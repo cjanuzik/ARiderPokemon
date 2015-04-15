@@ -1,0 +1,70 @@
+COMMON SPECS SHEET: http://www.cs.arizona.edu/classes/cs335/spring15/finalProjects/finalProject_2015_commonSpec.pdf
+POKEMON SPECS SHEET: http://www.cs.arizona.edu/classes/cs335/spring15/finalProjects/finalProject_2015_pokemon.pdf
+
+Sprites:
+http://www.spriters-resource.com
+
+UML BRAINSTORMING
+Model:
+Player: Inventory, Pokemon
+Pokemon: Common, Uncommon, Unique
+Common: Water, Ground, Grass
+Water:  Gyarados
+Ground: Pikachu, Pidgeotto, Gengar
+Grass: Scyther, Dragonite
+Uncommon: Water, Grass, Ground
+ 	Water: Blastoise
+	Ground: Charizard
+	Grass: Venusaur
+Unique: Mewtwo(Not a random encounter).
+Item: Hm, Pokeball
+HM: Surf, Rocksmash
+Pokeball: Safari ball
+Battle: Action
+Action: Throw rock, throw treat, throw ball, run
+Map: Tile
+Tile: Passable, Solid, Restricted
+Passable: tall grass, grass, sand
+Solid: Trees, fence
+Restricted: Water, rocks
+Inventory: Items
+Move
+Steps
+View:
+Controller:
+
+DEADLINES:-
+Repository & UML due:-......................................................4/16/15
+Model:-.................................................................................4/19/15
+Checkpoint 2 signup(attend class):-....................................4/21/15
+View:-...................................................................................4/25/15
+Controller:-...........................................................................4/30/15
+Testing and javadoc:-...........................................................5/4/15
+
+
+
+
+ROLES:
+Lead Programmer 1: Yash (Manages all the git stuff and code conflicts, keep a check on everyone’s work)
+Lead Programmer 2: Chris(Code is upto date, following the UML diagram)
+Team Leader: Aakash Rathore (assign roles, deadlines and keep a check on every)
+Recorder: Sean(Everything that the specs sheet says)
+
+git usernames:
+Aakash: aakashrathore
+Chris: cjanuzik
+Sean: MecharidleyS
+Yash: yashyadav
+Georgy: gdepaul
+
+Bring up to Manager
+Ok how we encounter unique pokemon (one randomly on map)
+animation programs: pyxel edit 
+                                          then animate pokemon in battle
+EC: destroyable objects
+       ask about NPC (Are they on the map or just on the win screen)
+       Fade in/out for maps (see 227 lab “FadeToBlack”)
+       Battle music
+       Pokedex
+       Additional maps
+       See above for animation
