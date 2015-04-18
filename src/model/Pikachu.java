@@ -1,3 +1,4 @@
+package model;
 
 public class Pikachu extends Pokemon{
     public Pikachu(){

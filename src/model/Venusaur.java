@@ -1,3 +1,4 @@
+package model;
 
 public class Venusaur extends Pokemon{
     public Venusaur(){

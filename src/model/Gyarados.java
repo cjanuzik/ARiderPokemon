@@ -1,3 +1,4 @@
+package model;
 
 public class Gyarados extends Pokemon{
     public Gyarados(){
