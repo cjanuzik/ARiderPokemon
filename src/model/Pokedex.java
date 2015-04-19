@@ -1,5 +1,4 @@
 package model;
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +9,6 @@ public class Pokedex {
     private Long caughtBitmap;
     
     public Pokedex(){
-=======
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +18,6 @@ public class Pokedex {
 	private Long seenBitmap;
 	private Long caughtBitmap;
 	
-	public Pokedex(){
->>>>>>> 96da19d11e6a8134a671bfa44cc9f9d375509bf3
-    	
+	public Pokedex(){ 	
     }
 }

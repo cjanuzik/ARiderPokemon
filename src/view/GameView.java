@@ -16,13 +16,6 @@ import model.Dir;
 import model.Map;
 import model.Tile;
 
-/**
- * This class is the main JFrame for the map. It loads all the objects and adds
- * them together. I tried to make it BIC as much as possible
- * 
- * @author Hasanain Jamal
- *
- */
 public class GameView extends JFrame implements Observer{
 	/**
 	 * 

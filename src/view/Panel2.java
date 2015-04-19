@@ -10,16 +10,6 @@ import javax.swing.JTextArea;
 
 import model.Map;
 
-/**
- * This class is String representation of the map
- * 
- * @author Hasanain Jamal
- * 
- * @see Map
- * @see javax.swing.JPanel
- * @see java.util.Observer
- *
- */
 public class Panel2 extends JPanel implements Observer{
 
 	/**

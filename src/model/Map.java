@@ -5,14 +5,6 @@ package model;
 import java.util.Observable;
 import java.util.Random;
 
-
-/**
- * This class serves as the main map. It contains an array of Tiles that make up
- * the map.The map extends Observable.
- * 
- * @author Hasanain Jamal
- *
- */
 public class Map extends Observable{
 	private Tile[][] map; // tiles of the map
 	public final static int height = 10; 

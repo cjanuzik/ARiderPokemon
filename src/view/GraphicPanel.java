@@ -14,21 +14,8 @@ import javax.swing.JPanel;
 import model.Map;
 import model.Tile;
 
-/**
- * This is a class that makes up the graphic representation of the class Map. It
- * extends the interface Observer
- * 
- * @author Hasanain Jamal
- *
- * @see Map
- * @see javax.swing.JPanel
- * @see java.util.Observer
- */
 public class GraphicPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 321562980917862556L;
 	private Map map;
 	
