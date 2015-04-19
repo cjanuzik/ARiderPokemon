@@ -1,3 +1,4 @@
+package model;
 
 public class Mewtwo extends Pokemon{
     public Mewtwo(){

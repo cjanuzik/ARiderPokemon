@@ -1,3 +1,4 @@
+package model;
 
 public class Gengar extends Pokemon{
     public Gengar(){

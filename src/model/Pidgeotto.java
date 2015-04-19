@@ -1,3 +1,4 @@
+package model;
 
 public class Pidgeotto extends Pokemon{
     public Pidgeotto(){

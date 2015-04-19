@@ -1,3 +1,4 @@
+package model;
 import java.util.Observable;
 
 
@@ -39,6 +40,14 @@ public abstract class Pokemon extends Observable{
     	return name;
     }
     
+    public int getDexNum(){
+    	return dexNum;
+    }
+    
+    public String getType(){
+    	return type;
+    }
+    
     public int getRarity(){
     	return rarity;
     }
@@ -55,7 +64,10 @@ public abstract class Pokemon extends Observable{
     	return maxTurns;
     }
     
-    /*public void changeRates(Action action){
+    public int getCatchRate(){
+    	return catchRate;
+    }
+    public void changeRates(Action action){
     	if(action instanceof throwRock){
     		runChance += runChance/2;
     		catchRate += catchRate/2;
@@ -78,6 +90,6 @@ public abstract class Pokemon extends Observable{
     			catchRate = 5;
     		}
     	}
-    }*/
+    }
   
 }

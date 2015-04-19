@@ -1,3 +1,4 @@
+package model;
 
 public class Blastoise extends Pokemon{
     public Blastoise(){

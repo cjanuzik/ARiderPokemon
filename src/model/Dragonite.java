@@ -1,3 +1,4 @@
+package model;
 
 public class Dragonite extends Pokemon{
     public Dragonite(){
