@@ -24,7 +24,7 @@ public class GraphicPanel extends JPanel {
 
 	public GraphicPanel(Map map) {
 		this.map = map;
-		this.setPreferredSize(new Dimension(320, 320));
+		this.setPreferredSize(new Dimension(1024, 992));
 		loadImages("Down");
 	}
 	
@@ -59,7 +59,7 @@ public class GraphicPanel extends JPanel {
 	public void drawMap(Graphics g, Map map) {
 		for (int i = 0; i < map.getHeight(); i++) {
 			for (int j = 0; j < map.getWidth(); j++) {
-				drawTile(g, map.tileAt(j, i), j * 32, i * 32);
+				drawTile(g, map.tileAt(i, j), j * 32, i * 32);
 			}
 		}
 
@@ -76,6 +76,12 @@ public class GraphicPanel extends JPanel {
 	 * @see java.awt.Graphics#drawImage(Image, int, int, Observer)
 	 */
 	public void drawTile(Graphics g, Tile tile, int x, int y) {
+		try {
+		    ground = ImageIO.read(new File("Images/Tiles/" + tile.getTileName() + ".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		g.drawImage(ground, x, y, null);
 		if(tile.hasCharacter())
 			g.drawImage(character, x, y, null);
