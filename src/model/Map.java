@@ -93,6 +93,8 @@ public class Map extends Observable{
 				{new FenceTopLeft(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceTopRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceTopLeft(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceTopRight()},
 
 		};
+		//Meadow meadow = new Meadow();
+		//map = meadow.getMeadow();
 		
 	}
 	/**
