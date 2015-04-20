@@ -25,16 +25,17 @@ public class GraphicPanel extends JPanel {
 	public GraphicPanel(Map map) {
 		this.map = map;
 		this.setPreferredSize(new Dimension(320, 320));
-		loadImages();
+		loadImages("Down");
 	}
 	
 	/**
 	 * This method loads the images for later use.
 	 */
-	private void loadImages() {
+	public void loadImages(String dir) {
 		try {
-			character = ImageIO.read(new File("TrainerDown.png"));
-			ground = ImageIO.read(new File("TallGrass.png"));
+			String direction = dir;
+			character = ImageIO.read(new File("Images/Trainer/Trainer" + direction + ".png"));
+			ground = ImageIO.read(new File("Images/Tiles/TallGrass.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

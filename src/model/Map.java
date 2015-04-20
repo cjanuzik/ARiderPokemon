@@ -5,6 +5,8 @@ package model;
 import java.util.Observable;
 import java.util.Random;
 
+import view.GraphicPanel;
+
 public class Map extends Observable{
 	private Tile[][] map; // tiles of the map
 	public final static int height = 10; 
@@ -44,23 +46,38 @@ public class Map extends Observable{
 	 * Moves the hunter in the direction specified with wrap around 
 	 * @param d The direction of movement
 	 */
-	public void move(Dir d) {
+	public void move(Dir d, GraphicPanel g) {
 		switch (d) {
 		case DOWN:
 			moveDown();
+			g.loadImages("Down");
 			break;
 		case LEFT:
 			moveLeft();
+			g.loadImages("Left");
 			break;
 		case RIGHT:
 			moveRight();
+			g.loadImages("Right");
 			break;
 		case UP:
 			moveUp();
+			g.loadImages("Up");
 			break;
 		default:
 			break;
 
+		}
+		
+		Tile nextTile = tileAt(c,r);
+		boolean canEncounter = nextTile.getCanEncounter();
+		
+		if(canEncounter == true){
+		    int encountered = (int) (Math.random() * 10);
+		
+		    if(encountered == 1){
+			    System.out.println("You have encountered a wild Pokemon!");
+		    }
 		}
 		
 		setChanged();

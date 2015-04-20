@@ -28,6 +28,7 @@ public class GameView extends JFrame implements Observer{
 	private BasicArrowButton up, down, right, left;
 
 	public GameView() {
+		setTitle("Pokemon - Safari Zone");
 		map = new Map();
 		layoutGUI();
 		registerListeners();
@@ -88,37 +89,21 @@ public class GameView extends JFrame implements Observer{
 		new GameView();
 	}
 
-	/**
-	 * This class implements ActionListener and listens to the arrow buttons on
-	 * the screen
-	 * 
-	 * @author Hasanain Jamal
-	 *
-	 */
+
 	private class MoveListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == up) {
-				map.move(Dir.UP);
+				map.move(Dir.UP, graphic);
 			} else if (e.getSource() == down) {
-				map.move(Dir.DOWN);
+				map.move(Dir.DOWN, graphic);
 			} else if (e.getSource() == right) {
-				map.move(Dir.RIGHT);
+				map.move(Dir.RIGHT, graphic);
 			} else if (e.getSource() == left) {
-				map.move(Dir.LEFT);
+				map.move(Dir.LEFT, graphic);
 			}
 			
-			Tile nextTile = map.tileAt(map.getC(), map.getR());
-			boolean canEncounter = nextTile.getCanEncounter();
-			
-			if(canEncounter == true){
-			    int encountered = (int) (Math.random() * 10);
-			
-			    if(encountered == 1){
-				    System.out.println("You have encountered a wild Pokemon!");
-			    }
-			}
 		}
 
 	}
