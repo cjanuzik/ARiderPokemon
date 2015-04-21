@@ -10,6 +10,7 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicArrowButton;
 
 import model.Dir;
@@ -78,11 +79,13 @@ public class GameView extends JFrame implements Observer{
 	}
 
 	private void registerListeners() {
+		
 		ActionListener listen = new MoveListener();
 		up.addActionListener(listen);
 		down.addActionListener(listen);
 		right.addActionListener(listen);
 		left.addActionListener(listen);
+		
 	}
 
 	public static void main(String[] args) {
@@ -91,7 +94,7 @@ public class GameView extends JFrame implements Observer{
 
 
 	private class MoveListener implements ActionListener {
-
+	
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == up) {
@@ -105,9 +108,8 @@ public class GameView extends JFrame implements Observer{
 			}
 			
 		}
-
 	}
-
+	
 	@Override
 	public void update(Observable o, Object arg) { //must cast arg to keep its object type
 		// TODO Auto-generated method stub

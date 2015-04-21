@@ -135,7 +135,6 @@ public class Map extends Observable{
 			    System.out.println("You have encountered a wild Pokemon!");
 		    }
 		}
-		
 		setChanged();
 		notifyObservers();
 	}

@@ -20,7 +20,7 @@ public class GraphicPanel extends JPanel {
 	private Map map;
 	
 	//images of the character and the ground
-	private BufferedImage ground;
+	private BufferedImage ground, character;
 
 	public GraphicPanel(Map map) {
 		this.map = map;
@@ -34,7 +34,7 @@ public class GraphicPanel extends JPanel {
 	public void loadImages(String dir) {
 		try {
 			String direction = dir;
-			//character = ImageIO.read(new File("Images/Trainer/Trainer" + direction + ".png"));
+			character = ImageIO.read(new File("Images/Trainer/Trainer" + direction + ".png"));
 			ground = ImageIO.read(new File("Images/Tiles/TallGrass.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -83,8 +83,8 @@ public class GraphicPanel extends JPanel {
 		}
 		
 		g.drawImage(ground, x, y, null);
-//		if(tile.hasCharacter())
-//			g.drawImage(character, x, y, null);
+		if(tile.hasCharacter())
+			g.drawImage(character, x, y, null);
 
 	}
 
