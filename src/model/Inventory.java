@@ -4,16 +4,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Inventory {
-	private int noOfPokeballs;
+	private int numOfBalls;
 	private List<Pokemon> pokemon;
-	private boolean rockDestroyer, surfAbility;
+	private Pokedex pokedex;
+	private boolean rockSmashUnlocked, surfUnlocked;
 	
 	public Inventory()
 	{
-		pokemon = new LinkedList<Pokemon>;
-		noOfPokeballs = 0;
-		rockDestroyer = false;
-		surfAbility = false;
+		pokemon = new LinkedList<Pokemon>();
+		numOfBalls = 0;
+		rockSmashUnlocked = false;
+		surfUnlocked = false;
 	}
 	
 	public boolean addPokemon(Pokemon toAdd)
@@ -34,16 +35,23 @@ public class Inventory {
 		return false;
 	}
 	
-	public void updateBallCount(int ball)
+	public boolean updateBallCount(int ball)
 	{
-		noOfPokeballs+=ball;
+		int temp = numOfBalls + ball;
+		if(temp>0)
+		{
+			numOfBalls+=ball;
+			return true;
+		}
+		else 
+			return false;
 	}
 	public boolean containsPokemon(Pokemon toCheck)
 	{
 		return pokemon.contains(toCheck);
 	}
 	
-	public int getNumberPokemon()
+	public int getNumOfPokemon()
 	{
 		return pokemon.size();
 	}
@@ -53,22 +61,26 @@ public class Inventory {
 		return pokemon;
 	}
 	
-	public boolean isSurfer()
+	public boolean getSurfUnlocked()
 	{
-		return surfAbility;
+		return surfUnlocked;
 	}
 	
 	public boolean isRockDestroyer()
 	{
-		return rockDestroyer;
+		return rockSmashUnlocked;
 	}
-	public void setSurfer(boolean value)
+	public void setSurferUnlocked(boolean value)
 	{
-		surfAbility = value;
+		surfUnlocked = value;
 	}
 	public void setRockDestroyer(boolean value)
 	{
-		rockDestroyer = value;
+		rockSmashUnlocked = value;
+	}
+	public int getBalls()
+	{
+		return numOfBalls;
 	}
 }
 
