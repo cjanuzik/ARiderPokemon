@@ -4,6 +4,6 @@ import model.Tile;
 
 public class TreeTopRight extends Tile{
     public TreeTopRight(){
-    	super("TreeTopRight", false, false);	
+    	super("TreeTopRight", false, true);	
     }
 }
