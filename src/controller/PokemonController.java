@@ -117,14 +117,14 @@ public class PokemonController {
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			
-			JOptionPane.showMessageDialog(null, "Inventory to be displayed here");
+			JOptionPane.showMessageDialog(null, "Inventory to be displayed here", "Inventory",JOptionPane.INFORMATION_MESSAGE);;
 		}
 	}
 	private class MyExitListener implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
-        	//as soon as exit is tapped, the program terminates
-          System.exit(0);
+        	int result = JOptionPane.showConfirmDialog(null, "So you want to exit pokemon game?", "Exit ARiderPokemon?", JOptionPane.YES_NO_OPTION);
+        	if(result == JOptionPane.YES_OPTION)
+        		System.exit(0);
         }
       }
 	private class MyAboutListener implements ActionListener
