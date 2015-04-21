@@ -4,6 +4,6 @@ import model.Tile;
 
 public class TallGrass extends Tile{
     public TallGrass(){
-    	super("TallGrass", true, true);	
+    	super("TallGrass", true, false);	
     }
 }

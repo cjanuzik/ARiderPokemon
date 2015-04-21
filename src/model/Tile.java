@@ -1,9 +1,17 @@
 package model;
 
-public class Tile {
+public abstract class Tile {
 
 	private boolean hasCharacter = false;
-	private boolean canEncounter = true;
+	private String tileName;
+	private boolean canEncounter;
+	private boolean solid;
+	
+	public Tile(String name, boolean encounter, boolean isSolid){
+		tileName = name;
+		canEncounter = encounter;
+		solid = isSolid;
+	}
 	
 	public boolean hasCharacter()
 	{
@@ -18,4 +26,14 @@ public class Tile {
 	public boolean getCanEncounter(){
 		return canEncounter;
 	}
+	
+	public boolean getSolid(){
+		return solid;
+	}
+	
+	public String getTileName(){
+		return tileName;
+	}
+	
+	//public abstract void setSolid(boolean toSet);
 }
