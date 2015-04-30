@@ -24,7 +24,7 @@ public class GraphicPanel extends JPanel {
 
 	public GraphicPanel(Map map) {
 		this.map = map;
-		this.setPreferredSize(new Dimension(1024, 640));
+		this.setPreferredSize(new Dimension(320, 320));
 		loadImages("Down");
 	}
 	

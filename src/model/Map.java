@@ -33,9 +33,9 @@ import view.GraphicPanel;
 
 public class Map extends Observable{
 	private Tile[][] map; // tiles of the map
-	public final static int height = 32; 
-	public final static int width = 32;
-	
+	public final static int height = 11; 
+	public final static int width = 11;
+	private Tile[][] meadow = new Meadow().getMeadow();
 	// the row and column of the current location of the Trainer
 	private int c;
 	private int r;
@@ -47,13 +47,16 @@ public class Map extends Observable{
 	 * Constructs a new instance of map
 	 */
 	public Map() {
-		makeMap();
+		
 		
 		// place the hunter randomly
 		this.c = 15;
 		this.r = 0;
 		
-		this.map[r][c].setHasCharacter(true);
+		meadow[r][c].setHasCharacter(true);
+		
+		map = new Tile[11][11];
+		makeMap();
 	}
 	
 	/**
@@ -61,8 +64,26 @@ public class Map extends Observable{
 	 */
 	private void makeMap() {
 		
-		Meadow meadow = new Meadow();
-		map = meadow.getMeadow();
+		int iStart = r - 5;
+		int jStart = c - 5;
+		
+		if(iStart < 0)
+			iStart = 0;
+	    if(iStart > 20)
+	    	iStart = 20;
+	    if(jStart < 0)
+			jStart = 0;
+	    if(jStart > 20)
+	    	jStart = 20;
+		
+		for(int i = 0; i < 11; i++){
+			for(int j = 0; j < 11; j++){
+				map[i][j] = meadow[i + iStart][j + jStart];
+			}
+		}
+		setChanged();
+		notifyObservers();
+		//map = meadow.getMeadow();
 		
 	}
 	/**
@@ -93,6 +114,8 @@ public class Map extends Observable{
 
 		}
 		
+		makeMap();
+		
 		Tile nextTile = tileAt(r,c);
 		boolean canEncounter = nextTile.getCanEncounter();
 		
@@ -110,10 +133,10 @@ public class Map extends Observable{
 	 * moves character up
 	 */
 	private void moveUp() {
-		if(!tileAt(r - 1, c).getSolid()){
-    		map[r][c].setHasCharacter(false);
+		if(!tileAtMeadow(r - 1, c).getSolid()){
+    		meadow[r][c].setHasCharacter(false);
 	    	r--;
-		    map[r][c].setHasCharacter(true);
+		    meadow[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -121,10 +144,10 @@ public class Map extends Observable{
 	 * moves character down
 	 */
 	private void moveDown() {
-		if(!tileAt(r + 1, c).getSolid()){
-		    map[r][c].setHasCharacter(false);
+		if(!tileAtMeadow(r + 1, c).getSolid()){
+		    meadow[r][c].setHasCharacter(false);
 		    r++;
-		    map[r][c].setHasCharacter(true);
+		    meadow[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -132,10 +155,10 @@ public class Map extends Observable{
 	 * moves character right
 	 */
 	private void moveRight() {
-		if(!tileAt(r,c + 1).getSolid()){
-		    map[r][c].setHasCharacter(false);
+		if(!tileAtMeadow(r,c + 1).getSolid()){
+		    meadow[r][c].setHasCharacter(false);
 		    c++;
-		    map[r][c].setHasCharacter(true);
+		    meadow[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -143,10 +166,10 @@ public class Map extends Observable{
 	 * moves character left
 	 */
 	private void moveLeft() {
-		if(!tileAt(r,c - 1).getSolid()){
-		    map[r][c].setHasCharacter(false);
+		if(!tileAtMeadow(r,c - 1).getSolid()){
+		    meadow[r][c].setHasCharacter(false);
 		    c--;
-		    map[r][c].setHasCharacter(true);
+		    meadow[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -160,6 +183,10 @@ public class Map extends Observable{
 	public Tile tileAt(int x, int y) {
 		return map[x][y];
 
+	}
+	
+	public Tile tileAtMeadow(int x, int y){
+		return meadow[x][y];
 	}
 	
 	public int getC(){

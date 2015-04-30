@@ -27,8 +27,7 @@ public class GameView extends JFrame implements Observer, KeyListener{
 	private GraphicPanel graphic; // graphic view
 	//private Panel2 text; // text view
 	private Map map;
-	private JPanel controls, views;
-	private BasicArrowButton up, down, right, left;
+	private JPanel views;
 
 	public GameView() {
 		setTitle("Pokemon - Safari Zone");
@@ -43,7 +42,6 @@ public class GameView extends JFrame implements Observer, KeyListener{
 
 	public void layoutGUI() {
 		makeAndLayoutViews();
-		makeControlls();
 		setLayoutAndAddComponentsToFrame();
 	}
 
@@ -59,25 +57,6 @@ public class GameView extends JFrame implements Observer, KeyListener{
 	private void setLayoutAndAddComponentsToFrame() {
 		this.setLayout(new BorderLayout());
 		this.add(views, BorderLayout.NORTH);
-		this.add(controls, BorderLayout.SOUTH);
-	}
-
-	private void makeControlls() {
-		controls = new JPanel(new GridLayout(2, 4));
-		up = new BasicArrowButton(BasicArrowButton.NORTH);
-		down = new BasicArrowButton(BasicArrowButton.SOUTH);
-		right = new BasicArrowButton(BasicArrowButton.EAST);
-		left = new BasicArrowButton(BasicArrowButton.WEST);
-
-		controls.add(new JPanel()); // add empty panels to make the buttons look
-									// right
-		controls.add(up);
-		controls.add(new JPanel()); // add empty panels to make the buttons look
-									// right
-		controls.add(left);
-		controls.add(down);
-		controls.add(right);
-		controls.setPreferredSize(new Dimension(200, 100));
 	}
 
 	private void registerListeners() {
