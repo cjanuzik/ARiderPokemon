@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,7 +19,7 @@ import model.Dir;
 import model.Map;
 import model.Tile;
 
-public class GameView extends JFrame implements Observer{
+public class GameView extends JFrame implements Observer, KeyListener{
 	/**
 	 * 
 	 */
@@ -80,39 +82,42 @@ public class GameView extends JFrame implements Observer{
 
 	private void registerListeners() {
 		
-		ActionListener listen = new MoveListener();
-		up.addActionListener(listen);
-		down.addActionListener(listen);
-		right.addActionListener(listen);
-		left.addActionListener(listen);
+		this.addKeyListener(this);
 		
 	}
 
 	public static void main(String[] args) {
 		new GameView();
 	}
-
-
-	private class MoveListener implements ActionListener {
-	
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == up) {
-				map.move(Dir.UP, graphic);
-			} else if (e.getSource() == down) {
-				map.move(Dir.DOWN, graphic);
-			} else if (e.getSource() == right) {
-				map.move(Dir.RIGHT, graphic);
-			} else if (e.getSource() == left) {
-				map.move(Dir.LEFT, graphic);
-			}
-			
-		}
-	}
 	
 	@Override
 	public void update(Observable o, Object arg) { //must cast arg to keep its object type
 		// TODO Auto-generated method stub
 		this.repaint();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getKeyCode() == KeyEvent.VK_UP)
+			map.move(Dir.UP,  graphic);
+		if(e.getKeyCode() == KeyEvent.VK_LEFT)
+			map.move(Dir.LEFT,  graphic);
+		if(e.getKeyCode() == KeyEvent.VK_DOWN)
+			map.move(Dir.DOWN,  graphic);
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+			map.move(Dir.RIGHT,  graphic);
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
