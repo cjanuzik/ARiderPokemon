@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
@@ -9,6 +9,7 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import view.GraphicPanel;
 import model.Dir;
 import model.Map;
 
@@ -75,13 +76,13 @@ public class GameView extends JFrame implements Observer, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode() == KeyEvent.VK_UP)
+		if(e.getKeyCode() == KeyEvent.VK_UP && map.getR() > 0)
 			map.move(Dir.UP,  graphic);
-		if(e.getKeyCode() == KeyEvent.VK_LEFT)
+		if(e.getKeyCode() == KeyEvent.VK_LEFT && map.getC() > 0)
 			map.move(Dir.LEFT,  graphic);
-		if(e.getKeyCode() == KeyEvent.VK_DOWN)
+		if(e.getKeyCode() == KeyEvent.VK_DOWN && map.getR() < 29)
 			map.move(Dir.DOWN,  graphic);
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT && map.getC() < 29)
 			map.move(Dir.RIGHT,  graphic);
 	}
 
