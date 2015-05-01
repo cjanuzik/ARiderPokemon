@@ -16,6 +16,29 @@ public class Battle {
 		//display();
 	}
 	/*
+	 * throwbait
+	 */
+	public int[] throwBait(){
+		result[0] -= result[0]/2;
+		result[1] -= result[1]/2;
+		result[2]--;
+		result[3] = result(result[1], result[0]);
+		
+		return result;
+		
+	}
+	
+	public int[] throwRock(){
+		result[0] += result[0]/2;
+		result[1] += result[1]/2;
+		result[2]--;
+		result[3] = result(result[1], result[0]);
+		
+		return result;
+		
+	}
+	
+	/*
 	 * returns the result of the fight
 	 */
 	public int result(int catchRate, int runChance){
