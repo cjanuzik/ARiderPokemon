@@ -69,29 +69,7 @@ public abstract class Pokemon extends Observable{
     public int getCatchRate(){
     	return catchRate;
     }
-    public void changeRates(Action action){
-    	if(action instanceof throwRock){
-    		runChance += runChance/2;
-    		catchRate += catchRate/2;
-    		if(runChance > 100){
-    			runChance = 100;
-    		}
-    		
-    		if(catchRate >= 90){
-    			catchRate = 90;
-    		}
-    	}
-    	
-    	if(action instanceof throwBait){
-    		runChance -= runChance/2;
-    		catchRate -= catchRate/2;
-    		if(runChance <= 0){
-    			runChance = 5;
-    		}
-    		if(catchRate <= 0){
-    			catchRate = 5;
-    		}
-    	}
-    }
+
+    
   
 }
