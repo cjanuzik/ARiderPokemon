@@ -3,7 +3,7 @@ package model;
 public class Battle {
 	Pokemon pokemon = null;
 	Character character = null;
-	int[] result = new int[4];
+	int[] result = new int[4]; //stores runRate CatchRate turns result
 	/*
 	 * constructor
 	 */
@@ -27,7 +27,9 @@ public class Battle {
 		return result;
 		
 	}
-	
+	/*
+	 * When Rock is thrown
+	 */
 	public int[] throwRock(){
 		result[0] += result[0]/2;
 		result[1] += result[1]/2;
@@ -37,7 +39,48 @@ public class Battle {
 		return result;
 		
 	}
-	
+
+	 public int[] throwPokeball(){
+		 int max = 0,min = 0,prob = 0;
+		 if(pokemon.getRarity() == 0){   //common pokemon
+			 max = 11;
+			 min = 1;
+			 
+			 prob = min + (int)(Math.random() * ((max - min) + 1));
+			 
+			 if(prob == 7){
+				 result[3]=1;
+			 }
+			 else
+				 result[3]=-1;
+		 }
+		 if(pokemon.getRarity() == 1){  //uncommon pokemon
+			 max = 21;
+			 min = 1;
+			 
+			 prob = min + (int)(Math.random() * ((max - min) + 1));
+			 
+			 if(prob == 7){
+				 result[3]=1;
+			 }
+			 else
+				 result[3]=-1;
+		 }
+		 if(pokemon.getRarity() == 2){  //unique pokemon
+			 max = 101;
+			 min = 1;
+			 
+			 prob = min + (int)(Math.random() * ((max - min) + 1));
+			 
+			 if(prob == 7){
+				 result[3]=1;
+			 }
+			 else
+				 result[3]=-1;
+		 }
+		 
+		 return result;
+	 }
 	/*
 	 * returns the result of the fight
 	 */
