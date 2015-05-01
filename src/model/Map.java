@@ -33,14 +33,14 @@ import view.GraphicPanel;
 
 public class Map extends Observable{
 	private Tile[][] map; // tiles of the map
-	public final static int height = 11; 
-	public final static int width = 11;
+	public final static int height = 12; 
+	public final static int width = 12;
 	private Tile[][] meadow = new Meadow().getMeadow();
 	// the row and column of the current location of the Trainer
 	private int c;
 	private int r;
 	private boolean hasMoved;
-
+	private char direction = 'd'; //direction facing, u,l,d,r
 
 
 	/**
@@ -55,7 +55,7 @@ public class Map extends Observable{
 		
 		meadow[r][c].setHasCharacter(true);
 		
-		map = new Tile[11][11];
+		map = new Tile[12][12];
 		makeMap();
 	}
 	
@@ -76,8 +76,8 @@ public class Map extends Observable{
 	    if(jStart > 20)
 	    	jStart = 20;
 		
-		for(int i = 0; i < 11; i++){
-			for(int j = 0; j < 11; j++){
+		for(int i = 0; i < 12; i++){
+			for(int j = 0; j < 12; j++){
 				map[i][j] = meadow[i + iStart][j + jStart];
 			}
 		}
@@ -94,19 +94,43 @@ public class Map extends Observable{
 		hasMoved = false;
 		switch (d) {
 		case DOWN:
-			moveDown();
+			if(direction != 'd'){
+				direction = 'd';
+				g.loadImages("Down");
+				break;
+			}
+			if(r < 30)
+			    moveDown();
 			g.loadImages("Down");
 			break;
 		case LEFT:
-			moveLeft();
+			if(direction != 'l'){
+				direction = 'l';
+				g.loadImages("Left");
+				break;
+			}
+			if(c > 0)
+			    moveLeft();
 			g.loadImages("Left");
 			break;
 		case RIGHT:
-			moveRight();
+			if(direction != 'r'){
+				direction = 'r';
+				g.loadImages("Right");
+				break;
+			}
+			if(c < 30)
+			    moveRight();
 			g.loadImages("Right");
 			break;
 		case UP:
-			moveUp();
+			if(direction != 'u'){
+				direction = 'u';
+				g.loadImages("Up");
+				break;
+			}
+			if(r > 0)
+			    moveUp();
 			g.loadImages("Up");
 			break;
 		default:

@@ -22,7 +22,7 @@ public class GameView extends JFrame implements Observer, KeyListener{
 	//private Panel2 text; // text view
 	private Map map;
 	private JPanel views;
-
+	
 	public GameView() {
 		setTitle("Pokemon - Safari Zone");
 		map = new Map();
@@ -76,13 +76,13 @@ public class GameView extends JFrame implements Observer, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode() == KeyEvent.VK_UP && map.getR() > 0)
+		if(e.getKeyCode() == KeyEvent.VK_UP)
 			map.move(Dir.UP,  graphic);
-		if(e.getKeyCode() == KeyEvent.VK_LEFT && map.getC() > 0)
+		if(e.getKeyCode() == KeyEvent.VK_LEFT)
 			map.move(Dir.LEFT,  graphic);
-		if(e.getKeyCode() == KeyEvent.VK_DOWN && map.getR() < 29)
+		if(e.getKeyCode() == KeyEvent.VK_DOWN)
 			map.move(Dir.DOWN,  graphic);
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT && map.getC() < 29)
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 			map.move(Dir.RIGHT,  graphic);
 	}
 
