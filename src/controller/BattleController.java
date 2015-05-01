@@ -1,18 +1,28 @@
 package controller;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class JavaController extends JFrame {
-	JPanel battleAction, buttons;
+import model.Battle;
+import model.Blastoise;
+import model.Pokemon;
+
+public class BattleController extends JFrame {
+	JPanel battleAction, buttons, meters;
+	JLabel catchRateLabel, runRateLabel, turnsLeftLabel;
+	JSlider catchRateSlider, runRateSlider, turnsLeftSlider;
+	Battle battle;
+	Pokemon pokemon;
 	JButton throwBait, throwSafariBall, throwRock, runAway;
 	private Image image;
 
-	public JavaController()
+	public BattleController(Pokemon tempPokemon, Battle tempBattle)
 	{
 		try {
 			image = ImageIO.read(new File("Images/Trainer/TrainerRight.png"));
@@ -21,6 +31,7 @@ public class JavaController extends JFrame {
 			e.printStackTrace();
 		}
 		new JFrame();
+		battle = tempBattle;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//terminates the program when close button is tapped
         //setting the title
         setTitle("Battle");
@@ -36,14 +47,88 @@ public class JavaController extends JFrame {
         setSize(500,300);
         buttons = new JPanel(new GridLayout(2,2));
         throwBait = new JButton("Throw Bait");
+        throwBait.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int[] result = battle.throwBait();
+				runRateSlider.setValue(result[0]);
+				catchRateSlider.setValue(result[1]);
+				turnsLeftSlider.setValue(result[2]);
+				
+				if(result[3] == -1)
+					System.out.println("You Lose");
+				else if(result[3] == 1)
+					System.out.println("You Win");
+				
+				// TODO Auto-generated method stub
+				
+			}});
         throwSafariBall = new JButton("Throw Safari Ball");
+        throwSafariBall.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int[] result = battle.throwPokeball();
+				runRateSlider.setValue(result[0]);
+				catchRateSlider.setValue(result[1]);
+				turnsLeftSlider.setValue(result[2]);
+				
+				if(result[3] == -1)
+					System.out.println("You Lose");
+				else if(result[3] == 1)
+					System.out.println("You Win");
+				// TODO Auto-generated method stub
+				
+			}});
         throwRock = new JButton("Throw Rock");
+        throwRock.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int[] result = battle.throwRock();
+				runRateSlider.setValue(result[0]);
+				catchRateSlider.setValue(result[1]);
+				turnsLeftSlider.setValue(result[2]);
+				
+				if(result[3] == -1)
+					System.out.println("You Lose");
+				else if(result[3] == 1)
+					System.out.println("You Win");
+				// TODO Auto-generated method stub
+				
+			}});
         runAway = new JButton("Run Away");
+        runAway.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//battle.runAway();
+				// TODO Auto-generated method stub
+				
+			}});
         buttons.add(throwBait);
         buttons.add(throwRock);
         buttons.add(throwSafariBall);
         buttons.add(runAway);
-        add(battleAction, BorderLayout.NORTH);
+        catchRateLabel = new JLabel("CatchRate:");
+        runRateLabel = new JLabel("Run Rate:");
+        turnsLeftLabel = new JLabel("Turns Left:");
+        catchRateSlider = new JSlider(0, 100, pokemon.getCatchRate());
+        turnsLeftSlider = new JSlider(0, 5, pokemon.getMaxTurns());
+        runRateSlider = new JSlider(0, 100, pokemon.getRunChance());
+        meters = new JPanel(new GridLayout(3,2));
+        meters.add(catchRateLabel);
+        meters.add(catchRateSlider);
+        
+        meters.add(runRateLabel);
+        meters.add(runRateSlider);
+        
+        meters.add(turnsLeftLabel);
+        meters.add(turnsLeftSlider);
+        
+        add(battleAction, BorderLayout.CENTER);
+        add(meters, BorderLayout.NORTH);
         add(buttons, BorderLayout.SOUTH);
         setVisible(true);
         
@@ -55,10 +140,4 @@ public class JavaController extends JFrame {
 		g.drawImage(image, 50, 0, null);
 		
 	}
-	public static void main(String[] args)
-	{
-		new JavaController();
-	}
-	
-
 }
