@@ -2,6 +2,7 @@ package model;
 
 
 
+
 import java.util.Observable;
 
 import model.Tiles.FenceBottom;
@@ -32,9 +33,9 @@ import view.GraphicPanel;
 
 public class Map extends Observable{
 	private Tile[][] map; // tiles of the map
-	public final static int height = 31; 
-	public final static int width = 32;
-	
+	public final static int height = 11; 
+	public final static int width = 11;
+	private Tile[][] meadow = new Meadow().getMeadow();
 	// the row and column of the current location of the Trainer
 	private int c;
 	private int r;
@@ -46,54 +47,42 @@ public class Map extends Observable{
 	 * Constructs a new instance of map
 	 */
 	public Map() {
-		makeMap();
+		
 		
 		// place the hunter randomly
 		this.c = 15;
 		this.r = 0;
 		
-		this.map[r][c].setHasCharacter(true);
+		meadow[r][c].setHasCharacter(true);
+		
+		map = new Tile[11][11];
+		makeMap();
 	}
 	
 	/**
 	 * instantiates each tile/
 	 */
 	private void makeMap() {
-		map = new Tile[][] {
-				{new FenceTopLeft(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceTopRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceTopLeft(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceTopRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottomRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceBottomLeft(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new WaterTopLeft(), new WaterTop(), new WaterTop(), new WaterTop(), new WaterTopRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new WaterLeft(), new Water(), new Water(), new Water(), new WaterRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TreeTopLeft(), new TreeTopRight(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(),new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new WaterLeft(), new Water(), new Water(), new Water(), new WaterRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TreeLeft(), new TreeRight(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(),new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new WaterBottomLeft(), new WaterBottom(), new WaterBottom(), new WaterBottom(), new WaterBottomRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TreeBottomLeft(), new TreeBottomRight(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TreeTopLeft(), new TreeTopRight(), new TallGrass(), new TallGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TreeLeft(), new TreeRight(), new TallGrass(), new TallGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceBottomLeft(), new FenceBottom(), new FenceBottom(), new FenceBottomRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TreeBottomLeft(), new TreeBottomRight(), new TallGrass(), new TallGrass(), new FenceBottomLeft(), new FenceBottom(), new FenceBottom(), new FenceBottomRight()},
-		        {new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new WaterTopLeft(), new WaterTop(), new WaterTop(), new WaterTop(), new WaterTop(), new WaterTop(), new WaterTopRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass()},
-		        {new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new WaterLeft(), new Water(), new Water(), new Water(), new Water(), new Water(), new WaterRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass()},
-		        {new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new WaterBottomLeft(), new WaterBottom(), new WaterBottom(), new WaterBottom(), new WaterBottom(), new WaterBottom(), new WaterBottomRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass()},
-		        {new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass()},
-		        {new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new WaterTopLeft(), new WaterTop(), new WaterTop(), new WaterTop(), new WaterTop(), new WaterTop(), new WaterTop(), new WaterTop(), new WaterTopRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass()},
-		        {new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new WaterLeft(), new Water(), new Water(), new Water(), new Water(), new Water(), new Water(), new Water(), new WaterRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass()},
-		        {new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new WaterBottomLeft(), new WaterBottom(), new WaterBottom(), new WaterBottom(), new WaterBottom(), new WaterBottom(), new WaterBottom(), new WaterBottom(), new WaterBottomRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass()},
-		        {new FenceTopLeft(), new FenceBottom(), new FenceBottom(), new FenceTopRight(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceTopLeft(), new FenceBottom(), new FenceBottom(), new FenceTopRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new TallGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottomRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceBottomLeft(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceLeft(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceRight()},
-				{new FenceTopLeft(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceTopRight(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new MeadowGrass(), new FenceTopLeft(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceBottom(), new FenceTopRight()},
-
-		};
-		//Meadow meadow = new Meadow();
+		
+		int iStart = r - 5;
+		int jStart = c - 5;
+		
+		if(iStart < 0)
+			iStart = 0;
+	    if(iStart > 20)
+	    	iStart = 20;
+	    if(jStart < 0)
+			jStart = 0;
+	    if(jStart > 20)
+	    	jStart = 20;
+		
+		for(int i = 0; i < 11; i++){
+			for(int j = 0; j < 11; j++){
+				map[i][j] = meadow[i + iStart][j + jStart];
+			}
+		}
+		setChanged();
+		notifyObservers();
 		//map = meadow.getMeadow();
 		
 	}
@@ -125,7 +114,9 @@ public class Map extends Observable{
 
 		}
 		
-		Tile nextTile = tileAt(r,c);
+		makeMap();
+		
+		Tile nextTile = tileAtMeadow(r,c);
 		boolean canEncounter = nextTile.getCanEncounter();
 		
 		if(canEncounter == true && hasMoved){
@@ -135,17 +126,16 @@ public class Map extends Observable{
 			    System.out.println("You have encountered a wild Pokemon!");
 		    }
 		}
-		setChanged();
-		notifyObservers();
+		
 	}
 	/**
 	 * moves character up
 	 */
 	private void moveUp() {
-		if(!tileAt(r - 1, c).getSolid()){
-    		map[r][c].setHasCharacter(false);
+		if(!tileAtMeadow(r - 1, c).getSolid()){
+    		meadow[r][c].setHasCharacter(false);
 	    	r--;
-		    map[r][c].setHasCharacter(true);
+		    meadow[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -153,10 +143,10 @@ public class Map extends Observable{
 	 * moves character down
 	 */
 	private void moveDown() {
-		if(!tileAt(r + 1, c).getSolid()){
-		    map[r][c].setHasCharacter(false);
+		if(!tileAtMeadow(r + 1, c).getSolid()){
+		    meadow[r][c].setHasCharacter(false);
 		    r++;
-		    map[r][c].setHasCharacter(true);
+		    meadow[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -164,10 +154,10 @@ public class Map extends Observable{
 	 * moves character right
 	 */
 	private void moveRight() {
-		if(!tileAt(r,c + 1).getSolid()){
-		    map[r][c].setHasCharacter(false);
+		if(!tileAtMeadow(r,c + 1).getSolid()){
+		    meadow[r][c].setHasCharacter(false);
 		    c++;
-		    map[r][c].setHasCharacter(true);
+		    meadow[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -175,10 +165,10 @@ public class Map extends Observable{
 	 * moves character left
 	 */
 	private void moveLeft() {
-		if(!tileAt(r,c - 1).getSolid()){
-		    map[r][c].setHasCharacter(false);
+		if(!tileAtMeadow(r,c - 1).getSolid()){
+		    meadow[r][c].setHasCharacter(false);
 		    c--;
-		    map[r][c].setHasCharacter(true);
+		    meadow[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -192,6 +182,10 @@ public class Map extends Observable{
 	public Tile tileAt(int x, int y) {
 		return map[x][y];
 
+	}
+	
+	public Tile tileAtMeadow(int x, int y){
+		return meadow[x][y];
 	}
 	
 	public int getC(){

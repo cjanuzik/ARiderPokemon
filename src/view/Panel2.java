@@ -1,5 +1,7 @@
 package view;
 
+import Map;
+
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
@@ -7,8 +9,6 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-
-import model.Map;
 
 public class Panel2 extends JPanel implements Observer{
 
