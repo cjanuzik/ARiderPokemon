@@ -1,10 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Observable;
@@ -12,12 +8,9 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.Timer;
-import javax.swing.plaf.basic.BasicArrowButton;
 
 import model.Dir;
 import model.Map;
-import model.Tile;
 
 public class GameView extends JFrame implements Observer, KeyListener{
 	/**
@@ -47,11 +40,9 @@ public class GameView extends JFrame implements Observer, KeyListener{
 
 	private void makeAndLayoutViews() {
 		graphic = new GraphicPanel(map);
-		//text = new Panel2(map);
 		views = new JPanel(new BorderLayout());
 
 		views.add(graphic, BorderLayout.WEST);
-		//views.add(text, BorderLayout.EAST);
 	}
 
 	private void setLayoutAndAddComponentsToFrame() {

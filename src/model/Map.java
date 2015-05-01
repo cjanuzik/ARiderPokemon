@@ -116,7 +116,7 @@ public class Map extends Observable{
 		
 		makeMap();
 		
-		Tile nextTile = tileAt(r,c);
+		Tile nextTile = tileAtMeadow(r,c);
 		boolean canEncounter = nextTile.getCanEncounter();
 		
 		if(canEncounter == true && hasMoved){
@@ -126,8 +126,7 @@ public class Map extends Observable{
 			    System.out.println("You have encountered a wild Pokemon!");
 		    }
 		}
-		setChanged();
-		notifyObservers();
+		
 	}
 	/**
 	 * moves character up
