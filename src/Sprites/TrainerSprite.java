@@ -88,7 +88,7 @@ public class TrainerSprite extends Sprite {
 		BufferedImage temp = sheet.getSubimage(leftBorder + col * width, row * (height + vertBorder), width - offset, height);
 		
 		// Up-scaling the frame by 2x
-		return temp.getScaledInstance(2*width, 2*height, Image.SCALE_DEFAULT);
+		return temp.getScaledInstance(1*width, 1*height, Image.SCALE_DEFAULT);
 	}
 
 	@Override

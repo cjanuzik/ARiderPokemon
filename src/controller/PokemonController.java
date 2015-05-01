@@ -34,6 +34,11 @@ public class PokemonController {
 		
 		// creates the panel that actually draws the sprites
 		panel = new JPanel(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -968649436766507053L;
+
 			public void paintComponent(Graphics g){
 				super.paintComponent(g);
 				
