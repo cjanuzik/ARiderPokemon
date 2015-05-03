@@ -1,12 +1,20 @@
 package controller;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import view.GraphicPanel;
@@ -19,13 +27,16 @@ public class GameView extends JFrame implements Observer, KeyListener{
 	 */
 	private static final long serialVersionUID = -308984420263715300L;
 	private GraphicPanel graphic; // graphic view
+	private JPanel topPanel, centerPanel, bottomPanel, mainPanel;
 	//private Panel2 text; // text view
 	private Map map;
-	private JPanel views;
+	private JLabel GBCTopL, GBCTop, GBCTopR, GBCLeft, GBCRight, GBCBotL, GBCBottom, GBCBotR;
+	//private JPanel views;
 	
 	public GameView() {
 		setTitle("Pokemon - Safari Zone");
 		map = new Map();
+		loadImages();
 		layoutGUI();
 		registerListeners();
 		this.pack();
@@ -33,7 +44,30 @@ public class GameView extends JFrame implements Observer, KeyListener{
 		this.setVisible(true);
 		map.addObserver(this); //this does the observing
 	}
-
+    
+	public void loadImages(){
+		try {
+		    BufferedImage GBCComponent = ImageIO.read(new File("Images/GBC/GBCTopL.png"));
+		    GBCTopL = new JLabel(new ImageIcon(GBCComponent));
+		    GBCComponent = ImageIO.read(new File("Images/GBC/GBCTop.png"));
+		    GBCTop = new JLabel(new ImageIcon(GBCComponent));
+		    GBCComponent = ImageIO.read(new File("Images/GBC/GBCTopR.png"));
+		    GBCTopR = new JLabel(new ImageIcon(GBCComponent));
+		    GBCComponent = ImageIO.read(new File("Images/GBC/GBCLeft.png"));
+		    GBCLeft = new JLabel(new ImageIcon(GBCComponent));
+		    GBCComponent = ImageIO.read(new File("Images/GBC/GBCRight.png"));
+		    GBCRight = new JLabel(new ImageIcon(GBCComponent));
+		    GBCComponent = ImageIO.read(new File("Images/GBC/GBCBotL.png"));
+		    GBCBotL = new JLabel(new ImageIcon(GBCComponent));
+		    GBCComponent = ImageIO.read(new File("Images/GBC/GBCBottom.png"));
+		    GBCBottom = new JLabel(new ImageIcon(GBCComponent));
+		    GBCComponent = ImageIO.read(new File("Images/GBC/GBCBotR.png"));
+		    GBCBotR = new JLabel(new ImageIcon(GBCComponent));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void layoutGUI() {
 		makeAndLayoutViews();
 		setLayoutAndAddComponentsToFrame();
@@ -41,14 +75,28 @@ public class GameView extends JFrame implements Observer, KeyListener{
 
 	private void makeAndLayoutViews() {
 		graphic = new GraphicPanel(map);
-		views = new JPanel(new BorderLayout());
-
-		views.add(graphic, BorderLayout.WEST);
+		topPanel = new JPanel();
+		centerPanel = new JPanel();
+		bottomPanel = new JPanel();
+		mainPanel = new JPanel(new BorderLayout());
+        topPanel.add(GBCTopL);
+        topPanel.add(GBCTop);
+        topPanel.add(GBCTopR);
+        centerPanel.add(GBCLeft);
+		centerPanel.add(graphic);
+		centerPanel.add(GBCRight);
+		bottomPanel.add(GBCBotL);
+		bottomPanel.add(GBCBottom);
+		bottomPanel.add(GBCBotR);
+		mainPanel.add(topPanel, BorderLayout.NORTH);
+		mainPanel.add(centerPanel, BorderLayout.CENTER);
+		mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+		//mainPanel.add(GBCBotR);
 	}
 
 	private void setLayoutAndAddComponentsToFrame() {
 		this.setLayout(new BorderLayout());
-		this.add(views, BorderLayout.NORTH);
+		this.add(mainPanel, BorderLayout.NORTH);
 	}
 
 	private void registerListeners() {
