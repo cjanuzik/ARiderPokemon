@@ -141,7 +141,6 @@ public class BattleController extends JFrame {
 	{
 		return panelToReturn;
 	}
-	
 	public void draw(Graphics g)
 	{
 		//don't know the coordinates yet
