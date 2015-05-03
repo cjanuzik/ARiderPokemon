@@ -14,7 +14,7 @@ import model.Blastoise;
 import model.Pokemon;
 
 public class BattleController extends JFrame {
-	JPanel battleAction, buttons, meters;
+	JPanel battleAction, buttons, meters, panelToReturn;
 	JLabel catchRateLabel, runRateLabel, turnsLeftLabel;
 	JSlider catchRateSlider, runRateSlider, turnsLeftSlider;
 	Battle battle;
@@ -132,7 +132,16 @@ public class BattleController extends JFrame {
         add(buttons, BorderLayout.SOUTH);
         setVisible(true);
         
+        panelToReturn = new JPanel();
+        panelToReturn.add(this);
+        
 	}
+	
+	public JPanel getBattlePanel()
+	{
+		return panelToReturn;
+	}
+	
 	public void draw(Graphics g)
 	{
 		//don't know the coordinates yet
