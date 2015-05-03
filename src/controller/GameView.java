@@ -79,15 +79,11 @@ public class GameView extends JFrame implements Observer, KeyListener{
 		centerPanel = new JPanel(new BorderLayout());
 		bottomPanel = new JPanel(new BorderLayout());
 		mainPanel = new JPanel(new BorderLayout());
-        topPanel.add(GBCTopL, BorderLayout.WEST);
-        topPanel.add(GBCTop, BorderLayout.CENTER);
-        topPanel.add(GBCTopR, BorderLayout.EAST);
+        topPanel.add(GBCTop, BorderLayout.SOUTH);
         centerPanel.add(GBCLeft, BorderLayout.WEST);
 		centerPanel.add(graphic, BorderLayout.CENTER);
 		centerPanel.add(GBCRight, BorderLayout.EAST);
-		bottomPanel.add(GBCBotL, BorderLayout.WEST);
-		bottomPanel.add(GBCBottom, BorderLayout.CENTER);
-		bottomPanel.add(GBCBotR, BorderLayout.EAST);
+		bottomPanel.add(GBCBottom, BorderLayout.NORTH);
 		mainPanel.add(topPanel, BorderLayout.NORTH);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		mainPanel.add(bottomPanel, BorderLayout.SOUTH);
