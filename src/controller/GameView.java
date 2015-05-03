@@ -75,19 +75,19 @@ public class GameView extends JFrame implements Observer, KeyListener{
 
 	private void makeAndLayoutViews() {
 		graphic = new GraphicPanel(map);
-		topPanel = new JPanel();
-		centerPanel = new JPanel();
-		bottomPanel = new JPanel();
+		topPanel = new JPanel(new BorderLayout());
+		centerPanel = new JPanel(new BorderLayout());
+		bottomPanel = new JPanel(new BorderLayout());
 		mainPanel = new JPanel(new BorderLayout());
-        topPanel.add(GBCTopL);
-        topPanel.add(GBCTop);
-        topPanel.add(GBCTopR);
-        centerPanel.add(GBCLeft);
-		centerPanel.add(graphic);
-		centerPanel.add(GBCRight);
-		bottomPanel.add(GBCBotL);
-		bottomPanel.add(GBCBottom);
-		bottomPanel.add(GBCBotR);
+        topPanel.add(GBCTopL, BorderLayout.WEST);
+        topPanel.add(GBCTop, BorderLayout.CENTER);
+        topPanel.add(GBCTopR, BorderLayout.EAST);
+        centerPanel.add(GBCLeft, BorderLayout.WEST);
+		centerPanel.add(graphic, BorderLayout.CENTER);
+		centerPanel.add(GBCRight, BorderLayout.EAST);
+		bottomPanel.add(GBCBotL, BorderLayout.WEST);
+		bottomPanel.add(GBCBottom, BorderLayout.CENTER);
+		bottomPanel.add(GBCBotR, BorderLayout.EAST);
 		mainPanel.add(topPanel, BorderLayout.NORTH);
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		mainPanel.add(bottomPanel, BorderLayout.SOUTH);
