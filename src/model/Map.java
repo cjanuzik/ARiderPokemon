@@ -5,6 +5,9 @@ package model;
 
 import java.util.Observable;
 
+import javax.swing.JPanel;
+
+import controller.GameView;
 import model.Tiles.FenceBottom;
 import model.Tiles.FenceBottomLeft;
 import model.Tiles.FenceBottomRight;
@@ -94,41 +97,41 @@ public class Map extends Observable{
 		hasMoved = false;
 		switch (d) {
 		case DOWN:
-			if(direction != 'd'){
+			/*if(direction != 'd'){
 				direction = 'd';
 				g.loadImages("Down");
 				break;
-			}
+			}*/
 			if(r < 30)
 			    moveDown();
 			g.loadImages("Down");
 			break;
 		case LEFT:
-			if(direction != 'l'){
+			/*if(direction != 'l'){
 				direction = 'l';
 				g.loadImages("Left");
 				break;
-			}
+			}*/
 			if(c > 0)
 			    moveLeft();
 			g.loadImages("Left");
 			break;
 		case RIGHT:
-			if(direction != 'r'){
+			/*if(direction != 'r'){
 				direction = 'r';
 				g.loadImages("Right");
 				break;
-			}
+			}*/
 			if(c < 30)
 			    moveRight();
 			g.loadImages("Right");
 			break;
 		case UP:
-			if(direction != 'u'){
+			/*if(direction != 'u'){
 				direction = 'u';
 				g.loadImages("Up");
 				break;
-			}
+			}*/
 			if(r > 0)
 			    moveUp();
 			g.loadImages("Up");

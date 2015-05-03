@@ -93,7 +93,9 @@ public class GameView extends JFrame implements Observer, KeyListener{
 		mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 		//mainPanel.add(GBCBotR);
 	}
-
+    public void goBattle(){
+    	this.remove(graphic);
+    }
 	private void setLayoutAndAddComponentsToFrame() {
 		this.setLayout(new BorderLayout());
 		this.add(mainPanel, BorderLayout.NORTH);
@@ -118,7 +120,6 @@ public class GameView extends JFrame implements Observer, KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
