@@ -93,7 +93,6 @@ public class Battle {
 	 */
 	public int result(int catchRate, int runChance){
 		if(runChance > 100 || result[2] == 0){
-			result [3] = -1;
 			return -1;    //pokemon ran away
 		}
 		
