@@ -5,12 +5,6 @@ package model;
 
 import java.util.Observable;
 
-<<<<<<< HEAD
-=======
-import javax.swing.JPanel;
-
-import controller.BattleView;
->>>>>>> a75abe0949bd076ec3f49a85ff3e1d8be319b691
 import controller.GameView;
 import view.GraphicPanel;
 
@@ -107,12 +101,7 @@ public class Map extends Observable{
 		    int encountered = (int) (Math.random() * 20);
 		
 		    if(encountered == 1){
-<<<<<<< HEAD
 			    GameView.addBattlePanel();
-=======
-			    System.out.println("You have encountered a wild Pokemon!");
-			    BattleView startBattle = new BattleView(new Blastoise());
->>>>>>> a75abe0949bd076ec3f49a85ff3e1d8be319b691
 		    }
 		}
 		
