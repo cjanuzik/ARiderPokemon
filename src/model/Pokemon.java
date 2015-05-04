@@ -1,8 +1,6 @@
 package model;
 import java.util.Observable;
 
-import javax.swing.Action;
-
 
 public abstract class Pokemon extends Observable{
     private String name;

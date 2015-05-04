@@ -2,6 +2,6 @@ package model;
 
 public class Mewtwo extends Pokemon{
     public Mewtwo(){
-    	super("Mewtwo", 150, "Any", 3, 106);
+    	super("Mewtwo", 150, "Legend", 3, 106);
     }
 }

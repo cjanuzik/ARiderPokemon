@@ -5,53 +5,24 @@ package model;
 
 import java.util.Observable;
 
-import javax.swing.JPanel;
-
 import controller.GameView;
-import model.Tiles.FenceBottom;
-import model.Tiles.FenceBottomLeft;
-import model.Tiles.FenceBottomRight;
-import model.Tiles.FenceLeft;
-import model.Tiles.FenceRight;
-import model.Tiles.FenceTopLeft;
-import model.Tiles.FenceTopRight;
-import model.Tiles.MeadowGrass;
-import model.Tiles.TallGrass;
-import model.Tiles.TreeBottomLeft;
-import model.Tiles.TreeBottomRight;
-import model.Tiles.TreeLeft;
-import model.Tiles.TreeRight;
-import model.Tiles.TreeTopLeft;
-import model.Tiles.TreeTopRight;
-import model.Tiles.Water;
-import model.Tiles.WaterBottom;
-import model.Tiles.WaterBottomLeft;
-import model.Tiles.WaterBottomRight;
-import model.Tiles.WaterLeft;
-import model.Tiles.WaterRight;
-import model.Tiles.WaterTop;
-import model.Tiles.WaterTopLeft;
-import model.Tiles.WaterTopRight;
 import view.GraphicPanel;
 
 public class Map extends Observable{
 	private Tile[][] map; // tiles of the map
 	public final static int height = 12; 
 	public final static int width = 12;
-	private Tile[][] meadow = new Meadow().getMeadow();
+	private Tile[][] meadow;
 	// the row and column of the current location of the Trainer
 	private int c;
 	private int r;
 	private boolean hasMoved;
-	private char direction = 'd'; //direction facing, u,l,d,r
-
 
 	/**
 	 * Constructs a new instance of map
 	 */
 	public Map() {
-		
-		
+		meadow = new Meadow().getMeadow();
 		// place the hunter randomly
 		this.c = 15;
 		this.r = 0;
@@ -97,41 +68,21 @@ public class Map extends Observable{
 		hasMoved = false;
 		switch (d) {
 		case DOWN:
-			/*if(direction != 'd'){
-				direction = 'd';
-				g.loadImages("Down");
-				break;
-			}*/
 			if(r < 30)
 			    moveDown();
 			g.loadImages("Down");
 			break;
 		case LEFT:
-			/*if(direction != 'l'){
-				direction = 'l';
-				g.loadImages("Left");
-				break;
-			}*/
 			if(c > 0)
 			    moveLeft();
 			g.loadImages("Left");
 			break;
 		case RIGHT:
-			/*if(direction != 'r'){
-				direction = 'r';
-				g.loadImages("Right");
-				break;
-			}*/
 			if(c < 30)
 			    moveRight();
 			g.loadImages("Right");
 			break;
 		case UP:
-			/*if(direction != 'u'){
-				direction = 'u';
-				g.loadImages("Up");
-				break;
-			}*/
 			if(r > 0)
 			    moveUp();
 			g.loadImages("Up");
@@ -147,10 +98,10 @@ public class Map extends Observable{
 		boolean canEncounter = nextTile.getCanEncounter();
 		
 		if(canEncounter == true && hasMoved){
-		    int encountered = (int) (Math.random() * 10);
+		    int encountered = (int) (Math.random() * 20);
 		
 		    if(encountered == 1){
-			    System.out.println("You have encountered a wild Pokemon!");
+			    GameView.addBattlePanel();
 		    }
 		}
 		
@@ -169,7 +120,7 @@ public class Map extends Observable{
 	/**
 	 * moves character down
 	 */
-	private void moveDown() {
+	public void moveDown() {
 		if(!tileAtMeadow(r + 1, c).getSolid()){
 		    meadow[r][c].setHasCharacter(false);
 		    r++;

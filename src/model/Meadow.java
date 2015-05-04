@@ -1,12 +1,8 @@
 package model;
 
 
-import model.Tiles.FenceBottom;
-import model.Tiles.FenceBottomLeft;
-import model.Tiles.FenceBottomRight;
-import model.Tiles.FenceRight;
-import model.Tiles.FenceTopLeft;
-import model.Tiles.FenceTopRight;
+import java.util.Random;
+
 import model.Tiles.MeadowGrass;
 import model.Tiles.TallGrass;
 import model.Tiles.TreeBottomLeft;
@@ -32,6 +28,7 @@ private Tile[][] meadow;
 
     public Meadow(){
 	    makeMeadow();
+	    addRockSmash();
     }
 
     private void makeMeadow(){
@@ -69,6 +66,16 @@ private Tile[][] meadow;
     			{new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 	new MeadowGrass(), 	new MeadowGrass(), 	new MeadowGrass(), 	new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight()},
     			{new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 	new MeadowGrass(), 	new MeadowGrass(), 	new MeadowGrass(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight()},
     	};
+    }
+    
+    private void addRockSmash(){
+    	Random randomGenerator = new Random();
+		   
+   	    int rockSmashC = randomGenerator.nextInt(4) + 4;
+   	    int rockSmashR = randomGenerator.nextInt(10) + 8;
+   	    
+   	    meadow[rockSmashR][rockSmashC].setHasRockSmash(true);
+   	    
     }
     
     public Tile[][] getMeadow(){

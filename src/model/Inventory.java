@@ -6,13 +6,14 @@ import java.util.List;
 public class Inventory {
 	private int numOfBalls;
 	private List<Pokemon> pokemon;
-	private Pokedex pokedex;
 	private boolean rockSmashUnlocked, surfUnlocked;
+	private int steps;
 	
 	public Inventory()
 	{
 		pokemon = new LinkedList<Pokemon>();
-		numOfBalls = 0;
+		numOfBalls = 30;
+		steps = 500;
 		rockSmashUnlocked = false;
 		surfUnlocked = false;
 	}
@@ -24,15 +25,6 @@ public class Inventory {
 		
 		pokemon.add(toAdd);
 		return true;
-	}
-	public boolean removePokemon(Pokemon toRemove)
-	{
-		if(pokemon.contains(toRemove))
-		{
-			pokemon.remove(toRemove);
-			return true;
-		}
-		return false;
 	}
 	
 	public boolean updateBallCount(int ball)
@@ -66,7 +58,7 @@ public class Inventory {
 		return surfUnlocked;
 	}
 	
-	public boolean isRockDestroyer()
+	public boolean getRockSmashUnlocked()
 	{
 		return rockSmashUnlocked;
 	}
@@ -74,13 +66,16 @@ public class Inventory {
 	{
 		surfUnlocked = value;
 	}
-	public void setRockDestroyer(boolean value)
+	public void setRockSmashUnlocked(boolean value)
 	{
 		rockSmashUnlocked = value;
 	}
 	public int getBalls()
 	{
 		return numOfBalls;
+	}
+	public int getSteps(){
+		return steps;
 	}
 }
 
