@@ -6,7 +6,8 @@ import java.util.List;
 public class Inventory {
 	private int numOfBalls;
 	private List<Pokemon> pokemon;
-	private boolean rockSmashUnlocked, surfUnlocked;
+	private static boolean rockSmashUnlocked;
+	private boolean surfUnlocked;
 	private int steps;
 	
 	public Inventory()
@@ -66,7 +67,7 @@ public class Inventory {
 	{
 		surfUnlocked = value;
 	}
-	public void setRockSmashUnlocked(boolean value)
+	public static void setRockSmashUnlocked(boolean value)
 	{
 		rockSmashUnlocked = value;
 	}

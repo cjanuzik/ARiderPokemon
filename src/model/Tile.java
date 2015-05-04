@@ -39,6 +39,10 @@ public abstract class Tile {
 	
 	public void setHasSurf(boolean setSurf){
 		hasSurf = setSurf;
+		if(setSurf)
+			solid = true;
+		else
+			solid = false;
 	}
 	
 	public void setHasRockSmash(boolean setRockSmash){

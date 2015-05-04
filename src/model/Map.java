@@ -17,6 +17,7 @@ public class Map extends Observable{
 	private int c;
 	private int r;
 	private boolean hasMoved;
+	private char direction;
 
 	/**
 	 * Constructs a new instance of map
@@ -71,21 +72,25 @@ public class Map extends Observable{
 			if(r < 30)
 			    moveDown();
 			g.loadImages("Down");
+			direction = 'd';
 			break;
 		case LEFT:
 			if(c > 0)
 			    moveLeft();
 			g.loadImages("Left");
+			direction = 'l';
 			break;
 		case RIGHT:
 			if(c < 30)
 			    moveRight();
 			g.loadImages("Right");
+			direction = 'r';
 			break;
 		case UP:
 			if(r > 0)
 			    moveUp();
 			g.loadImages("Up");
+			direction = 'u';
 			break;
 		default:
 			break;
@@ -104,6 +109,20 @@ public class Map extends Observable{
 			    GameView.addBattlePanel();
 		    }
 		}
+		
+	}
+	
+	public void interact(){
+		switch(direction){
+		case('d'):
+			boolean hasHM = tileAtMeadow(r + 1, c).getHasRockSmash();
+		    if(hasHM){
+		    	Inventory.setRockSmashUnlocked(true);
+		    	tileAtMeadow(r + 1, c).setHasRockSmash(false);
+		    }
+		}
+		setChanged();
+		notifyObservers();
 		
 	}
 	/**

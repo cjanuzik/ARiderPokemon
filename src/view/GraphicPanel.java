@@ -128,6 +128,9 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 		        map.move(Dir.DOWN, this);
 		    if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 			    map.move(Dir.RIGHT,  this);
+		    if(e.getKeyCode() == KeyEvent.VK_ENTER){
+		    	map.interact();
+		    }
 		//}
 	}
 
