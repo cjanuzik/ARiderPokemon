@@ -1,6 +1,5 @@
-package controller;
+package model;
 
-import model.Inventory;
 
 public class Character {
 	String name;

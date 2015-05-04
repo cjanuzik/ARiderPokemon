@@ -39,7 +39,11 @@ public class Battle {
 		return result;
 		
 	}
-
+	/*
+	 * When a Pokeball is thrown,
+	 * the pokemon is caught on the basis of probability
+	 * the rarer the pokemon, the lesser the probability of it being caught 
+	 */
 	 public int[] throwPokeball(){
 		 int max = 0,min = 0,prob = 0;
 		 if(pokemon.getRarity() == 0){   //common pokemon
@@ -83,9 +87,13 @@ public class Battle {
 	 }
 	/*
 	 * returns the result of the fight
+	 * -1 = Pokemon ran away
+	 * 0 = continue the battle
+	 * 1 = Pokemon is caught
 	 */
 	public int result(int catchRate, int runChance){
 		if(runChance > 100 || result[2] == 0){
+			result [3] = -1;
 			return -1;    //pokemon ran away
 		}
 		
