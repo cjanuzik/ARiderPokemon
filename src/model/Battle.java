@@ -9,10 +9,6 @@ public class Battle {
 	 * constructor
 	 */
 	public Battle(Pokemon p){
-<<<<<<< HEAD
-		
-=======
->>>>>>> 6e53668c23a9e26f2958ce1c5219e6ddbf395e41
 		pokemon = p;
 		result[0] = pokemon.getRunChance();
 		result[1] = pokemon.getCatchRate();
