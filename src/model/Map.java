@@ -113,14 +113,43 @@ public class Map extends Observable{
 	}
 	
 	public void interact(){
-		switch(direction){
-		case('d'):
-			boolean hasHM = tileAtMeadow(r + 1, c).getHasRockSmash();
-		    if(hasHM){
-		    	Inventory.setRockSmashUnlocked(true);
-		    	tileAtMeadow(r + 1, c).setHasRockSmash(false);
-		    }
-		}
+		boolean hasHM;
+		switch(direction) {
+		    case 'd':
+		    	hasHM = tileAtMeadow(r + 1, c).getHasRockSmash();
+		        if(hasHM){
+		    	    Inventory.setRockSmashUnlocked(true);
+		    	    tileAtMeadow(r + 1, c).setHasRockSmash(false);
+		        }
+		        break;
+		
+	        case 'u':
+		        hasHM = tileAtMeadow(r - 1, c).getHasRockSmash();
+	            if(hasHM){
+	    	        Inventory.setRockSmashUnlocked(true);
+	    	        tileAtMeadow(r - 1, c).setHasRockSmash(false);
+	            }
+	            break;
+	            
+	        case 'l':
+		        hasHM = tileAtMeadow(r, c - 1).getHasRockSmash();
+	            if(hasHM){
+	    	        Inventory.setRockSmashUnlocked(true);
+	    	        tileAtMeadow(r, c - 1).setHasRockSmash(false);
+	            }
+	            break;
+	            
+	        case 'r':
+		        hasHM = tileAtMeadow(r, c + 1).getHasRockSmash();
+	            if(hasHM){
+	    	        Inventory.setRockSmashUnlocked(true);
+	    	        tileAtMeadow(r, c + 1).setHasRockSmash(false);
+	            }
+	            break;
+	            
+	        default:
+	        	break;
+	    }
 		setChanged();
 		notifyObservers();
 		
