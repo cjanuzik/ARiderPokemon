@@ -13,7 +13,11 @@ import model.Battle;
 import model.Blastoise;
 import model.Pokemon;
 
-public class BattleController extends JPanel {
+public class BattleView extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JPanel battleAction, buttons, meters, panelToReturn;
 	JLabel catchRateLabel, runRateLabel, turnsLeftLabel;
 	JSlider catchRateSlider, runRateSlider, turnsLeftSlider;
@@ -22,7 +26,7 @@ public class BattleController extends JPanel {
 	JButton throwBait, throwSafariBall, throwRock, runAway;
 	private Image image;
 
-	public BattleController(Pokemon tempPokemon, Battle tempBattle)
+	public BattleView(Pokemon tempPokemon)
 	{
 		try {
 			image = ImageIO.read(new File("Images/Trainer/TrainerRight.png"));
@@ -30,12 +34,13 @@ public class BattleController extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new JFrame();
-		battle = tempBattle;
+		new JPanel();
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//terminates the program when close button is tapped
         //setting the title
         //setTitle("Battle");
         setLayout(new BorderLayout());
+        pokemon = tempPokemon;
+        battle = new Battle(pokemon);
         battleAction = new JPanel(){
 				private static final long serialVersionUID = 1L;
 				public void paintComponent(Graphics g){
@@ -137,10 +142,10 @@ public class BattleController extends JPanel {
         
 	}
 	
-//	public JPanel getBattlePanel()
-//	{
-//		return panelToReturn;
-//	}
+	public JPanel getBattlePanel()
+	{
+		return panelToReturn;
+	}
 	public void draw(Graphics g)
 	{
 		//don't know the coordinates yet

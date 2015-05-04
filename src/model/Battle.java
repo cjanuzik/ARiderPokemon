@@ -7,9 +7,9 @@ public class Battle {
 	/*
 	 * constructor
 	 */
-	public Battle(Pokemon p, Character c){
+	public Battle(Pokemon p){
+		
 		pokemon = p;
-		character = c;
 		result[0] = pokemon.getRunChance();
 		result[1] = pokemon.getCatchRate();
 		result[2] = pokemon.getMaxTurns();
