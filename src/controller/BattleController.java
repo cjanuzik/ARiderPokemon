@@ -13,7 +13,7 @@ import model.Battle;
 import model.Blastoise;
 import model.Pokemon;
 
-public class BattleController extends JFrame {
+public class BattleController extends JPanel {
 	JPanel battleAction, buttons, meters, panelToReturn;
 	JLabel catchRateLabel, runRateLabel, turnsLeftLabel;
 	JSlider catchRateSlider, runRateSlider, turnsLeftSlider;
@@ -32,9 +32,9 @@ public class BattleController extends JFrame {
 		}
 		new JFrame();
 		battle = tempBattle;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//terminates the program when close button is tapped
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//terminates the program when close button is tapped
         //setting the title
-        setTitle("Battle");
+        //setTitle("Battle");
         setLayout(new BorderLayout());
         battleAction = new JPanel(){
 				private static final long serialVersionUID = 1L;
@@ -137,10 +137,10 @@ public class BattleController extends JFrame {
         
 	}
 	
-	public JPanel getBattlePanel()
-	{
-		return panelToReturn;
-	}
+//	public JPanel getBattlePanel()
+//	{
+//		return panelToReturn;
+//	}
 	public void draw(Graphics g)
 	{
 		//don't know the coordinates yet
