@@ -4,16 +4,19 @@ public class Battle {
 	Pokemon pokemon = null;
 	Character character = null;
 	int[] result = new int[4]; //stores runRate CatchRate turns result
+	
 	/*
 	 * constructor
 	 */
 	public Battle(Pokemon p){
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 6e53668c23a9e26f2958ce1c5219e6ddbf395e41
 		pokemon = p;
 		result[0] = pokemon.getRunChance();
 		result[1] = pokemon.getCatchRate();
 		result[2] = pokemon.getMaxTurns();
-		//display();
 	}
 	/*
 	 * throwbait
@@ -41,7 +44,7 @@ public class Battle {
 	}
 	/*
 	 * When a Pokeball is thrown,
-	 * the pokemon is caught on the basis of probability
+	 * the Pokemon is caught on the basis of probability
 	 * the rarer the pokemon, the lesser the probability of it being caught 
 	 */
 	 public int[] throwPokeball(){
@@ -93,7 +96,6 @@ public class Battle {
 	 */
 	public int result(int catchRate, int runChance){
 		if(runChance > 100 || result[2] == 0){
-			result [3] = -1;
 			return -1;    //pokemon ran away
 		}
 		
