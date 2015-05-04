@@ -8,10 +8,10 @@ public class Character {
 	/*
 	 * Constructor to set values
 	 */
-	public Character(String n, Inventory i, int s){
+	public Character(String n){
 		name = n;
-		inventory= i;
-		steps = s;
+		//inventory= i;
+		//steps = s;
 		
 	}
 	/*

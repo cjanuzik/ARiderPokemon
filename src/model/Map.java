@@ -7,6 +7,7 @@ import java.util.Observable;
 
 import javax.swing.JPanel;
 
+import controller.BattleView;
 import controller.GameView;
 import model.Tiles.FenceBottom;
 import model.Tiles.FenceBottomLeft;
@@ -151,6 +152,7 @@ public class Map extends Observable{
 		
 		    if(encountered == 1){
 			    System.out.println("You have encountered a wild Pokemon!");
+			    BattleView startBattle = new BattleView(new Blastoise());
 		    }
 		}
 		

@@ -13,18 +13,19 @@ import model.Battle;
 import model.Blastoise;
 import model.Pokemon;
 
-public class BattleView extends JPanel {
+public class BattleView extends JFrame{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JPanel battleAction, buttons, meters, panelToReturn;
-	JLabel catchRateLabel, runRateLabel, turnsLeftLabel;
-	JSlider catchRateSlider, runRateSlider, turnsLeftSlider;
-	Battle battle;
-	Pokemon pokemon;
-	JButton throwBait, throwSafariBall, throwRock, runAway;
+	private JPanel battleAction, buttons, meters, panelToReturn;
+	private JLabel catchRateLabel, runRateLabel, turnsLeftLabel;
+	private JSlider catchRateSlider, runRateSlider, turnsLeftSlider;
+	private Battle battle;
+	private Pokemon pokemon;
+	private JButton throwBait, throwSafariBall, throwRock, runAway;
 	private Image image;
+	private Character character;
 
 	public BattleView(Pokemon tempPokemon)
 	{
@@ -34,12 +35,14 @@ public class BattleView extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		new JPanel();
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//terminates the program when close button is tapped
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//terminates the program when close button is tapped
         //setting the title
-        //setTitle("Battle");
+        setTitle("Battle");
         setLayout(new BorderLayout());
         pokemon = tempPokemon;
+        //character = tempCharacter;
         battle = new Battle(pokemon);
         battleAction = new JPanel(){
 				private static final long serialVersionUID = 1L;
@@ -64,7 +67,10 @@ public class BattleView extends JPanel {
 				if(result[3] == -1)
 					System.out.println("You Lose");
 				else if(result[3] == 1)
+				{
 					System.out.println("You Win");
+					//character.addPokemon(pokemon);
+				}
 				
 				// TODO Auto-generated method stub
 				
@@ -137,15 +143,15 @@ public class BattleView extends JPanel {
         add(buttons, BorderLayout.SOUTH);
         setVisible(true);
         
-        panelToReturn = new JPanel();
-        panelToReturn.add(this);
+        //panelToReturn = new JPanel();
+        //panelToReturn.add(this);
         
 	}
 	
-	public JPanel getBattlePanel()
-	{
-		return panelToReturn;
-	}
+//	public JPanel getBattlePanel()
+//	{
+//		return panelToReturn;
+//	}
 	public void draw(Graphics g)
 	{
 		//don't know the coordinates yet
