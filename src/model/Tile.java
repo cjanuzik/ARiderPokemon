@@ -53,6 +53,10 @@ public abstract class Tile {
 			solid = false;
 	}
 	
+	public boolean getHasSurf(){
+		return hasSurf;
+	}
+	
 	public boolean getHasRockSmash(){
 		return hasRockSmash;
 	}

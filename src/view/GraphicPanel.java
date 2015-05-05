@@ -96,7 +96,7 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 		g.drawImage(ground, x, y, null);
 		if(tile.hasCharacter())
 			g.drawImage(character, x, y, null);
-		if(tile.getHasRockSmash())
+		if(tile.getHasRockSmash() || tile.getHasSurf())
 			g.drawImage(hm, x, y, null);
 
 	}

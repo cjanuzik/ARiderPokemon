@@ -12,7 +12,7 @@ public class Map extends Observable{
 	private Tile[][] map; // tiles of the map
 	public final static int height = 12; 
 	public final static int width = 12;
-	private Tile[][] meadow;
+	private Tile[][] world;
 	// the row and column of the current location of the Trainer
 	private int c;
 	private int r;
@@ -23,12 +23,12 @@ public class Map extends Observable{
 	 * Constructs a new instance of map
 	 */
 	public Map() {
-		meadow = new Meadow().getMeadow();
+		world = new World().getWorld();
 		// place the hunter randomly
 		this.c = 15;
 		this.r = 0;
 		
-		meadow[r][c].setHasCharacter(true);
+		world[r][c].setHasCharacter(true);
 		
 		map = new Tile[12][12];
 		makeMap();
@@ -48,12 +48,12 @@ public class Map extends Observable{
 	    	iStart = 20;
 	    if(jStart < 0)
 			jStart = 0;
-	    if(jStart > 20)
-	    	jStart = 20;
+	    if(jStart > 52)
+	    	jStart = 52;
 		
 		for(int i = 0; i < 12; i++){
 			for(int j = 0; j < 12; j++){
-				map[i][j] = meadow[i + iStart][j + jStart];
+				map[i][j] = world[i + iStart][j + jStart];
 			}
 		}
 		setChanged();
@@ -69,7 +69,7 @@ public class Map extends Observable{
 		hasMoved = false;
 		switch (d) {
 		case DOWN:
-			if(r < 30)
+			if(r < 31)
 			    moveDown();
 			g.loadImages("Down");
 			direction = 'd';
@@ -81,7 +81,7 @@ public class Map extends Observable{
 			direction = 'l';
 			break;
 		case RIGHT:
-			if(c < 30)
+			if(c < 63)
 			    moveRight();
 			g.loadImages("Right");
 			direction = 'r';
@@ -159,9 +159,9 @@ public class Map extends Observable{
 	 */
 	private void moveUp() {
 		if(!tileAtMeadow(r - 1, c).getSolid()){
-    		meadow[r][c].setHasCharacter(false);
+    		world[r][c].setHasCharacter(false);
 	    	r--;
-		    meadow[r][c].setHasCharacter(true);
+		    world[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -170,9 +170,9 @@ public class Map extends Observable{
 	 */
 	public void moveDown() {
 		if(!tileAtMeadow(r + 1, c).getSolid()){
-		    meadow[r][c].setHasCharacter(false);
+		    world[r][c].setHasCharacter(false);
 		    r++;
-		    meadow[r][c].setHasCharacter(true);
+		    world[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -181,9 +181,9 @@ public class Map extends Observable{
 	 */
 	private void moveRight() {
 		if(!tileAtMeadow(r,c + 1).getSolid()){
-		    meadow[r][c].setHasCharacter(false);
+		    world[r][c].setHasCharacter(false);
 		    c++;
-		    meadow[r][c].setHasCharacter(true);
+		    world[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -192,9 +192,9 @@ public class Map extends Observable{
 	 */
 	private void moveLeft() {
 		if(!tileAtMeadow(r,c - 1).getSolid()){
-		    meadow[r][c].setHasCharacter(false);
+		    world[r][c].setHasCharacter(false);
 		    c--;
-		    meadow[r][c].setHasCharacter(true);
+		    world[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -211,7 +211,7 @@ public class Map extends Observable{
 	}
 	
 	public Tile tileAtMeadow(int x, int y){
-		return meadow[x][y];
+		return world[x][y];
 	}
 	
 	public int getC(){
