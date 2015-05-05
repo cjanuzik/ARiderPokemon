@@ -5,38 +5,37 @@ package model;
 
 import java.util.Observable;
 
+import model.Tiles.Sand;
 import controller.GameView;
 import view.GraphicPanel;
 
 public class Map extends Observable{
-	private Tile[][] map; // tiles of the map
-	public final static int height = 12; 
-	public final static int width = 12;
-	private Tile[][] world;
+	private Tile[][] map; // tiles of the current viewing map
+	public final static int height = 12;  // height of viewing map
+	public final static int width = 12; // width of viewing map
+	private Tile[][] world; // tiles of the entire map
+	
 	// the row and column of the current location of the Trainer
 	private int c;
 	private int r;
+	
+	//Keeps track of if the trainer has moved/ran into a solid
+	//and which direction they are facing
 	private boolean hasMoved;
 	private char direction;
 
-	/**
-	 * Constructs a new instance of map
-	 */
+	//Initializes a new world and sets viewing area
 	public Map() {
 		world = new World().getWorld();
-		// place the hunter randomly
+		//Places the trainer at the top of the left map
 		this.c = 15;
 		this.r = 0;
-		
 		world[r][c].setHasCharacter(true);
-		
 		map = new Tile[12][12];
 		makeMap();
 	}
 	
-	/**
-	 * instantiates each tile/
-	 */
+	//Draws an 11x11 grid of tiles around the trainer
 	private void makeMap() {
 		
 		int iStart = r - 5;
@@ -58,13 +57,10 @@ public class Map extends Observable{
 		}
 		setChanged();
 		notifyObservers();
-		//map = meadow.getMeadow();
-		
 	}
-	/**
-	 * Moves the hunter in the direction specified with wrap around 
-	 * @param d The direction of movement
-	 */
+	
+	//Moves the trainer and changes direction if needed
+	//Also acts as trainer move limitation
 	public void move(Dir d, GraphicPanel g) {
 		hasMoved = false;
 		switch (d) {
@@ -97,9 +93,14 @@ public class Map extends Observable{
 
 		}
 		
+		//Redraws the map
 		makeMap();
+		
+		//Deducts a step from the trainer's step count
 		if(hasMoved)
 		    Inventory.takeAStep();
+		
+		//Checks if a wild Pokemon was encountered, if so swap panels
 		Tile nextTile = tileAtMeadow(r,c);
 		boolean canEncounter = nextTile.getCanEncounter();
 		
@@ -113,100 +114,59 @@ public class Map extends Observable{
 		
 	}
 	
+	//Interact with rocks and items on map
 	public void interact(){
-		boolean hasRockSmash;
-		boolean hasSurf;
-		boolean isRock;
+		Tile tileFacing = new Sand();
+		//Check which tile trainer
 		switch(direction) {
 		    case 'd':
-		    	//Checks if tile below contains HM Rock Smash
-		    	hasRockSmash = tileAtMeadow(r + 1, c).getHasRockSmash();
-		        if(hasRockSmash){
-		    	    Inventory.setRockSmashUnlocked(true);
-		    	    tileAtMeadow(r + 1, c).setHasRockSmash(false);
-		        }
-		        
-		        //Checks if tile below contains HM Surf
-		        hasSurf = tileAtMeadow(r + 1, c).getHasSurf();
-		        if(hasSurf){
-		    	    Inventory.setSurfUnlocked(true);
-		    	    tileAtMeadow(r + 1, c).setHasSurf(false);
-		        }
-		        
-		        //Checks if tile below contains a rock
-		        isRock = tileAtMeadow(r + 1, c).getHasRock();
-		        if(Inventory.getRockSmashUnlocked() && isRock){
-		        	Inventory.updateBallCount(1);
-		        	tileAtMeadow(r + 1, c).setHasRock(false);
-		        }
+		    	//Gets tile below character
+		    	tileFacing = tileAtMeadow(r + 1, c);
 		        break;
 		
 	        case 'u':
-		        hasRockSmash = tileAtMeadow(r - 1, c).getHasRockSmash();
-	            if(hasRockSmash){
-	    	        Inventory.setRockSmashUnlocked(true);
-	    	        tileAtMeadow(r - 1, c).setHasRockSmash(false);
-	            }
-	            hasSurf = tileAtMeadow(r - 1, c).getHasSurf();
-	            if(hasSurf){
-	    	        Inventory.setSurfUnlocked(true);
-	    	        tileAtMeadow(r - 1, c).setHasSurf(false);
-	            }
-	            
-	            isRock = tileAtMeadow(r - 1, c).getHasRock();
-		        if(Inventory.getRockSmashUnlocked() && isRock){
-		        	Inventory.updateBallCount(1);
-		        	tileAtMeadow(r - 1, c).setHasRock(false);
-		        }
+	        	//Gets tile above character
+		        tileFacing = tileAtMeadow(r - 1, c);
 	            break;
 	            
 	        case 'l':
-		        hasRockSmash = tileAtMeadow(r, c - 1).getHasRockSmash();
-	            if(hasRockSmash){
-	    	        Inventory.setRockSmashUnlocked(true);
-	    	        tileAtMeadow(r, c - 1).setHasRockSmash(false);
-	            }
-	            hasSurf = tileAtMeadow(r, c - 1).getHasSurf();
-	            if(hasSurf){
-	    	        Inventory.setSurfUnlocked(true);
-	    	        tileAtMeadow(r, c - 1).setHasSurf(false);
-	            }
-	            
-	            isRock = tileAtMeadow(r, c - 1).getHasRock();
-		        if(Inventory.getRockSmashUnlocked() && isRock){
-		        	Inventory.updateBallCount(1);
-		        	tileAtMeadow(r, c - 1).setHasRock(false);
-		        }
+	        	//Gets tile to left of character
+		        tileFacing = tileAtMeadow(r, c - 1);
 	            break;
 	            
 	        case 'r':
-		        hasRockSmash = tileAtMeadow(r, c + 1).getHasRockSmash();
-	            if(hasRockSmash){
-	    	        Inventory.setRockSmashUnlocked(true);
-	    	        tileAtMeadow(r, c + 1).setHasRockSmash(false);
-	            }
-	            hasSurf = tileAtMeadow(r, c + 1).getHasSurf();
-	            if(hasSurf){
-	    	        Inventory.setSurfUnlocked(true);
-	    	        tileAtMeadow(r, c + 1).setHasSurf(false);
-	            }
-	            isRock = tileAtMeadow(r, c + 1).getHasRock();
-		        if(Inventory.getRockSmashUnlocked() && isRock){
-		        	Inventory.updateBallCount(1);
-		        	tileAtMeadow(r, c + 1).setHasRock(false);
-		        }
+	        	//Gets tile to right of character
+		        tileFacing = tileAtMeadow(r, c + 1);
 	            break;
 	            
 	        default:
 	        	break;
 	    }
-		setChanged();
-		notifyObservers();
 		
+		//Checks if tile trainer is facing has HM Rock Smash
+        if(tileFacing.getHasRockSmash()){
+    	    Inventory.setRockSmashUnlocked(true);
+    	    tileAtMeadow(r + 1, c).setHasRockSmash(false);
+        }
+        
+        //Checks if tile below contains HM Surf
+        if(tileFacing.getHasSurf()){
+    	    Inventory.setSurfUnlocked(true);
+    	    tileAtMeadow(r + 1, c).setHasSurf(false);
+        }
+        
+        //Checks if tile below contains a rock and if trainer has rock smash
+        if(Inventory.getRockSmashUnlocked() && tileFacing.getHasRock()){
+        	Inventory.updateBallCount(1);
+        	tileAtMeadow(r + 1, c).setHasRock(false);
+        }
+        
+        //Notify observers so item disappears
+		setChanged();
+		notifyObservers();	
 	}
-	/**
-	 * moves character up
-	 */
+	
+	//Moves character up if tile above is not solid
 	private void moveUp() {
 		if(!tileAtMeadow(r - 1, c).getSolid()){
     		world[r][c].setHasCharacter(false);
@@ -215,9 +175,8 @@ public class Map extends Observable{
 		    hasMoved = true;
 		}
 	}
-	/**
-	 * moves character down
-	 */
+	
+	//Moves character down if tile below is not solid
 	public void moveDown() {
 		if(!tileAtMeadow(r + 1, c).getSolid()){
 		    world[r][c].setHasCharacter(false);
@@ -226,9 +185,8 @@ public class Map extends Observable{
 		    hasMoved = true;
 		}
 	}
-	/**
-	 * moves character right
-	 */
+	
+	//Moves character right if tile to the right is not solid
 	private void moveRight() {
 		if(!tileAtMeadow(r,c + 1).getSolid()){
 		    world[r][c].setHasCharacter(false);
@@ -237,9 +195,8 @@ public class Map extends Observable{
 		    hasMoved = true;
 		}
 	}
-	/**
-	 * moves character left
-	 */
+	
+	//Moves character left if tile to the left is not solid
 	private void moveLeft() {
 		if(!tileAtMeadow(r,c - 1).getSolid()){
 		    world[r][c].setHasCharacter(false);
@@ -249,41 +206,38 @@ public class Map extends Observable{
 		}
 	}
 
-	/**
-	 * returns the tile at the coordinates passed
-	 * @param x
-	 * @param y
-	 * @return Tile
-	 */
+	//Returns the tile at viewing area (x,y)
 	public Tile tileAt(int x, int y) {
 		return map[x][y];
 
 	}
 	
+	//Returns the tile on the world at (x,y)
 	public Tile tileAtMeadow(int x, int y){
 		return world[x][y];
 	}
 	
+	//Returns column the trainer is on in the world
 	public int getC(){
 		return c;
 	}
 	
+	//Returns row the trainer is on in the world
 	public int getR(){
 		return r;
 	}
-	/**
-	 * returns a String representation of the hunter 
-	 * 
-	 * @see Object#toString()
-	 */
+	
+	//Returns a string version of the world
 	public String toString() {
 		return "The Width of the map is :"+width +"\nThe height of the map is: "+height +"\nThe hunter is at:\n" + "Row: " + r + "\nCol: " + c + "\n";
 	}
-
+    
+	//Returns map viewing area height
 	public int getHeight() {
 		return height;
 	}
 	
+	//Returns map viewing area width
 	public int getWidth() {
 		return width;
 	}

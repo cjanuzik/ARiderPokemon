@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -20,43 +22,40 @@ import javax.swing.JScrollPane;
 
 import view.GraphicPanel;
 import view.BattlePanel;
+import view.HomePanel;
 import model.Inventory;
 import model.Map;
 
 public class GameView extends JFrame{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -308984420263715300L;
+	
+	private static final long serialVersionUID = 1L;
+	
+	//Components needed for JScrollPane
 	private static JPanel master;
 	private static BattlePanel battlePanel;
 	private static GraphicPanel mapPanel;
+	private HomePanel homePanel;
 	private static JScrollPane graphic; // graphic view
+	
+	//Panels needed for building the border then add to mainPanel
+	private JLabel GBCTop, GBCLeft, GBCRight, GBCBottom;
 	private JPanel topPanel;
 	private JPanel centerPanel;
 	private JPanel bottomPanel;
 	private JPanel mainPanel;
-	private static Map map;
-	private JLabel GBCTop, GBCLeft, GBCRight, GBCBottom;
 	
+	//Current instance of a Map
+	private static Map map;
+	
+	//Creates new instance of map and layouts the GUI
 	public GameView() {
-		setTitle("Pokemon - Safari Zone");
+		
 		map = new Map();
 		loadImages();
-		master = new JPanel();
-		mapPanel = new GraphicPanel(map);
-		battlePanel = new BattlePanel(map);
-		master.add(mapPanel);
-		master.add(battlePanel);
-		graphic = new JScrollPane(master);
-		graphic.setViewportView(mapPanel);
 		layoutGUI();
-		this.pack();
-		this.setResizable(false);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setVisible(true);
 	}
     
+	//Initializes image variables
 	public void loadImages(){
 		try {
 		    BufferedImage GBCComponent = ImageIO.read(new File("Images/GBC/GBCTop.png"));
@@ -72,12 +71,27 @@ public class GameView extends JFrame{
 		}
 	}
 	
+	//Layouts the GUI
 	public void layoutGUI() {
 		makeAndLayoutViews();
+		buildMenuBar();
 		setLayoutAndAddComponentsToFrame();
 	}
-
+    
+	//Makes all the components of the GUI
 	private void makeAndLayoutViews() {
+		master = new JPanel();
+		mapPanel = new GraphicPanel(map);
+		battlePanel = new BattlePanel(map);
+		homePanel = new HomePanel();
+		master.add(mapPanel);
+		master.add(battlePanel);
+		master.add(homePanel);
+		graphic = new JScrollPane(master);
+		graphic.setViewportView(homePanel);
+		graphic.setPreferredSize(new Dimension(352, 352));
+		graphic.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        graphic.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		topPanel = new JPanel(new BorderLayout());
 		centerPanel = new JPanel(new BorderLayout());
 		bottomPanel = new JPanel(new BorderLayout());
@@ -91,10 +105,10 @@ public class GameView extends JFrame{
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 	}
-   
-	private void setLayoutAndAddComponentsToFrame() {
-		this.setLayout(new BorderLayout());
-		//Add JMenuBar to Frame
+	
+	//Builds a menu bar and adds it to the Frame
+    private void buildMenuBar(){
+    	//Add JMenuBar to Frame
 		JMenuBar theMenuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu("File"); 
 		JMenu inventoryMenu = new JMenu("Inventory");
@@ -106,6 +120,7 @@ public class GameView extends JFrame{
 		JMenuItem hmItem = new JMenuItem("HM");
 		hmItem.addActionListener(new hmActionListener());
 		JMenuItem pokemonItem = new JMenuItem("Pokemon");
+		pokemonItem.addActionListener(new pokemonActionListener());
 		JMenuItem infoItem = new JMenuItem("Info");
 		infoItem.addActionListener(new infoActionListener());
 		JMenuItem seenItem = new JMenuItem("Seen");
@@ -120,23 +135,32 @@ public class GameView extends JFrame{
 		theMenuBar.add(inventoryMenu);
 		theMenuBar.add(pokedexMenu);
 		this.setJMenuBar(theMenuBar);
-		
+    }
+    
+    //Adds all main components to the frame
+	private void setLayoutAndAddComponentsToFrame() {
+		setTitle("Pokemon - Safari Zone");
+		this.setLayout(new BorderLayout());
 		this.add(mainPanel, BorderLayout.NORTH);
+		this.pack();
+		this.setResizable(false);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setVisible(true);
 	}
     
+	//Swaps to battle panel when a battle is triggered
 	public static void addBattlePanel(){
 		battlePanel = new BattlePanel(map);
 		graphic.setViewportView(battlePanel);
 	}
 	
+	//Swaps to map panel when a battle is over / homePanel is done
 	public static void addMapPanel(){
 		graphic.setViewportView(mapPanel);
 		mapPanel.comeBack();
 	}
 	
-	
-
-    
+    //Listener for about file item to give the player info about the project
 	private class AboutActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
             JPanel panel = new JPanel(new BorderLayout());
@@ -151,6 +175,7 @@ public class GameView extends JFrame{
 		}
 	}
 	
+	//Listener for Controls file item to show player the controls
 	private class ControlsActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			JPanel panel = new JPanel(new BorderLayout());
@@ -164,6 +189,7 @@ public class GameView extends JFrame{
 		}
 	}
 	
+	//Listner for HM file item, shows the player what HM they have unlocked
 	private class hmActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			JPanel panel = new JPanel(new BorderLayout());
@@ -183,6 +209,7 @@ public class GameView extends JFrame{
 		}
 	}
 	
+	//Listener for info file item, shows the player's steps and ball count
 	private class infoActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			JPanel panel = new JPanel(new BorderLayout());
@@ -196,6 +223,18 @@ public class GameView extends JFrame{
 		}
 	}
 	
+	private class pokemonActionListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			JPanel panel = new JPanel(new GridLayout(Inventory.listPokemon().size() - 1, 1));
+			
+			for(int i = 0; i < Inventory.listPokemon().size(); i++){
+				panel.add(new JLabel("" + Inventory.listPokemon().get(i).getName()));
+			}
+			
+			JOptionPane.showMessageDialog(null, panel);
+		}
+	}
+	//Calls GameView to start the game
 	public static void main(String[] args) {
 		new GameView();
 	}

@@ -5,18 +5,15 @@ import java.util.List;
 
 public class Inventory {
 	private static int numOfBalls = 30;
-	private List<Pokemon> pokemon = new ArrayList<Pokemon>();
+	private static List<Pokemon> pokemon = new ArrayList<Pokemon>();
 	private static boolean rockSmashUnlocked = false;
 	private static boolean surfUnlocked = false;
 	private static int steps = 500;
 	
-	public boolean addPokemon(Pokemon toAdd)
+	public static void addPokemon(Pokemon toAdd)
 	{
-		if(pokemon.contains(toAdd))
-			return false;
-		
 		pokemon.add(toAdd);
-		return true;
+		
 	}
 	
 	public static boolean updateBallCount(int ball)
@@ -44,7 +41,7 @@ public class Inventory {
 		return pokemon.size();
 	}
 	
-	public List<Pokemon> listPokemon()
+	public static List<Pokemon> listPokemon()
 	{
 		return pokemon;
 	}

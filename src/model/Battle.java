@@ -9,10 +9,12 @@ import model.Tiles.TallGrass;
 public class Battle extends Observable{
 	Map map;
 	Pokemon pokemon;
+	int turns;
 	
 	public Battle(Map map){
 		this.map = map;
 	    pokemon = generatePokemon();
+	    turns = 0;
 	}
 	
 	private Pokemon generatePokemon(){
@@ -56,5 +58,33 @@ public class Battle extends Observable{
 	//Returns which Pokemon is being battled
 	public Pokemon getPokemon(){
 		return pokemon;
+	}
+	
+	//Returns if the Pokemon was caught
+	public boolean isCaught(){
+		Random randomGenerator = new Random();
+		int caught = randomGenerator.nextInt(100);
+		
+		if(caught < pokemon.getCatchRate())
+		    return true;
+		
+		return false;
+	}
+	
+	public boolean checkTurns(){
+		turns++;
+		if(turns == pokemon.getMaxTurns())
+			return true;
+		return false;
+	}
+	
+	public boolean pokemonRun(){
+		Random randomGenerator = new Random();
+		int caught = randomGenerator.nextInt(100);
+		
+		if(caught < pokemon.getRunChance())
+		    return true;
+		
+		return false;
 	}
 }

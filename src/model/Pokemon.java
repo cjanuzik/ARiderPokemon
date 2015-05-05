@@ -8,9 +8,9 @@ public abstract class Pokemon extends Observable{
     private String type;
     private int rarity;
     private int HP;
-    private int runChance = 20; //defaults runChance to 20%
-    private int maxTurns = 7; //defaults maxTurns to 7
-    private int catchRate = 40;//defaults catchRate to 40%
+    private int runChance; //defaults runChance to 20%
+    private int maxTurns; //defaults maxTurns to 7
+    private int catchRate;//defaults catchRate to 40%
     
     public Pokemon(String pkmnName, int pkmnDexNum, String pkmnType, int pkmnRarity, int pkmnHP){
     	name = pkmnName;
@@ -21,7 +21,7 @@ public abstract class Pokemon extends Observable{
     	switch(pkmnRarity){
 	        case 0: runChance = 20; //Sets common runChance to 20%
 	        		maxTurns = 7; //Sets common maxTurns to 7
-	        		catchRate = 40;//Sets common catchRate to 40%
+	        		catchRate = 30;//Sets common catchRate to 40%
 	                break;
 	                
 	        case 1: runChance = 33; //Sets uncommon runChance to 33%
@@ -31,7 +31,7 @@ public abstract class Pokemon extends Observable{
 	                
 	        case 2: runChance = 50; //Sets unique runChance to 50%
 	                maxTurns = 3; //Sets unique maxTurns to 3
-	                catchRate = 20;//Sets unique catchRate to 20%
+	                catchRate = 10;//Sets unique catchRate to 20%
 	                break;
     	}
     }

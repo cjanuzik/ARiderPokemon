@@ -21,7 +21,8 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 
 	private static final long serialVersionUID = 321562980917862556L;
 	private Map map;
-	//images of the character and the ground
+	
+	//images of the character, ground, items and rocks
 	private BufferedImage ground, character, hm, rock;
 
 	public GraphicPanel(Map map) {

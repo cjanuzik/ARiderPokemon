@@ -3,7 +3,9 @@ package view;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +18,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import model.Battle;
 import model.Inventory;
@@ -27,11 +32,13 @@ public class BattlePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	// Current instance of a battle
 	private Battle battle;
-	
+	private Timer timer = null;
+	private boolean caught;
 	//GUI components of BattlePanel
-	private JPanel pokemonPanel, buttonPanel, trainerPanel;
+	private JScrollPane graphic, textGraphic;
+	private JPanel buttonPanel, trainerPanel, master, textFeed, pokemonPanel;
     private JButton throwBait, throwRock, run, throwBall;
-	private JLabel trainerPic, pokemonPic, pokemonBar, actionFeed;
+	private JLabel trainerPic, pokemonPic, ballPic, pokemonBar, ballFeed, encounterFeed, brokeFeed, baitFeed, rockFeed;
 	
 	//Initializes a new battle and calls layoutGUI
 	public BattlePanel(Map map) {
@@ -58,6 +65,8 @@ public class BattlePanel extends JPanel{
     
 	//Creates components and adds them to eachother
 	private void makeAndLayoutViews() {
+		
+		//Create main panels and buttons
 		pokemonPanel = new JPanel(new GridLayout(1,2));
 		trainerPanel = new JPanel(new GridLayout(1,2));
 		buttonPanel = new JPanel(new GridLayout(2,2));
@@ -65,35 +74,103 @@ public class BattlePanel extends JPanel{
 		throwRock = new JButton("Throw Rock");
 		throwBall = new JButton("Throw Ball");
 		run = new JButton("Run");
+		
+		//Load Pictures
 		try{
 		    BufferedImage image = ImageIO.read(new File("Images/Battle/BattleTrainer.png"));
 	        trainerPic = new JLabel(new ImageIcon(image));
 	        image = ImageIO.read(new File("Images/Battle/" + battle.getPokemon().getName() + ".png"));
 	        pokemonPic = new JLabel(new ImageIcon(image));
+	        image = ImageIO.read(new File("Images/Battle/" + battle.getPokemon().getType() + "BallActive.png"));
+	        ballPic = new JLabel(new ImageIcon(image));
 	        image = ImageIO.read(new File("Images/Battle/" + battle.getPokemon().getName() + "Bar.png"));
 	        pokemonBar = new JLabel(new ImageIcon(image));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		actionFeed = new JLabel("A wild " + battle.getPokemon().getName() + " appeared!");
-		pokemonPanel.add(pokemonBar);
-		pokemonPanel.add(pokemonPic);
-		trainerPanel.add(trainerPic);
-		trainerPanel.add(actionFeed);
+		
+		//Add ballPic and pokemonPic to master panel
+		master = new JPanel();
+		master.add(pokemonPic);
+		master.add(ballPic);
+		
+		//Add pokemon slides to graphic and set view panel
+		graphic = new JScrollPane(master);
+		graphic.setViewportView(pokemonPic);
+		graphic.setPreferredSize(new Dimension(132, 132));
+		graphic.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        graphic.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		//Create main panel components
+		pokemonPanel.add(pokemonBar, BorderLayout.WEST);
+		pokemonPanel.add(graphic, BorderLayout.CENTER);
+		
+		//Create TextFeed panel and add different labels with text
+		textFeed = new JPanel();
+		encounterFeed = new JLabel("A wild " + battle.getPokemon().getName() + " appeared!");
+		ballFeed = new JLabel("You throw a safari ball...");
+		brokeFeed = new JLabel(battle.getPokemon().getName() + " broke free!");
+		baitFeed = new JLabel("You throw some bait...");
+		rockFeed = new JLabel("You throw a rock...");
+		textFeed.add(encounterFeed);
+		textFeed.add(ballFeed);
+		textFeed.add(brokeFeed);
+		textFeed.add(baitFeed);
+		textFeed.add(rockFeed);
+		
+		//Add textFeed to textGraphic and default to encountered Pokemon
+		textGraphic = new JScrollPane(textFeed);
+		textGraphic.setViewportView(encounterFeed);
+		textGraphic.setPreferredSize(new Dimension(200, 200));
+		textGraphic.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        textGraphic.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		trainerPanel.add(trainerPic, BorderLayout.WEST);
+		trainerPanel.add(textGraphic, BorderLayout.CENTER);
 		buttonPanel.add(throwBall);
 		buttonPanel.add(throwBait);
 		buttonPanel.add(throwRock);
 		buttonPanel.add(run);
 	}
-    
+	
 	//Registers listeners to buttons
 	private void registerListeners() {
-
-		// TODO 9: uncomment the code below and talk about
+		
+		//Timer to swap out JPanels when trying to catch and calcuates if caught
+		timer = new Timer(3000, new ActionListener(){      // Timer 3 seconds
+            public void actionPerformed(ActionEvent e) {
+            	timer.stop();
+            	if(caught){
+        			Inventory.addPokemon(battle.getPokemon());
+        			GameView.addMapPanel();
+        		}
+            	graphic.setViewportView(pokemonPic); //Changes view to Pokemon after 3 sec.
+            	textGraphic.setViewportView(brokeFeed);
+            	
+            	if(battle.checkTurns())
+            		GameView.addMapPanel();
+            	
+                repaint(); //updates
+            }
+        });
+		
+		//Throws ball, swaps JPanels, calls timer
+		throwBall.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+            	caught = false;
+            	caught = battle.isCaught();
+            	Inventory.updateBallCount(-1);
+            	textGraphic.setViewportView(ballFeed);
+            	graphic.setViewportView(ballPic);
+                repaint();                  // updates
+                timer.start();              // starts the timer
+            }
+        });
+		
+		//Creates listeners for throwBait, throwRock and run buttons
 		BattleListener listen = new BattleListener();
 		throwBait.addActionListener(listen);
 		throwRock.addActionListener(listen);
-		throwBall.addActionListener(listen);
+		
 		run.addActionListener(listen);
 
 	}
@@ -103,25 +180,12 @@ public class BattlePanel extends JPanel{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			if(e.getSource() == throwBall){
-				actionFeed.setText("You throw a safari ball!");
-				Inventory.updateBallCount(-1);
-				try{
-					pokemonPanel.remove(pokemonPic);
-					String type = battle.getPokemon().getType();
-					BufferedImage image = ImageIO.read(new File("Images/Battle/" + type + "BallActive.png"));
-		            pokemonPic = new JLabel(new ImageIcon(image));
-		            pokemonPanel.add(pokemonPic, BorderLayout.EAST);
-				} catch (IOException ioe) {
-					ioe.printStackTrace();
-				}
-			}
+			
 			if(e.getSource() == throwBait){
-				actionFeed.setText("You throw some bait!");
+				textGraphic.setViewportView(baitFeed);
 			}
 			if(e.getSource() == throwRock){
-				actionFeed.setText("You throw a rock!");
+				textGraphic.setViewportView(rockFeed);
 			}
 			if (e.getSource() == run)
 				GameView.addMapPanel();
