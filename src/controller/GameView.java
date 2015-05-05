@@ -168,8 +168,13 @@ public class GameView extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			JPanel panel = new JPanel(new BorderLayout());
 		
+<<<<<<< HEAD
 			JLabel surf = new JLabel("You do not have HM Surf");
 			JLabel rockSmash = new JLabel("You do not have HM Rock Smash");
+=======
+			JLabel surf = new JLabel("You do not have HM Surf...");
+			JLabel rockSmash = new JLabel("You do not have HM Rock Smash...");
+>>>>>>> 6cb403aa49db4513a4e8374dae4f672ff8f11acb
 			
 			if(Inventory.getSurfUnlocked())
 				surf = new JLabel("You have unlocked HM Surf!");
