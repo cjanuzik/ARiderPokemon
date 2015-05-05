@@ -119,6 +119,8 @@ public class GameView extends JFrame{
 		JMenu pokedexMenu = new JMenu("Pokedex");
 		JMenuItem aboutItem = new JMenuItem("About");
 		aboutItem.addActionListener(new AboutActionListener());
+		JMenuItem exitItem = new JMenuItem("Exit");
+		exitItem.addActionListener(new ExitActionListener());
 		JMenuItem controlsItem = new JMenuItem("Controls");
 		controlsItem.addActionListener(new ControlsActionListener());
 		JMenuItem hmItem = new JMenuItem("HM");
@@ -131,6 +133,7 @@ public class GameView extends JFrame{
 		
 		fileMenu.add(aboutItem);
 		fileMenu.add(controlsItem);
+		fileMenu.add(exitItem);
 		inventoryMenu.add(hmItem);
 		inventoryMenu.add(pokemonItem);
 		inventoryMenu.add(infoItem);
@@ -182,6 +185,17 @@ public class GameView extends JFrame{
 			JOptionPane.showMessageDialog(null, panel);
 
 		}
+	}
+	private class ExitActionListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			System.exit(0);
+			// TODO Auto-generated 
+			
+		}
+		
 	}
 	
 	//Listener for Controls file item to show player the controls
