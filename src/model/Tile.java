@@ -8,6 +8,7 @@ public abstract class Tile {
 	private boolean solid;
 	private boolean hasSurf = false;
 	private boolean hasRockSmash = false;
+	private boolean hasRock = false;
 	
 	public Tile(String name, boolean encounter, boolean isSolid){
 		tileName = name;
@@ -53,11 +54,23 @@ public abstract class Tile {
 			solid = false;
 	}
 	
+	public void setHasRock(boolean toSet){
+		hasRock = toSet;
+		if(toSet)
+			solid = true;
+		else
+			solid = false;
+	}
+	
 	public boolean getHasSurf(){
 		return hasSurf;
 	}
 	
 	public boolean getHasRockSmash(){
 		return hasRockSmash;
+	}
+	
+	public boolean getHasRock(){
+		return hasRock;
 	}
 }

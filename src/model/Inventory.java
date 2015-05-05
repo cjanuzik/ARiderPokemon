@@ -1,23 +1,14 @@
 package model;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
-	private int numOfBalls;
-	private List<Pokemon> pokemon;
-	private static boolean rockSmashUnlocked;
-	private boolean surfUnlocked;
-	private int steps;
-	
-	public Inventory()
-	{
-		pokemon = new LinkedList<Pokemon>();
-		numOfBalls = 30;
-		steps = 500;
-		rockSmashUnlocked = false;
-		surfUnlocked = false;
-	}
+	private static int numOfBalls = 30;
+	private List<Pokemon> pokemon = new ArrayList<Pokemon>();
+	private static boolean rockSmashUnlocked = false;
+	private static boolean surfUnlocked = false;
+	private static int steps = 500;
 	
 	public boolean addPokemon(Pokemon toAdd)
 	{
@@ -28,7 +19,7 @@ public class Inventory {
 		return true;
 	}
 	
-	public boolean updateBallCount(int ball)
+	public static boolean updateBallCount(int ball)
 	{
 		int temp = numOfBalls + ball;
 		if(temp>0)
@@ -38,6 +29,10 @@ public class Inventory {
 		}
 		else 
 			return false;
+	}
+	
+	public static void takeAStep(){
+		steps--;
 	}
 	public boolean containsPokemon(Pokemon toCheck)
 	{
@@ -54,16 +49,16 @@ public class Inventory {
 		return pokemon;
 	}
 	
-	public boolean getSurfUnlocked()
+	public static boolean getSurfUnlocked()
 	{
 		return surfUnlocked;
 	}
 	
-	public boolean getRockSmashUnlocked()
+	public static boolean getRockSmashUnlocked()
 	{
 		return rockSmashUnlocked;
 	}
-	public void setSurferUnlocked(boolean value)
+	public static void setSurfUnlocked(boolean value)
 	{
 		surfUnlocked = value;
 	}
@@ -71,11 +66,11 @@ public class Inventory {
 	{
 		rockSmashUnlocked = value;
 	}
-	public int getBalls()
+	public static int getBalls()
 	{
 		return numOfBalls;
 	}
-	public int getSteps(){
+	public static int getSteps(){
 		return steps;
 	}
 }

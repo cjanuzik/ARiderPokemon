@@ -20,6 +20,7 @@ public class Desert {
 	public Desert(){
 		makeDesert();
 		addHasSurf();
+		addRocks();
 	}
 	
 	public void makeDesert(){
@@ -72,4 +73,11 @@ public class Desert {
    	    desert[rockSmashR][rockSmashC].setHasSurf(true);
    	    
     }
+	
+	private void addRocks(){
+		desert[4][20].setHasRock(true);
+		desert[7][17].setHasRock(true);
+		desert[15][8].setHasRock(true);
+		desert[23][27].setHasRock(true);
+	}
 }

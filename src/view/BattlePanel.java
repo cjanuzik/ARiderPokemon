@@ -18,30 +18,35 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Battle;
+import model.Inventory;
 import model.Map;
 import controller.GameView;
 
 public class BattlePanel extends JPanel{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6425413722609154458L;
-	//TODO: Declare any components you want to use
+	private static final long serialVersionUID = 1L;
+	// Current instance of a battle
 	private Battle battle;
+	
+	//GUI components of BattlePanel
 	private JPanel pokemonPanel, buttonPanel, trainerPanel;
     private JButton throwBait, throwRock, run, throwBall;
 	private JLabel trainerPic, pokemonPic, pokemonBar, actionFeed;
+	
+	//Initializes a new battle and calls layoutGUI
 	public BattlePanel(Map map) {
 		battle = new Battle(map);
 		layoutGUI();
 		registerListeners();
 	}
     
+	//Layouts the GUI
 	private void layoutGUI(){
 		makeAndLayoutViews();
 		setLayoutAndAddComponentsToFrame();
 	}
+	
+	//Adds main components to the BattlePanel
 	private void setLayoutAndAddComponentsToFrame() {
 		this.setPreferredSize(new Dimension(352, 352));
 		this.setVisible(true);
@@ -50,7 +55,8 @@ public class BattlePanel extends JPanel{
 		this.add(trainerPanel, BorderLayout.CENTER);
 		this.add(buttonPanel, BorderLayout.SOUTH);
 	}
-
+    
+	//Creates components and adds them to eachother
 	private void makeAndLayoutViews() {
 		pokemonPanel = new JPanel(new GridLayout(1,2));
 		trainerPanel = new JPanel(new GridLayout(1,2));
@@ -79,7 +85,8 @@ public class BattlePanel extends JPanel{
 		buttonPanel.add(throwRock);
 		buttonPanel.add(run);
 	}
-
+    
+	//Registers listeners to buttons
 	private void registerListeners() {
 
 		// TODO 9: uncomment the code below and talk about
@@ -91,6 +98,7 @@ public class BattlePanel extends JPanel{
 
 	}
 	
+	//Checks which button was pressed then performs the correct actions.
 	private class BattleListener implements ActionListener{
 
 		@Override
@@ -98,6 +106,7 @@ public class BattlePanel extends JPanel{
 			// TODO Auto-generated method stub
 			if(e.getSource() == throwBall){
 				actionFeed.setText("You throw a safari ball!");
+				Inventory.updateBallCount(-1);
 				try{
 					pokemonPanel.remove(pokemonPic);
 					String type = battle.getPokemon().getType();

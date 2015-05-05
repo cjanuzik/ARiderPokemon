@@ -69,7 +69,7 @@ public class Map extends Observable{
 		hasMoved = false;
 		switch (d) {
 		case DOWN:
-			if(r < 31)
+			if(r < 30)
 			    moveDown();
 			g.loadImages("Down");
 			direction = 'd';
@@ -81,7 +81,7 @@ public class Map extends Observable{
 			direction = 'l';
 			break;
 		case RIGHT:
-			if(c < 63)
+			if(c < 62)
 			    moveRight();
 			g.loadImages("Right");
 			direction = 'r';
@@ -98,7 +98,8 @@ public class Map extends Observable{
 		}
 		
 		makeMap();
-		
+		if(hasMoved)
+		    Inventory.takeAStep();
 		Tile nextTile = tileAtMeadow(r,c);
 		boolean canEncounter = nextTile.getCanEncounter();
 		
@@ -113,38 +114,87 @@ public class Map extends Observable{
 	}
 	
 	public void interact(){
-		boolean hasHM;
+		boolean hasRockSmash;
+		boolean hasSurf;
+		boolean isRock;
 		switch(direction) {
 		    case 'd':
-		    	hasHM = tileAtMeadow(r + 1, c).getHasRockSmash();
-		        if(hasHM){
+		    	//Checks if tile below contains HM Rock Smash
+		    	hasRockSmash = tileAtMeadow(r + 1, c).getHasRockSmash();
+		        if(hasRockSmash){
 		    	    Inventory.setRockSmashUnlocked(true);
 		    	    tileAtMeadow(r + 1, c).setHasRockSmash(false);
+		        }
+		        
+		        //Checks if tile below contains HM Surf
+		        hasSurf = tileAtMeadow(r + 1, c).getHasSurf();
+		        if(hasSurf){
+		    	    Inventory.setSurfUnlocked(true);
+		    	    tileAtMeadow(r + 1, c).setHasSurf(false);
+		        }
+		        
+		        //Checks if tile below contains a rock
+		        isRock = tileAtMeadow(r + 1, c).getHasRock();
+		        if(Inventory.getRockSmashUnlocked() && isRock){
+		        	Inventory.updateBallCount(1);
+		        	tileAtMeadow(r + 1, c).setHasRock(false);
 		        }
 		        break;
 		
 	        case 'u':
-		        hasHM = tileAtMeadow(r - 1, c).getHasRockSmash();
-	            if(hasHM){
+		        hasRockSmash = tileAtMeadow(r - 1, c).getHasRockSmash();
+	            if(hasRockSmash){
 	    	        Inventory.setRockSmashUnlocked(true);
 	    	        tileAtMeadow(r - 1, c).setHasRockSmash(false);
 	            }
+	            hasSurf = tileAtMeadow(r - 1, c).getHasSurf();
+	            if(hasSurf){
+	    	        Inventory.setSurfUnlocked(true);
+	    	        tileAtMeadow(r - 1, c).setHasSurf(false);
+	            }
+	            
+	            isRock = tileAtMeadow(r - 1, c).getHasRock();
+		        if(Inventory.getRockSmashUnlocked() && isRock){
+		        	Inventory.updateBallCount(1);
+		        	tileAtMeadow(r - 1, c).setHasRock(false);
+		        }
 	            break;
 	            
 	        case 'l':
-		        hasHM = tileAtMeadow(r, c - 1).getHasRockSmash();
-	            if(hasHM){
+		        hasRockSmash = tileAtMeadow(r, c - 1).getHasRockSmash();
+	            if(hasRockSmash){
 	    	        Inventory.setRockSmashUnlocked(true);
 	    	        tileAtMeadow(r, c - 1).setHasRockSmash(false);
 	            }
+	            hasSurf = tileAtMeadow(r, c - 1).getHasSurf();
+	            if(hasSurf){
+	    	        Inventory.setSurfUnlocked(true);
+	    	        tileAtMeadow(r, c - 1).setHasSurf(false);
+	            }
+	            
+	            isRock = tileAtMeadow(r, c - 1).getHasRock();
+		        if(Inventory.getRockSmashUnlocked() && isRock){
+		        	Inventory.updateBallCount(1);
+		        	tileAtMeadow(r, c - 1).setHasRock(false);
+		        }
 	            break;
 	            
 	        case 'r':
-		        hasHM = tileAtMeadow(r, c + 1).getHasRockSmash();
-	            if(hasHM){
+		        hasRockSmash = tileAtMeadow(r, c + 1).getHasRockSmash();
+	            if(hasRockSmash){
 	    	        Inventory.setRockSmashUnlocked(true);
 	    	        tileAtMeadow(r, c + 1).setHasRockSmash(false);
 	            }
+	            hasSurf = tileAtMeadow(r, c + 1).getHasSurf();
+	            if(hasSurf){
+	    	        Inventory.setSurfUnlocked(true);
+	    	        tileAtMeadow(r, c + 1).setHasSurf(false);
+	            }
+	            isRock = tileAtMeadow(r, c + 1).getHasRock();
+		        if(Inventory.getRockSmashUnlocked() && isRock){
+		        	Inventory.updateBallCount(1);
+		        	tileAtMeadow(r, c + 1).setHasRock(false);
+		        }
 	            break;
 	            
 	        default:

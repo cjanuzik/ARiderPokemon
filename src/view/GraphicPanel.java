@@ -22,7 +22,7 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 	private static final long serialVersionUID = 321562980917862556L;
 	private Map map;
 	//images of the character and the ground
-	private BufferedImage ground, character, hm;
+	private BufferedImage ground, character, hm, rock;
 
 	public GraphicPanel(Map map) {
 		this.map = map;
@@ -43,6 +43,7 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 			character = ImageIO.read(new File("Images/Trainer/Trainer" + direction + ".png"));
 			ground = ImageIO.read(new File("Images/Tiles/TallGrass.png"));
 			hm = ImageIO.read(new File("Images/Tiles/HMTile.png"));
+			rock = ImageIO.read(new File("Images/Tiles/Rock.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -96,8 +97,10 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 		g.drawImage(ground, x, y, null);
 		if(tile.hasCharacter())
 			g.drawImage(character, x, y, null);
-		if(tile.getHasRockSmash() || tile.getHasSurf())
+		if(tile.getHasRockSmash() || tile.getHasSurf() && !tile.getHasRock())
 			g.drawImage(hm, x, y, null);
+		if(tile.getHasRock())
+			g.drawImage(rock, x, y, null);
 
 	}
 	

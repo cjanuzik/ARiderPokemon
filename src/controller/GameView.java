@@ -37,14 +37,11 @@ public class GameView extends JFrame{
 	private JPanel bottomPanel;
 	private JPanel mainPanel;
 	private static Map map;
-	private static Inventory inventory;
 	private JLabel GBCTop, GBCLeft, GBCRight, GBCBottom;
-	//private JPanel views;
 	
 	public GameView() {
 		setTitle("Pokemon - Safari Zone");
 		map = new Map();
-		inventory = new Inventory();
 		loadImages();
 		master = new JPanel();
 		mapPanel = new GraphicPanel(map);
@@ -110,6 +107,7 @@ public class GameView extends JFrame{
 		hmItem.addActionListener(new hmActionListener());
 		JMenuItem pokemonItem = new JMenuItem("Pokemon");
 		JMenuItem infoItem = new JMenuItem("Info");
+		infoItem.addActionListener(new infoActionListener());
 		JMenuItem seenItem = new JMenuItem("Seen");
 		
 		fileMenu.add(aboutItem);
@@ -173,14 +171,27 @@ public class GameView extends JFrame{
 			JLabel surf = new JLabel("You do not have HM Surf...");
 			JLabel rockSmash = new JLabel("You do not have HM Rock Smash...");
 			
-			if(inventory.getSurfUnlocked())
+			if(Inventory.getSurfUnlocked())
 				surf = new JLabel("You have unlocked HM Surf!");
-			if(inventory.getRockSmashUnlocked())
+			if(Inventory.getRockSmashUnlocked())
 				rockSmash = new JLabel("You have unlocked HM Rock Smash!");
 			
 			panel.add(surf, BorderLayout.NORTH);
 			panel.add(rockSmash, BorderLayout.CENTER);
 			
+			JOptionPane.showMessageDialog(null, panel);
+		}
+	}
+	
+	private class infoActionListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			JPanel panel = new JPanel(new BorderLayout());
+			
+			JLabel balls = new JLabel("Safari balls remaining: " + Inventory.getBalls());
+			JLabel steps = new JLabel("Number of steps remaining: " + Inventory.getSteps());
+			
+			panel.add(balls, BorderLayout.NORTH);
+			panel.add(steps, BorderLayout.CENTER);
 			JOptionPane.showMessageDialog(null, panel);
 		}
 	}
