@@ -36,6 +36,44 @@ public abstract class Pokemon extends Observable{
     	}
     }
     
+    public void adjustRunChance(int adjust){
+    	//Increases catchRate by 50% and sets to 90% if higher than 90%
+    	if(adjust == 1){
+    		runChance += runChance/2;
+    		if(runChance > 90){
+    			runChance = 90;
+    		}
+    	}
+    	
+    	//Decreases catchRate by 50% and sets to 10% if lower than 10%
+    	if(adjust == -1){
+    		runChance -= runChance/2;
+    		if(runChance < 10)
+    			runChance = 10;
+    	}
+    	
+    	System.out.println("RunChance = " + runChance);
+    }
+    
+    public void adjustCatchRate(int adjust){
+    	//Increases catchRate by 50% and sets to 90% if higher than 90%
+    	if(adjust == 1){
+    		catchRate += catchRate/2;
+    		if(catchRate > 90){
+    			catchRate = 90;
+    		}
+    	}
+    	
+    	//Decreases catchRate by 50% and sets to 10% if lower than 10%
+    	if(adjust == -1){
+    		catchRate -= catchRate/2;
+    		if(catchRate < 10)
+    			catchRate = 10;
+    	}
+    	
+    	System.out.println("CatchRate = " + catchRate);
+    }
+    
     public String getName(){
     	return name;
     }

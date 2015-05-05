@@ -33,6 +33,7 @@ public class BattlePanel extends JPanel{
 	private Timer runPause = null;
 	private boolean caught;
 	private boolean ran;
+	private boolean isWaiting;
 	//GUI components of BattlePanel
 	private JScrollPane graphic, textGraphic;
 	private JPanel buttonPanel, trainerPanel, master, textFeed, pokemonPanel, ranPanel;
@@ -44,6 +45,7 @@ public class BattlePanel extends JPanel{
 		battle = new Battle(map);
 		ran = false;
 		caught = false;
+		isWaiting = false;
 		layoutGUI();
 		registerListeners();
 	}
@@ -144,6 +146,7 @@ public class BattlePanel extends JPanel{
 		timer = new Timer(3000, new ActionListener(){      // Timer 3 seconds
             public void actionPerformed(ActionEvent e) {
             	timer.stop();
+            	isWaiting = false;
             	if(caught){
         			Inventory.addPokemon(battle.getPokemon());
         			GameView.addMapPanel();
@@ -158,7 +161,8 @@ public class BattlePanel extends JPanel{
 		//Throws ball, swaps JPanels, calls timer
 		throwBall.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-            	if(!ran){
+            	if(!ran && !isWaiting){
+            		isWaiting = true;
             	    caught = battle.isCaught();
             	    Inventory.updateBallCount(-1);
             	    textGraphic.setViewportView(ballFeed);
@@ -214,9 +218,13 @@ public class BattlePanel extends JPanel{
 			
 			if(e.getSource() == throwBait && !ran){
 				textGraphic.setViewportView(baitFeed);
+				battle.getPokemon().adjustRunChance(-1);
+				battle.getPokemon().adjustCatchRate(-1);
 			}
 			if(e.getSource() == throwRock && !ran){
 				textGraphic.setViewportView(rockFeed);
+				battle.getPokemon().adjustRunChance(1);
+				battle.getPokemon().adjustCatchRate(1);
 			}
 			if (e.getSource() == run && !ran)
 				GameView.addMapPanel();
