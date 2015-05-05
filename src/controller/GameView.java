@@ -191,9 +191,12 @@ public class GameView extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			System.exit(0);
+			int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit the game?", "Exit?",  JOptionPane.YES_NO_OPTION);
+			if (reply == JOptionPane.YES_OPTION)
+			{
+			   System.exit(0);
+			}
 			// TODO Auto-generated 
-			
 		}
 		
 	}
