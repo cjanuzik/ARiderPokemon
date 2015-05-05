@@ -1,0 +1,53 @@
+Character
+  Inventory
+    Pokemon
+    Items
+    Safari Balls
+
+Pokemon
+  Water
+    Gyarados
+    Blastoise
+    Mewtwo
+  Ground
+    Pikachu
+    Pidgeotto
+    Gengar
+    Charizard
+    Mewtwo
+  Grass
+    Scyther
+    Dragonite
+    Venusaur
+    Mewtwo
+
+Items
+  HM
+    Surf
+    Rocksmash
+  Ball
+    SafariBall
+
+Map
+  Tiles
+    Restricted
+      Rock
+      Water
+    Passable
+      Grass
+      Sand
+      TallGrass
+    Solid
+      LargeRock
+      Tree
+      Fence
+
+Move
+
+Battle
+  Action
+    ThrowRock
+    ThrowTreat
+    ThrowBall
+    Run
+    EndBattle
