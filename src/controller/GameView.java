@@ -23,6 +23,7 @@ import javax.swing.JScrollPane;
 import view.GraphicPanel;
 import view.BattlePanel;
 import view.HomePanel;
+import view.SummaryPanel;
 import model.Inventory;
 import model.Map;
 
@@ -35,6 +36,7 @@ public class GameView extends JFrame{
 	private static BattlePanel battlePanel;
 	private static GraphicPanel mapPanel;
 	private HomePanel homePanel;
+	private static SummaryPanel summaryPanel;
 	private static JScrollPane graphic; // graphic view
 	
 	//Panels needed for building the border then add to mainPanel
@@ -84,9 +86,11 @@ public class GameView extends JFrame{
 		mapPanel = new GraphicPanel(map);
 		battlePanel = new BattlePanel(map);
 		homePanel = new HomePanel();
+		summaryPanel = new SummaryPanel();
 		master.add(mapPanel);
 		master.add(battlePanel);
 		master.add(homePanel);
+		master.add(summaryPanel);
 		graphic = new JScrollPane(master);
 		graphic.setViewportView(homePanel);
 		graphic.setPreferredSize(new Dimension(352, 352));
@@ -158,6 +162,11 @@ public class GameView extends JFrame{
 	public static void addMapPanel(){
 		graphic.setViewportView(mapPanel);
 		mapPanel.comeBack();
+	}
+	
+	public static void addSummaryPanel(){
+		summaryPanel = new SummaryPanel();
+		graphic.setViewportView(summaryPanel);
 	}
 	
     //Listener for about file item to give the player info about the project

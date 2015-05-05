@@ -146,19 +146,19 @@ public class Map extends Observable{
 		//Checks if tile trainer is facing has HM Rock Smash
         if(tileFacing.getHasRockSmash()){
     	    Inventory.setRockSmashUnlocked(true);
-    	    tileAtMeadow(r + 1, c).setHasRockSmash(false);
+    	    tileFacing.setHasRockSmash(false);
         }
         
         //Checks if tile below contains HM Surf
         if(tileFacing.getHasSurf()){
     	    Inventory.setSurfUnlocked(true);
-    	    tileAtMeadow(r + 1, c).setHasSurf(false);
+    	    tileFacing.setHasSurf(false);
         }
         
         //Checks if tile below contains a rock and if trainer has rock smash
         if(Inventory.getRockSmashUnlocked() && tileFacing.getHasRock()){
         	Inventory.updateBallCount(1);
-        	tileAtMeadow(r + 1, c).setHasRock(false);
+        	tileFacing.setHasRock(false);
         }
         
         //Notify observers so item disappears

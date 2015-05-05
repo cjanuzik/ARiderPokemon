@@ -1,7 +1,10 @@
 package model;
 
+
 import java.util.ArrayList;
 import java.util.List;
+
+import controller.GameView;
 
 public class Inventory {
 	private static int numOfBalls = 30;
@@ -19,19 +22,28 @@ public class Inventory {
 	public static boolean updateBallCount(int ball)
 	{
 		int temp = numOfBalls + ball;
-		if(temp>0)
+		if(temp > 0)
 		{
-			numOfBalls+=ball;
+			numOfBalls += ball;
+			
+			return true;
+		}
+		if(temp == 0){
+			numOfBalls += ball;
+			GameView.addSummaryPanel();
 			return true;
 		}
 		else 
-			return false;
+		    return false;
 	}
 	
 	public static void takeAStep(){
 		steps--;
+		if(steps <= 0){
+			GameView.addSummaryPanel();
+		}
 	}
-	public boolean containsPokemon(Pokemon toCheck)
+	public static boolean containsPokemon(Pokemon toCheck)
 	{
 		return pokemon.contains(toCheck);
 	}

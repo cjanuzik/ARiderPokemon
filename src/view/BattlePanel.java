@@ -3,9 +3,7 @@ package view;
 
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import model.Battle;
@@ -33,16 +30,20 @@ public class BattlePanel extends JPanel{
 	// Current instance of a battle
 	private Battle battle;
 	private Timer timer = null;
+	private Timer runPause = null;
 	private boolean caught;
+	private boolean ran;
 	//GUI components of BattlePanel
 	private JScrollPane graphic, textGraphic;
-	private JPanel buttonPanel, trainerPanel, master, textFeed, pokemonPanel;
+	private JPanel buttonPanel, trainerPanel, master, textFeed, pokemonPanel, ranPanel;
     private JButton throwBait, throwRock, run, throwBall;
-	private JLabel trainerPic, pokemonPic, ballPic, pokemonBar, ballFeed, encounterFeed, brokeFeed, baitFeed, rockFeed;
+	private JLabel trainerPic, pokemonPic, ballPic, pokemonBar, ballFeed, encounterFeed, brokeFeed, baitFeed, rockFeed, runFeed;
 	
 	//Initializes a new battle and calls layoutGUI
 	public BattlePanel(Map map) {
 		battle = new Battle(map);
+		ran = false;
+		caught = false;
 		layoutGUI();
 		registerListeners();
 	}
@@ -69,6 +70,7 @@ public class BattlePanel extends JPanel{
 		//Create main panels and buttons
 		pokemonPanel = new JPanel(new GridLayout(1,2));
 		trainerPanel = new JPanel(new GridLayout(1,2));
+		ranPanel = new JPanel();
 		buttonPanel = new JPanel(new GridLayout(2,2));
 		throwBait = new JButton("Throw Bait");
 		throwRock = new JButton("Throw Rock");
@@ -93,6 +95,7 @@ public class BattlePanel extends JPanel{
 		master = new JPanel();
 		master.add(pokemonPic);
 		master.add(ballPic);
+		master.add(ranPanel);
 		
 		//Add pokemon slides to graphic and set view panel
 		graphic = new JScrollPane(master);
@@ -111,11 +114,13 @@ public class BattlePanel extends JPanel{
 		brokeFeed = new JLabel(battle.getPokemon().getName() + " broke free!");
 		baitFeed = new JLabel("You throw some bait...");
 		rockFeed = new JLabel("You throw a rock...");
+		runFeed = new JLabel(battle.getPokemon().getName() + " has fled!");
 		textFeed.add(encounterFeed);
 		textFeed.add(ballFeed);
 		textFeed.add(brokeFeed);
 		textFeed.add(baitFeed);
 		textFeed.add(rockFeed);
+		textFeed.add(runFeed);
 		
 		//Add textFeed to textGraphic and default to encountered Pokemon
 		textGraphic = new JScrollPane(textFeed);
@@ -146,9 +151,6 @@ public class BattlePanel extends JPanel{
             	graphic.setViewportView(pokemonPic); //Changes view to Pokemon after 3 sec.
             	textGraphic.setViewportView(brokeFeed);
             	
-            	if(battle.checkTurns())
-            		GameView.addMapPanel();
-            	
                 repaint(); //updates
             }
         });
@@ -156,13 +158,14 @@ public class BattlePanel extends JPanel{
 		//Throws ball, swaps JPanels, calls timer
 		throwBall.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-            	caught = false;
-            	caught = battle.isCaught();
-            	Inventory.updateBallCount(-1);
-            	textGraphic.setViewportView(ballFeed);
-            	graphic.setViewportView(ballPic);
-                repaint();                  // updates
-                timer.start();              // starts the timer
+            	if(!ran){
+            	    caught = battle.isCaught();
+            	    Inventory.updateBallCount(-1);
+            	    textGraphic.setViewportView(ballFeed);
+            	    graphic.setViewportView(ballPic);
+                    repaint();                  // updates
+                    timer.start();              // starts the timer
+            	}
             }
         });
 		
@@ -170,10 +173,38 @@ public class BattlePanel extends JPanel{
 		BattleListener listen = new BattleListener();
 		throwBait.addActionListener(listen);
 		throwRock.addActionListener(listen);
-		
 		run.addActionListener(listen);
+		
+		runPause = new Timer(3000, new ActionListener(){      // Timer 3 seconds
+            public void actionPerformed(ActionEvent e) {
+            	runPause.stop();
+            	
+            	GameView.addMapPanel();
+            	
+                repaint(); //updates
+            }
+        });
+		
+		ActionListener runListen = new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				if(battle.didRun() || battle.checkTurns()){
+					ran = true;
+					textGraphic.setViewportView(runFeed);
+					graphic.setViewportView(ranPanel);
+					repaint();
+					runPause.start();
+				}
+					
+			}
+		};
+		throwBall.addActionListener(runListen);
+		throwBait.addActionListener(runListen);
+		throwRock.addActionListener(runListen);
 
 	}
+	
+	
 	
 	//Checks which button was pressed then performs the correct actions.
 	private class BattleListener implements ActionListener{
@@ -181,13 +212,13 @@ public class BattlePanel extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			if(e.getSource() == throwBait){
+			if(e.getSource() == throwBait && !ran){
 				textGraphic.setViewportView(baitFeed);
 			}
-			if(e.getSource() == throwRock){
+			if(e.getSource() == throwRock && !ran){
 				textGraphic.setViewportView(rockFeed);
 			}
-			if (e.getSource() == run)
+			if (e.getSource() == run && !ran)
 				GameView.addMapPanel();
 		}
 	}

@@ -87,4 +87,14 @@ public class Battle extends Observable{
 		
 		return false;
 	}
+	
+	public boolean didRun(){
+		Random randomGenerator = new Random();
+		int ran = randomGenerator.nextInt(100);
+		
+		if(ran < pokemon.getRunChance())
+			return true;
+		
+		return false;
+	}
 }
