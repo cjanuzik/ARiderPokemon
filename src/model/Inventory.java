@@ -4,7 +4,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.GameView;
+import controller.ARiderPokemonController;
 
 public class Inventory {
 	private static int numOfBalls = 30;
@@ -30,7 +30,7 @@ public class Inventory {
 		}
 		if(temp == 0){
 			numOfBalls += ball;
-			GameView.addSummaryPanel();
+			ARiderPokemonController.addSummaryPanel();
 			return true;
 		}
 		else 
@@ -40,7 +40,7 @@ public class Inventory {
 	public static void takeAStep(){
 		steps--;
 		if(steps <= 0){
-			GameView.addSummaryPanel();
+			ARiderPokemonController.addSummaryPanel();
 		}
 	}
 	public static boolean containsPokemon(Pokemon toCheck)

@@ -6,7 +6,7 @@ package model;
 import java.util.Observable;
 
 import model.Tiles.Sand;
-import controller.GameView;
+import controller.ARiderPokemonController;
 import view.GraphicPanel;
 
 public class Map extends Observable{
@@ -108,7 +108,7 @@ public class Map extends Observable{
 		    int encountered = (int) (Math.random() * 20);
 		
 		    if(encountered == 1){
-			    GameView.addBattlePanel();
+			    ARiderPokemonController.addBattlePanel();
 		    }
 		}
 		

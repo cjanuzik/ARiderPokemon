@@ -1,7 +1,4 @@
 package view;
-
-
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -22,7 +19,7 @@ import javax.swing.Timer;
 import model.Battle;
 import model.Inventory;
 import model.Map;
-import controller.GameView;
+import controller.ARiderPokemonController;
 
 public class BattlePanel extends JPanel{
 
@@ -149,7 +146,7 @@ public class BattlePanel extends JPanel{
             	isWaiting = false;
             	if(caught){
         			Inventory.addPokemon(battle.getPokemon());
-        			GameView.addMapPanel();
+        			ARiderPokemonController.addMapPanel();
         		}
             	graphic.setViewportView(pokemonPic); //Changes view to Pokemon after 3 sec.
             	textGraphic.setViewportView(brokeFeed);
@@ -183,7 +180,7 @@ public class BattlePanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
             	runPause.stop();
             	
-            	GameView.addMapPanel();
+            	ARiderPokemonController.addMapPanel();
             	
                 repaint(); //updates
             }
@@ -227,7 +224,7 @@ public class BattlePanel extends JPanel{
 				battle.getPokemon().adjustCatchRate(1);
 			}
 			if (e.getSource() == run && !ran)
-				GameView.addMapPanel();
+				ARiderPokemonController.addMapPanel();
 		}
 	}
 

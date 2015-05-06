@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.GameView;
+import controller.ARiderPokemonController;
 
 public class HomePanel extends JPanel{
 	
@@ -103,7 +103,7 @@ public class HomePanel extends JPanel{
 			if(e.getSource() == noWin)
 				winChosen = NO_WIN;
 			
-			GameView.addMapPanel();
+			ARiderPokemonController.addMapPanel();
 		}
 		
 	}
