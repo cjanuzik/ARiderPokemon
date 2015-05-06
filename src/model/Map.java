@@ -291,7 +291,7 @@ public class Map extends Observable{
 	//Returns map viewing area width
 	/**
 	 * Returns map viewing area width
-	 * @return
+	 * @return width
 	 */
 	public int getWidth() {
 		return width;

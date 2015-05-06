@@ -29,7 +29,7 @@ public class Inventory {
 	/**
 	 * updates the ball count and returns true or false which depends on updating the count
 	 * @param ball
-	 * @return
+	 * @return true/false
 	 */
 	public static boolean updateBallCount(int ball)
 	{
