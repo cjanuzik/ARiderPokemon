@@ -8,7 +8,7 @@ import controller.ARiderPokemonController;
 
 /**
  * this class manages the inventory of the player. It consists of everything that the player picks up on the map, wins or pre-occupied things
- * @author Aakash
+ * @author Chris
  *
  */
 public class Inventory {
@@ -30,18 +30,13 @@ public class Inventory {
 		//}
 		
 	}
-<<<<<<< HEAD
 	/**
 	 * updates the ball count and returns true or false which depends on updating the count
 	 * @param ball
 	 * @return true/false
+	 * @throws NotEnoughBallsException
 	 */
-	public static boolean updateBallCount(int ball)
-	{
-=======
-	
 	public static boolean updateBallCount(int ball) throws NotEnoughBallsException{
->>>>>>> 264506c99a78af7a6533674df662e35acef1d32c
 		int temp = numOfBalls + ball;
 		if(temp > 0)
 		{
@@ -56,13 +51,10 @@ public class Inventory {
 		else 
 		    return false;
 	}
-<<<<<<< HEAD
+
 	/**
 	 * reduces the no. of steps taken. basically decrements the the step count after every step
 	 */
-	public static void takeAStep(){
-=======
-	
 	public static boolean hasMewtwo(){
 		for(int i = 0; i < pokemon.size(); i++){
 			if(pokemon.get(i).getName() == "Mewtwo"){
@@ -72,8 +64,11 @@ public class Inventory {
 		return false;
 	}
 	
+	/**
+	 * Reduces steps by 1 and throws out of steps exception when 0 steps left
+	 * @throws OutOfStepsException
+	 */
 	public static void takeAStep() throws OutOfStepsException{
->>>>>>> 264506c99a78af7a6533674df662e35acef1d32c
 		steps--;
 		if(steps <= 0){
 			throw new OutOfStepsException();
