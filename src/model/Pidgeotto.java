@@ -2,7 +2,6 @@ package model;
 
 /**
  * Defines the pokemon class. Creates a pokemon named Pidgeotto
- * @author Aakash
  *
  */
 

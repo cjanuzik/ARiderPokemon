@@ -233,7 +233,7 @@ public class ARiderPokemonController extends JFrame{
     //Listener for about file item to give the player info about the project
 	/**
 	 * Listener for about file item to give the player info about the project
-	 * @author Chris
+	 * @author Aakash
 	 *
 	 */
 	private class AboutActionListener implements ActionListener{
@@ -251,7 +251,7 @@ public class ARiderPokemonController extends JFrame{
 	}
 	/**
 	 * Listener for exit file item to exit the projects
-	 * @author Chris
+	 * @author Aakash
 	 *
 	 */
 	private class ExitActionListener implements ActionListener
@@ -272,7 +272,7 @@ public class ARiderPokemonController extends JFrame{
 	//Listener for Controls file item to show player the controls
 	/**
 	 * Listener for Controls file item to show player the controls
-	 * @author Chris
+	 * @author Aakash
 	 *
 	 */
 	private class ControlsActionListener implements ActionListener{
@@ -292,7 +292,7 @@ public class ARiderPokemonController extends JFrame{
 	/**
 	 * Listner for HM file item, shows the player what HM they have unlocked
 	 * 
-	 * @author Chris
+	 * @author Aakash
 	 *
 	 */
 	private class hmActionListener implements ActionListener{
@@ -317,7 +317,7 @@ public class ARiderPokemonController extends JFrame{
 	//Listener for info file item, shows the player's steps and ball count
 /**
  * Listener for info file item, shows the player's steps and ball count
- * @author Chris
+ * @author Aakash
  *
  */
 	private class infoActionListener implements ActionListener{

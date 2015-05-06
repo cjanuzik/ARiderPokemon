@@ -10,7 +10,6 @@ import model.Tiles.TallGrass;
  * performs all the calculation needed during the battle.
  * This class generates the probability for encountering the pokemon, sets the win conditions, decides if the pokemon has been caught or not
  * Basically, it perform everything needed for the battle, except the GUI
- * @author Aakash
  *
  */
 public class Battle extends Observable{

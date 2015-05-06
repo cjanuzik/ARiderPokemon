@@ -1,6 +1,7 @@
 package model;
 /**
  * Defines the pokemon class. Creates a pokemon named Charizard
+ * 
  */
 public class Charizard extends Pokemon{
     public Charizard(){

@@ -8,7 +8,6 @@ import controller.ARiderPokemonController;
 
 /**
  * this class manages the inventory of the player. It consists of everything that the player picks up on the map, wins or pre-occupied things
- * @author Aakash
  *
  */
 public class Inventory {

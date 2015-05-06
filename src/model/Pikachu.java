@@ -1,7 +1,6 @@
 package model;
 /**
  * Defines the pokemon class. Creates a pokemon named Pikachu
- * @author Aakash
  *
  */
 public class Pikachu extends Pokemon{

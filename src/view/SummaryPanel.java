@@ -11,7 +11,6 @@ import model.Mewtwo;
 
 /**
  * panel to display the summary of the battle.
- * @author Aakash
  *
  */
 public class SummaryPanel extends JPanel{

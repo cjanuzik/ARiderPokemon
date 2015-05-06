@@ -2,7 +2,6 @@ package model;
 
 /**
  * Defines the pokemon class. Creates a pokemon named Dragonite
- * @author Aakash
  *
  */
 public class Dragonite extends Pokemon{

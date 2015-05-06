@@ -3,7 +3,6 @@ import java.util.Observable;
 
 /**
  * abstract class used to design the pokemon. It sets everything about the piokemon like, rarity, HP, namerunChance, catchRate etc
- * @author Aakash
  *
  */
 public abstract class Pokemon extends Observable{

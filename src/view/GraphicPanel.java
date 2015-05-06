@@ -19,7 +19,6 @@ import model.Tile;
 
 /**
  * Creates the graph Panel for the controller which has the map and the gameplay
- * @author Aakash
  *
  */
 public class GraphicPanel extends JPanel implements Observer, KeyListener{

@@ -1,7 +1,6 @@
 package model;
 /**
  * Defines the pokemon class. Creates a pokemon named Scyther
- * @author Aakash
  *
  */
 public class Scyther extends Pokemon{

@@ -1,8 +1,7 @@
 package model;
 
 /**
- * ENUM CLASS 
- * @author Aakash
+ * ENUM CLASS used for directions
  *
  */
 public enum Dir {

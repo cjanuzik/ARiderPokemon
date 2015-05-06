@@ -1,8 +1,7 @@
 package model;
 /**
- * designs the world of the map. creates a map having meadow on the left and desert on the right. 
+ * Designs the world of the map. creates a map having meadow on the left and desert on the right. 
  * Basically, this class concatenates the two maps into one
- * @author Aakash
  *
  */
 public class World {

@@ -11,8 +11,7 @@ import javax.swing.JPanel;
 
 import controller.ARiderPokemonController;
 /**
- * designs th home panel of the controller. This asks to select the play style and displays the rules
- * @author Aakash
+ * designs the home panel of the controller. This asks to select the play style and displays the rules
  *
  */
 public class HomePanel extends JPanel{

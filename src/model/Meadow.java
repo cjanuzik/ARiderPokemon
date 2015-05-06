@@ -24,8 +24,6 @@ import model.Tiles.WaterTopLeft;
 import model.Tiles.WaterTopRight;
 /**
  * This class designs the Meadow map for the game
-
- * @author Aakash
  *
  */
 public class Meadow {

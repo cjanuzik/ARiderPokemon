@@ -1,7 +1,6 @@
 package model;
 /**
  * this class sets the basic characteristics of the tiles in the map
- * @author Aakash
  *
  */
 public abstract class Tile {

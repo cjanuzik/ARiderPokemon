@@ -24,7 +24,6 @@ import controller.ARiderPokemonController;
 
 /**
  * Designs the battle panel of the code
- * @author Aakash
  * 
  */
 public class BattlePanel extends JPanel{
@@ -162,6 +161,7 @@ public class BattlePanel extends JPanel{
 	//Registers listeners to buttons
 	/**
 	 * Registers listeners to buttons
+	 * @throws NotEnoughBallsException
 	 */
 	private void registerListeners() {
 		

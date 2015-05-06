@@ -2,6 +2,7 @@ package model;
 
 /**
  * This class designs the desert map for the game
+ * 
  */
 import java.util.Random;
 
