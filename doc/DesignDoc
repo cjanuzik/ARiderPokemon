@@ -1,0 +1,20 @@
+ARiderPokemon Design Patterns
+
+1. MVC:			The entire program uses the MVC design in order to keep information hidden from and displayed to the player separate. 
+     			All calculations and generation are done within the model and are hidden, while the information displayed to the player 
+     			is in the view within panels, and the controller is what allows the player to interact inside the game.
+
+2. Builder:		Used by the main controller to handle creation of different elements in the game, such as the Pokemon and map.
+
+3. Factory:		Used by the panels to quickly construct the required the windows used for gameplay, such as the map, the battle screen, 
+         		and the summary screen. We just need to call the panel class and it does everything on its own and displays the output
+
+4. Observer:	This pattern is used in order to keep track of and display any changes that take place during gameplay.  The graphic 
+          		panel is the observer, while map, Pokemon, and battle are observable.
+
+5. Iterator:	We did not use the iterator pattern for creating Pokemon or maps, because we found that each of these elements had 
+          		too many specific characteristics that would make it inefficient to try and create them all the same way.
+
+6. Singleton:	We did not use the singleton pattern for creating Pokemon because we wanted them to be able to be created freely.  
+           		Singleton would have created unique instances, when we wanted to use general instances in order to keep values 
+           		consistent.
