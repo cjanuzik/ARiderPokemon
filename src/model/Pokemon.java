@@ -66,8 +66,6 @@ public abstract class Pokemon extends Observable{
     		if(runChance < 10)
     			runChance = 10;
     	}
-    	
-    	System.out.println("RunChance = " + runChance);
     }
     /**
      * adjusts the catch rate
@@ -88,8 +86,6 @@ public abstract class Pokemon extends Observable{
     		if(catchRate < 10)
     			catchRate = 10;
     	}
-    	
-    	System.out.println("CatchRate = " + catchRate);
     }
     
     public String getName(){

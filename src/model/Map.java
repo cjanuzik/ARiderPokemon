@@ -83,7 +83,7 @@ public class Map extends Observable{
 	 */
 	//Moves the trainer and changes direction if needed
 	//Also acts as trainer move limitation
-	public void move(Dir d, GraphicPanel g) {
+	public void move(Dir d, GraphicPanel g) throws OutOfStepsException{
 		hasMoved = false;
 		switch (d) {
 		case DOWN:
@@ -119,8 +119,13 @@ public class Map extends Observable{
 		makeMap();
 		
 		//Deducts a step from the trainer's step count
-		if(hasMoved)
-		    Inventory.takeAStep();
+		if(hasMoved){
+			try{
+		        Inventory.takeAStep();
+			} catch(OutOfStepsException oose){
+				ARiderPokemonController.addSummaryPanel();
+			}
+		}
 		
 		//Checks if a wild Pokemon was encountered, if so swap panels
 		Tile nextTile = tileAtMeadow(r,c);

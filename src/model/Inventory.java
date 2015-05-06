@@ -25,7 +25,12 @@ public class Inventory {
 	{
 		pokemon.add(toAdd);
 		
+		//if(toAdd.getName().equals("Mewtwo") && HomePanel.getWinCondition() == HomePanel.MEWTWO_WIN){
+			ARiderPokemonController.addSummaryPanel();
+		//}
+		
 	}
+<<<<<<< HEAD
 	/**
 	 * updates the ball count and returns true or false which depends on updating the count
 	 * @param ball
@@ -33,6 +38,10 @@ public class Inventory {
 	 */
 	public static boolean updateBallCount(int ball)
 	{
+=======
+	
+	public static boolean updateBallCount(int ball) throws NotEnoughBallsException{
+>>>>>>> 264506c99a78af7a6533674df662e35acef1d32c
 		int temp = numOfBalls + ball;
 		if(temp > 0)
 		{
@@ -42,19 +51,32 @@ public class Inventory {
 		}
 		if(temp == 0){
 			numOfBalls += ball;
-			ARiderPokemonController.addSummaryPanel();
-			return true;
+			throw new NotEnoughBallsException();
 		}
 		else 
 		    return false;
 	}
+<<<<<<< HEAD
 	/**
 	 * reduces the no. of steps taken. basically decrements the the step count after every step
 	 */
 	public static void takeAStep(){
+=======
+	
+	public static boolean hasMewtwo(){
+		for(int i = 0; i < pokemon.size(); i++){
+			if(pokemon.get(i).getName() == "Mewtwo"){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static void takeAStep() throws OutOfStepsException{
+>>>>>>> 264506c99a78af7a6533674df662e35acef1d32c
 		steps--;
 		if(steps <= 0){
-			ARiderPokemonController.addSummaryPanel();
+			throw new OutOfStepsException();
 		}
 	}
 	/**

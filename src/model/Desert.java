@@ -82,10 +82,10 @@ public class Desert {
 	private void addHasSurf(){
     	Random randomGenerator = new Random();
 		   
-   	    int rockSmashC = randomGenerator.nextInt(4) + 24;
-   	    int rockSmashR = randomGenerator.nextInt(10) + 18;
+   	    int surfC = randomGenerator.nextInt(4) + 24;
+   	    int surfR = randomGenerator.nextInt(10) + 18;
    	    
-   	    desert[rockSmashR][rockSmashC].setHasSurf(true);
+   	    desert[surfR][surfC].setHasSurf(true);
    	    
     }
 	

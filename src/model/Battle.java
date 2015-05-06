@@ -120,6 +120,9 @@ public class Battle extends Observable{
 		Random randomGenerator = new Random();
 		int ran = randomGenerator.nextInt(100);
 		
+		if(checkTurns())
+			return true;
+		
 		if(ran < pokemon.getRunChance())
 			return true;
 		

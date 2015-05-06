@@ -87,7 +87,7 @@ public class SummaryPanel extends JPanel{
 		
 		//Checks if catching Mewtwo wins and checks if caught
 		if(winCondition == HomePanel.MEWTWO_WIN){
-			if(Inventory.containsPokemon(new Mewtwo())){
+			if(Inventory.hasMewtwo()){
 				won = new JLabel("Congratulations! You caught Mewtwo!");
 			}
 		}

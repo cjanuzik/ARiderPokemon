@@ -19,6 +19,7 @@ import javax.swing.Timer;
 import model.Battle;
 import model.Inventory;
 import model.Map;
+import model.NotEnoughBallsException;
 import controller.ARiderPokemonController;
 
 /**
@@ -164,33 +165,60 @@ public class BattlePanel extends JPanel{
 	 */
 	private void registerListeners() {
 		
+		//Timer to wait when displaying if the pokemon fled
+		runPause = new Timer(3000, new ActionListener(){      // Timer 3 seconds
+		    public void actionPerformed(ActionEvent e) {
+	          	runPause.stop();
+		            	
+	        	ARiderPokemonController.addMapPanel();
+		            	
+	            repaint(); //updates
+		    }
+		});
+				
 		//Timer to swap out JPanels when trying to catch and calcuates if caught
 		timer = new Timer(3000, new ActionListener(){      // Timer 3 seconds
             public void actionPerformed(ActionEvent e) {
             	timer.stop();
             	isWaiting = false;
+            	
             	if(caught){
         			Inventory.addPokemon(battle.getPokemon());
         			ARiderPokemonController.addMapPanel();
         		}
+            	
             	graphic.setViewportView(pokemonPic); //Changes view to Pokemon after 3 sec.
             	textGraphic.setViewportView(brokeFeed);
+            	repaint(); //updates
             	
-                repaint(); //updates
+            	if(ran){
+					textGraphic.setViewportView(runFeed);
+					graphic.setViewportView(ranPanel);
+					repaint();
+					runPause.start();
+				}
+            	
             }
         });
 		
 		//Throws ball, swaps JPanels, calls timer
 		throwBall.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-            	if(!ran && !isWaiting){
+            	if(!isWaiting){
             		isWaiting = true;
+            		
+            		ran = battle.didRun();
+            		
             	    caught = battle.isCaught();
-            	    Inventory.updateBallCount(-1);
-            	    textGraphic.setViewportView(ballFeed);
-            	    graphic.setViewportView(ballPic);
-                    repaint();                  // updates
-                    timer.start();              // starts the timer
+            	    try{
+            	        Inventory.updateBallCount(-1);
+            	        textGraphic.setViewportView(ballFeed);
+            	        graphic.setViewportView(ballPic);
+                        repaint();                  // updates
+                        timer.start();              // starts the timer
+            	    } catch(NotEnoughBallsException nebe){
+            	    	ARiderPokemonController.addSummaryPanel();
+            	    }
             	}
             }
         });
@@ -200,16 +228,6 @@ public class BattlePanel extends JPanel{
 		throwBait.addActionListener(listen);
 		throwRock.addActionListener(listen);
 		run.addActionListener(listen);
-		
-		runPause = new Timer(3000, new ActionListener(){      // Timer 3 seconds
-            public void actionPerformed(ActionEvent e) {
-            	runPause.stop();
-            	
-            	ARiderPokemonController.addMapPanel();
-            	
-                repaint(); //updates
-            }
-        });
 		
 		ActionListener runListen = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -224,7 +242,6 @@ public class BattlePanel extends JPanel{
 					
 			}
 		};
-		throwBall.addActionListener(runListen);
 		throwBait.addActionListener(runListen);
 		throwRock.addActionListener(runListen);
 
