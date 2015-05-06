@@ -100,7 +100,7 @@ public class BattlePanel extends JPanel{
 		
 		//Load Pictures
 		try{
-		    BufferedImage image = ImageIO.read(new File("Images/Battle/BattleTrainer.png"));
+		    BufferedImage image = ImageIO.read(new File("Images/Battle/" + battle.getPokemon().getType() + "Trainer.png"));
 	        trainerPic = new JLabel(new ImageIcon(image));
 	        image = ImageIO.read(new File("Images/Battle/" + battle.getPokemon().getName() + ".png"));
 	        pokemonPic = new JLabel(new ImageIcon(image));

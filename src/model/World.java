@@ -2,6 +2,7 @@ package model;
 /**
  * Designs the world of the map. creates a map having meadow on the left and desert on the right. 
  * Basically, this class concatenates the two maps into one
+ * @author Chris
  *
  */
 public class World {
@@ -25,9 +26,44 @@ public class World {
     }
     /**
      * returns the world, i.e. the concatenated version of the map
-     * @return wold
+     * @return Tile[][]
      */
     public Tile[][] getWorld(){
     	return world;
+    }
+    
+    /**
+     * Makes water passable, called when surf is unlocked
+     */
+    public void addWaterPassable(){
+    	for(int i = 8; i <= 12; i++){
+    		for(int j = 8; j <= 15; j++){
+    			world[i][j].setSolid(false);
+    		}
+    	}
+    	
+    	for(int i = 4; i <= 5; i++){
+    		for(int j = 20; j <= 24; j++){
+    			world[i][j].setSolid(false);
+    		}
+    	}
+    	
+    	for(int i = 12; i <= 14; i++){
+    		for(int j = 20; j <= 25; j++){
+    			world[i][j].setSolid(false);
+    		}
+    	}
+    	
+    	for(int i = 15; i <= 18; i++){
+    		for(int j = 18; j <= 23; j++){
+    			world[i][j].setSolid(false);
+    		}
+    	}
+    	
+    	for(int i = 18; i <= 19; i++){
+    		for(int j = 8; j <= 15; j++){
+    			world[i][j].setSolid(false);
+    		}
+    	}
     }
 }

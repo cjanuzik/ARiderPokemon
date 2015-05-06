@@ -24,7 +24,7 @@ public class Map extends Observable{
 	 * width of viewing map
 	 */
 	public final static int width = 12; // width of viewing map
-	private Tile[][] world; // tiles of the entire map
+	private World world; // tiles of the entire map
 	
 	// the row and column of the current location of the Trainer
 	private int c;
@@ -36,15 +36,15 @@ public class Map extends Observable{
 	private char direction;
 	
 	/**
-	 * Initializes a new world and sets viewing area
+	 * Initializes a new world.getWorld() and sets viewing area
 	 */
-	//Initializes a new world and sets viewing area
+	//Initializes a new world.getWorld() and sets viewing area
 	public Map() {
-		world = new World().getWorld();
+		world = new World();
 		//Places the trainer at the top of the left map
 		this.c = 15;
 		this.r = 0;
-		world[r][c].setHasCharacter(true);
+		world.getWorld()[r][c].setHasCharacter(true);
 		map = new Tile[12][12];
 		makeMap();
 	}
@@ -68,7 +68,7 @@ public class Map extends Observable{
 		
 		for(int i = 0; i < 12; i++){
 			for(int j = 0; j < 12; j++){
-				map[i][j] = world[i + iStart][j + jStart];
+				map[i][j] = world.getWorld()[i + iStart][j + jStart];
 			}
 		}
 		setChanged();
@@ -183,6 +183,7 @@ public class Map extends Observable{
         if(tileFacing.getHasSurf()){
     	    Inventory.setSurfUnlocked(true);
     	    tileFacing.setHasSurf(false);
+    	    world.addWaterPassable();
         }
         
         //Checks if tile below contains a rock and if trainer has rock smash
@@ -199,9 +200,9 @@ public class Map extends Observable{
 	//Moves character up if tile above is not solid
 	private void moveUp() {
 		if(!tileAtMeadow(r - 1, c).getSolid()){
-    		world[r][c].setHasCharacter(false);
+    		world.getWorld()[r][c].setHasCharacter(false);
 	    	r--;
-		    world[r][c].setHasCharacter(true);
+		    world.getWorld()[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -209,9 +210,9 @@ public class Map extends Observable{
 	//Moves character down if tile below is not solid
 	public void moveDown() {
 		if(!tileAtMeadow(r + 1, c).getSolid()){
-		    world[r][c].setHasCharacter(false);
+		    world.getWorld()[r][c].setHasCharacter(false);
 		    r++;
-		    world[r][c].setHasCharacter(true);
+		    world.getWorld()[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -219,9 +220,9 @@ public class Map extends Observable{
 	//Moves character right if tile to the right is not solid
 	private void moveRight() {
 		if(!tileAtMeadow(r,c + 1).getSolid()){
-		    world[r][c].setHasCharacter(false);
+		    world.getWorld()[r][c].setHasCharacter(false);
 		    c++;
-		    world[r][c].setHasCharacter(true);
+		    world.getWorld()[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -229,9 +230,9 @@ public class Map extends Observable{
 	//Moves character left if tile to the left is not solid
 	private void moveLeft() {
 		if(!tileAtMeadow(r,c - 1).getSolid()){
-		    world[r][c].setHasCharacter(false);
+		    world.getWorld()[r][c].setHasCharacter(false);
 		    c--;
-		    world[r][c].setHasCharacter(true);
+		    world.getWorld()[r][c].setHasCharacter(true);
 		    hasMoved = true;
 		}
 	}
@@ -248,38 +249,38 @@ public class Map extends Observable{
 
 	}
 	
-	//Returns the tile on the world at (x,y)
+	//Returns the tile on the world.getWorld() at (x,y)
 	/**
-	 * Returns the tile on the world at (x,y)
+	 * Returns the tile on the world.getWorld() at (x,y)
 	 * @param x
 	 * @param y
-	 * @return world[x][y]
+	 * @return world.getWorld()[x][y]
 	 */
 	public Tile tileAtMeadow(int x, int y){
-		return world[x][y];
+		return world.getWorld()[x][y];
 	}
 	
-	//Returns column the trainer is on in the world
+	//Returns column the trainer is on in the world.getWorld()
 	/**
-	 * Returns column the trainer is on in the world
+	 * Returns column the trainer is on in the world.getWorld()
 	 * @return c
 	 */
 	public int getC(){
 		return c;
 	}
 	
-	//Returns row the trainer is on in the world
+	//Returns row the trainer is on in the world.getWorld()
 	/**
-	 * Returns row the trainer is on in the world
+	 * Returns row the trainer is on in the world.getWorld()
 	 * @return r
 	 */
 	public int getR(){
 		return r;
 	}
 	
-	//Returns a string version of the world
+	//Returns a string version of the world.getWorld()
 	/**
-	 * Returns a string version of the world
+	 * Returns a string version of the world.getWorld()
 	 */
 	public String toString() {
 		return "The Width of the map is :"+width +"\nThe height of the map is: "+height +"\nThe hunter is at:\n" + "Row: " + r + "\nCol: " + c + "\n";

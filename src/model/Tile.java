@@ -117,4 +117,8 @@ public abstract class Tile {
 	public boolean getHasRock(){
 		return hasRock;
 	}
+	
+	public void setSolid(boolean toSet){
+		solid = toSet;
+	}
 }

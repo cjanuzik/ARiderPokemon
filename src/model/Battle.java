@@ -5,6 +5,15 @@ import java.util.Random;
 
 import model.Tiles.DesertGrass;
 import model.Tiles.TallGrass;
+import model.Tiles.Water;
+import model.Tiles.WaterBottom;
+import model.Tiles.WaterBottomLeft;
+import model.Tiles.WaterBottomRight;
+import model.Tiles.WaterLeft;
+import model.Tiles.WaterRight;
+import model.Tiles.WaterTop;
+import model.Tiles.WaterTopLeft;
+import model.Tiles.WaterTopRight;
 
 /**
  * performs all the calculation needed during the battle.
@@ -60,6 +69,15 @@ public class Battle extends Observable{
 			
 			if(encountered < 14)
 				return new Charizard();
+		}
+		
+		if(isWater()){
+			int encountered = randomGenerator.nextInt(15);
+			
+			if(encountered < 12)
+				return new Gyarados();
+			if(encountered < 14)
+				return new Blastoise();
 		}
 		
 		//If no Pokemon was encountered, return a Mewtwo!
@@ -126,5 +144,27 @@ public class Battle extends Observable{
 			return true;
 		
 		return false;
+	}
+	
+	private boolean isWater(){
+		if(map.tileAtMeadow(map.getR(), map.getC()) instanceof Water)
+			return true;
+		if(map.tileAtMeadow(map.getR(), map.getC()) instanceof WaterBottomLeft)
+			return true;
+		if(map.tileAtMeadow(map.getR(), map.getC()) instanceof WaterBottom)
+			return true;
+		if(map.tileAtMeadow(map.getR(), map.getC()) instanceof WaterBottomRight)
+			return true;
+		if(map.tileAtMeadow(map.getR(), map.getC()) instanceof WaterLeft)
+			return true;
+		if(map.tileAtMeadow(map.getR(), map.getC()) instanceof WaterRight)
+			return true;
+		if(map.tileAtMeadow(map.getR(), map.getC()) instanceof WaterTopLeft)
+			return true;
+	    if(map.tileAtMeadow(map.getR(), map.getC()) instanceof WaterTop)
+	    	return true;
+	    if(map.tileAtMeadow(map.getR(), map.getC()) instanceof WaterTopRight)
+	    	return true;
+	    return false;				
 	}
 }
