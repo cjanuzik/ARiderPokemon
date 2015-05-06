@@ -10,7 +10,7 @@ import model.Inventory;
 import model.Mewtwo;
 
 /**
- * panel to display the summary of the battle.
+ * panel to display the summary of the game.
  *
  */
 public class SummaryPanel extends JPanel{
