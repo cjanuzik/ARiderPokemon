@@ -9,6 +9,11 @@ import javax.swing.JPanel;
 import model.Inventory;
 import model.Mewtwo;
 
+/**
+ * panel to display the summary of the battle.
+ * @author Aakash
+ *
+ */
 public class SummaryPanel extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
@@ -16,16 +21,27 @@ public class SummaryPanel extends JPanel{
 	JLabel surf, rockSmash, won;
 	JPanel caught;
 	
+	/**
+	 * initializes the win condition with information from the HomePanel class
+	 * calls layoutGUI() to set the layout of the GUI
+	 */
 	public SummaryPanel(){
         winCondition = HomePanel.getWinCondition();
         layoutGUI();
 	}
-	
+	/**
+	 * sets the layout of the GUI for this panel
+	 */
 	private void layoutGUI(){
 		makeAndLayoutViews();
 		setLayoutAndAddComponentsToPanel();
 	}
 
+	/**
+	 * adds functionality to the panel. 
+	 * initializes all the swing components like JPanel, JButton etc
+	 */
+	
 	private void makeAndLayoutViews() {
 		checkWon();
 		caught = new JPanel(new GridLayout(Inventory.listPokemon().size() - 1, 1));
@@ -46,7 +62,10 @@ public class SummaryPanel extends JPanel{
 		
 		
 	}
-
+	/**
+	 * Adds main components to the HomePanel.
+	 * initializes the things needed for building the panel Layout
+	 */
 	private void setLayoutAndAddComponentsToPanel() {
 		// TODO Auto-generated method stub
 		this.setPreferredSize(new Dimension(352, 352));
@@ -59,6 +78,9 @@ public class SummaryPanel extends JPanel{
 	}
 	
 	//Sets the won JLabel depending on conditions.
+	/**
+	 * Sets the won JLabel depending on conditions.
+	 */
 	private void checkWon(){
 		//Defaults to a loss
 		won = new JLabel("Better luck next time!");
