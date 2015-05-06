@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * This class designs the desert map for the game
+ */
 import java.util.Random;
 
 import model.Tiles.DesertGrass;
@@ -17,12 +20,17 @@ import model.Tiles.Sand;
 public class Desert {
 	private Tile[][] desert;
 	
+	/**
+	 * calls the required functions (makeDesert(), addHasSurf() and addRocks();)
+	 */
 	public Desert(){
 		makeDesert();
 		addHasSurf();
 		addRocks();
 	}
-	
+	/**
+	 * designs the desert map using a 2-D array
+	 */
 	public void makeDesert(){
 		desert = new Tile[][] {
 				{new HillTopLeft(), 	new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTopRight(), 	new Sand(), 		new Sand(), 		new Sand(), 		new Sand(), 	new Sand(), 		new Sand(), 		new Sand(), 		new Sand(), 		new HillTopLeft(), 	new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillTop(), 		new HillRight()},
@@ -60,10 +68,17 @@ public class Desert {
 		};
 	}
 	
+	/**
+	 * returns the desert array of tiles
+	 * @return desert
+	 */
 	public Tile[][] getDesert(){
     	return desert;
     }
 	
+	/**
+	 * sets the surf ability of the character
+	 */
 	private void addHasSurf(){
     	Random randomGenerator = new Random();
 		   
@@ -74,6 +89,9 @@ public class Desert {
    	    
     }
 	
+/**
+ * adds rock to the desert Map
+ */
 	private void addRocks(){
 		desert[4][20].setHasRock(true);
 		desert[7][17].setHasRock(true);

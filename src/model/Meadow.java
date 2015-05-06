@@ -22,15 +22,25 @@ import model.Tiles.WaterRight;
 import model.Tiles.WaterTop;
 import model.Tiles.WaterTopLeft;
 import model.Tiles.WaterTopRight;
+/**
+ * This class designs the Meadow map for the game
 
+ * @author Aakash
+ *
+ */
 public class Meadow {
 private Tile[][] meadow;
 
+/**
+ * calls the required functions (makeMedow() and addRockSmash();)
+ */
     public Meadow(){
 	    makeMeadow();
 	    addRockSmash();
     }
-
+    /**
+	 * designs the desert map using a 2-D array
+	 */
     private void makeMeadow(){
     	meadow = new Tile[][] {
     			{new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 	new MeadowGrass(), 	new MeadowGrass(), 	new MeadowGrass(), 	new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight(), 		new TreeLeft(), 		new TreeRight()},
@@ -67,7 +77,9 @@ private Tile[][] meadow;
     			{new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 		new MeadowGrass(), 	new MeadowGrass(), 	new MeadowGrass(), 	new MeadowGrass(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight(), 	new TreeBottomLeft(), 	new TreeBottomRight()},
     	};
     }
-    
+    /**
+	 * sets the rock smash ability of the character
+	 */
     private void addRockSmash(){
     	Random randomGenerator = new Random();
 		   
@@ -77,7 +89,10 @@ private Tile[][] meadow;
    	    meadow[rockSmashR][rockSmashC].setHasRockSmash(true);
    	    
     }
-    
+    /**
+	 * returns the meadow array of tiles
+	 * @return meadow
+	 */
     public Tile[][] getMeadow(){
     	return meadow;
     }

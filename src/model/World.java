@@ -1,5 +1,10 @@
 package model;
-
+/**
+ * designs the world of the map. creates a map having meadow on the left and desert on the right. 
+ * Basically, this class concatenates the two maps into one
+ * @author Aakash
+ *
+ */
 public class World {
 	
 	private Tile[][] world;
@@ -19,7 +24,10 @@ public class World {
     	}
     	
     }
-    
+    /**
+     * returns the world, i.e. the concatenated version of the map
+     * @return wold
+     */
     public Tile[][] getWorld(){
     	return world;
     }

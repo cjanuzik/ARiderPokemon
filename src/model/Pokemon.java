@@ -1,7 +1,11 @@
 package model;
 import java.util.Observable;
 
-
+/**
+ * abstract class used to design the pokemon. It sets everything about the piokemon like, rarity, HP, namerunChance, catchRate etc
+ * @author Aakash
+ *
+ */
 public abstract class Pokemon extends Observable{
     private String name;
     private int dexNum;
@@ -12,6 +16,14 @@ public abstract class Pokemon extends Observable{
     private int maxTurns; //defaults maxTurns to 7
     private int catchRate;//defaults catchRate to 40%
     
+    /**
+     * constructor to set the runchance maxTurns and catchRate according to the pokemon's rarity
+     * @param pkmnName
+     * @param pkmnDexNum
+     * @param pkmnType
+     * @param pkmnRarity
+     * @param pkmnHP
+     */
     public Pokemon(String pkmnName, int pkmnDexNum, String pkmnType, int pkmnRarity, int pkmnHP){
     	name = pkmnName;
     	dexNum = pkmnDexNum;
@@ -35,7 +47,10 @@ public abstract class Pokemon extends Observable{
 	                break;
     	}
     }
-    
+    /**
+     * adjusts the run chance
+     * @param adjust
+     */
     public void adjustRunChance(int adjust){
     	//Increases catchRate by 50% and sets to 90% if higher than 90%
     	if(adjust == 1){
@@ -54,7 +69,10 @@ public abstract class Pokemon extends Observable{
     	
     	System.out.println("RunChance = " + runChance);
     }
-    
+    /**
+     * adjusts the catch rate
+     * @param adjust
+     */
     public void adjustCatchRate(int adjust){
     	//Increases catchRate by 50% and sets to 90% if higher than 90%
     	if(adjust == 1){
@@ -78,30 +96,54 @@ public abstract class Pokemon extends Observable{
     	return name;
     }
     
+    /**
+     * return dex Number
+     * @return dexNum
+     */
     public int getDexNum(){
     	return dexNum;
     }
-    
+    /**
+     * returns the pokemon type
+     * @return type
+     */
     public String getType(){
     	return type;
     }
     
+    /**
+     * returns the pokemon's rarity
+     * @return rarity
+     */
     public int getRarity(){
     	return rarity;
     }
-    
+    /**
+     * returns the pokemon's HP
+     * @return HP
+     */
     public int getHP(){
     	return HP;
     }
-    
+    /**
+     * returns the pokemon's runChance
+     * @return runChance
+     */
     public int getRunChance(){
     	return runChance;
     }
-    
+    /**
+     * returns the max turns
+     * @return maxTurns
+     */
     public int getMaxTurns(){
     	return maxTurns;
     }
     
+    /**
+     * returns the pokemon's CatchRate
+     * @return catchRate
+     */ 
     public int getCatchRate(){
     	return catchRate;
     }

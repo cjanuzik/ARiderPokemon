@@ -1,17 +1,28 @@
 package model;
 
-
-
-
 import java.util.Observable;
 
 import model.Tiles.Sand;
 import controller.ARiderPokemonController;
 import view.GraphicPanel;
 
+/**
+ * this is the main map class for the program which extends observable. This class controls the movement of the character and designing the view for the game. The functions like moveUp and moveDown decides the direction of movement of the player when the buttons are pressed in the controller
+ * @author Aakash
+ *
+ */
 public class Map extends Observable{
+	/**
+	 * tiles of the current viewing map
+	 */
 	private Tile[][] map; // tiles of the current viewing map
+	/**
+	 * height of viewing map
+	 */
 	public final static int height = 12;  // height of viewing map
+	/**
+	 * width of viewing map
+	 */
 	public final static int width = 12; // width of viewing map
 	private Tile[][] world; // tiles of the entire map
 	
@@ -23,7 +34,10 @@ public class Map extends Observable{
 	//and which direction they are facing
 	private boolean hasMoved;
 	private char direction;
-
+	
+	/**
+	 * Initializes a new world and sets viewing area
+	 */
 	//Initializes a new world and sets viewing area
 	public Map() {
 		world = new World().getWorld();
@@ -34,7 +48,9 @@ public class Map extends Observable{
 		map = new Tile[12][12];
 		makeMap();
 	}
-	
+	/**
+	 * Draws an 11x11 grid of tiles around the trainer
+	 */
 	//Draws an 11x11 grid of tiles around the trainer
 	private void makeMap() {
 		
@@ -59,6 +75,12 @@ public class Map extends Observable{
 		notifyObservers();
 	}
 	
+	/**
+	 * Moves the trainer and changes direction if needed
+	 * Also acts as trainer move limitation
+	 * @param d
+	 * @param g
+	 */
 	//Moves the trainer and changes direction if needed
 	//Also acts as trainer move limitation
 	public void move(Dir d, GraphicPanel g) {
@@ -115,6 +137,9 @@ public class Map extends Observable{
 	}
 	
 	//Interact with rocks and items on map
+	/**
+	 * Interact with rocks and other items on the map
+	 */
 	public void interact(){
 		Tile tileFacing = new Sand();
 		//Check which tile trainer
@@ -142,7 +167,6 @@ public class Map extends Observable{
 	        default:
 	        	break;
 	    }
-		
 		//Checks if tile trainer is facing has HM Rock Smash
         if(tileFacing.getHasRockSmash()){
     	    Inventory.setRockSmashUnlocked(true);
@@ -207,37 +231,68 @@ public class Map extends Observable{
 	}
 
 	//Returns the tile at viewing area (x,y)
+	/**
+	 * Returns the tile at viewing area (x,y)
+	 * @param x
+	 * @param y
+	 * @return map[x][y]
+	 */
 	public Tile tileAt(int x, int y) {
 		return map[x][y];
 
 	}
 	
 	//Returns the tile on the world at (x,y)
+	/**
+	 * Returns the tile on the world at (x,y)
+	 * @param x
+	 * @param y
+	 * @return world[x][y]
+	 */
 	public Tile tileAtMeadow(int x, int y){
 		return world[x][y];
 	}
 	
 	//Returns column the trainer is on in the world
+	/**
+	 * Returns column the trainer is on in the world
+	 * @return c
+	 */
 	public int getC(){
 		return c;
 	}
 	
 	//Returns row the trainer is on in the world
+	/**
+	 * Returns row the trainer is on in the world
+	 * @return r
+	 */
 	public int getR(){
 		return r;
 	}
 	
 	//Returns a string version of the world
+	/**
+	 * Returns a string version of the world
+	 */
 	public String toString() {
 		return "The Width of the map is :"+width +"\nThe height of the map is: "+height +"\nThe hunter is at:\n" + "Row: " + r + "\nCol: " + c + "\n";
 	}
     
 	//Returns map viewing area height
+	/**
+	 * Returns map viewing area height
+	 * @return height
+	 */
 	public int getHeight() {
 		return height;
 	}
 	
 	//Returns map viewing area width
+	/**
+	 * Returns map viewing area width
+	 * @return
+	 */
 	public int getWidth() {
 		return width;
 	}
