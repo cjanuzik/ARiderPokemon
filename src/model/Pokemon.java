@@ -31,7 +31,7 @@ public abstract class Pokemon extends Observable{
 	                
 	        case 2: runChance = 30; //Sets unique runChance to 50%
 	                maxTurns = 3; //Sets unique maxTurns to 3
-	                catchRate = 100;//Sets unique catchRate to 20%
+	                catchRate = 10;//Sets unique catchRate to 20%
 	                break;
     	}
     }
@@ -51,8 +51,6 @@ public abstract class Pokemon extends Observable{
     		if(runChance < 10)
     			runChance = 10;
     	}
-    	
-    	System.out.println("RunChance = " + runChance);
     }
     
     public void adjustCatchRate(int adjust){
@@ -70,8 +68,6 @@ public abstract class Pokemon extends Observable{
     		if(catchRate < 10)
     			catchRate = 10;
     	}
-    	
-    	System.out.println("CatchRate = " + catchRate);
     }
     
     public String getName(){
