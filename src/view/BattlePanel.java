@@ -22,6 +22,7 @@ import javax.swing.Timer;
 import model.Battle;
 import model.Inventory;
 import model.Map;
+import model.NotEnoughBallsException;
 import controller.GameView;
 
 public class BattlePanel extends JPanel{
@@ -149,6 +150,8 @@ public class BattlePanel extends JPanel{
             	isWaiting = false;
             	if(caught){
         			Inventory.addPokemon(battle.getPokemon());
+        			if(battle.getPokemon().getName() == "Mewtwo")
+        				GameView.addSummaryPanel();
         			GameView.addMapPanel();
         		}
             	graphic.setViewportView(pokemonPic); //Changes view to Pokemon after 3 sec.
@@ -164,11 +167,15 @@ public class BattlePanel extends JPanel{
             	if(!ran && !isWaiting){
             		isWaiting = true;
             	    caught = battle.isCaught();
-            	    Inventory.updateBallCount(-1);
-            	    textGraphic.setViewportView(ballFeed);
-            	    graphic.setViewportView(ballPic);
-                    repaint();                  // updates
+            	    try{
+            	        Inventory.updateBallCount(-1);
+            	        textGraphic.setViewportView(ballFeed);
+            	        graphic.setViewportView(ballPic);
+                        repaint();                  // updates
                     timer.start();              // starts the timer
+            	    } catch(NotEnoughBallsException nebe){
+            	    	GameView.addSummaryPanel();
+            	    }
             	}
             }
         });

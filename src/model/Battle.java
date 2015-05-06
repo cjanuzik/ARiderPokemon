@@ -23,15 +23,15 @@ public class Battle extends Observable{
 		//Calculates which Pokemon was encountered in the Meadow
 		if(map.tileAtMeadow(map.getR(), map.getC()) instanceof TallGrass){
 	        int encountered = randomGenerator.nextInt(15);
-			
-            if(encountered < 6)
+			return new Mewtwo();
+            /*if(encountered < 6)
                 return new Scyther();
             
             if(encountered < 12)
                 return new Dragonite();
             
             if(encountered < 14)
-                return new Venusaur();
+                return new Venusaur();*/
 		}
 		
 		//Calculates which Pokemon was encountered in the Desert

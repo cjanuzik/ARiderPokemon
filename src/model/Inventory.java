@@ -4,6 +4,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import view.HomePanel;
 import controller.GameView;
 
 public class Inventory {
@@ -17,10 +18,13 @@ public class Inventory {
 	{
 		pokemon.add(toAdd);
 		
+		//if(toAdd.getName().equals("Mewtwo") && HomePanel.getWinCondition() == HomePanel.MEWTWO_WIN){
+			GameView.addSummaryPanel();
+		//}
+		
 	}
 	
-	public static boolean updateBallCount(int ball)
-	{
+	public static boolean updateBallCount(int ball) throws NotEnoughBallsException{
 		int temp = numOfBalls + ball;
 		if(temp > 0)
 		{
@@ -30,17 +34,25 @@ public class Inventory {
 		}
 		if(temp == 0){
 			numOfBalls += ball;
-			GameView.addSummaryPanel();
-			return true;
+			throw new NotEnoughBallsException();
 		}
 		else 
 		    return false;
 	}
 	
-	public static void takeAStep(){
+	public static boolean hasMewtwo(){
+		for(int i = 0; i < pokemon.size(); i++){
+			if(pokemon.get(i).getName() == "Mewtwo"){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static void takeAStep() throws OutOfStepsException{
 		steps--;
 		if(steps <= 0){
-			GameView.addSummaryPanel();
+			throw new OutOfStepsException();
 		}
 	}
 	public static boolean containsPokemon(Pokemon toCheck)

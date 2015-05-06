@@ -31,7 +31,7 @@ public abstract class Pokemon extends Observable{
 	                
 	        case 2: runChance = 30; //Sets unique runChance to 50%
 	                maxTurns = 3; //Sets unique maxTurns to 3
-	                catchRate = 10;//Sets unique catchRate to 20%
+	                catchRate = 100;//Sets unique catchRate to 20%
 	                break;
     	}
     }
