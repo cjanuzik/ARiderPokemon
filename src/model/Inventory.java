@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controller.ARiderPokemonController;
+import exceptions.NotEnoughBallsException;
+import exceptions.OutOfStepsException;
 
 /**
  * this class manages the inventory of the player. It consists of everything that the player picks up on the map, wins or pre-occupied things
-<<<<<<< HEAD
-=======
- * @author Chris
->>>>>>> 90a810ba63ebb86dcd37cda1d9801cbd3639e867
  *
  */
 public class Inventory {

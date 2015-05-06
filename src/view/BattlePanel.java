@@ -19,8 +19,8 @@ import javax.swing.Timer;
 import model.Battle;
 import model.Inventory;
 import model.Map;
-import model.NotEnoughBallsException;
 import controller.ARiderPokemonController;
+import exceptions.NotEnoughBallsException;
 
 /**
  * Designs the battle panel of the code

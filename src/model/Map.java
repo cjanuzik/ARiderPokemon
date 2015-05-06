@@ -5,6 +5,7 @@ import java.util.Observable;
 import model.Tiles.Sand;
 import view.GraphicPanel;
 import controller.ARiderPokemonController;
+import exceptions.OutOfStepsException;
 
 /**
  * this is the main map class for the program which extends observable. This class controls the movement of the character and designing the view for the game. The functions like moveUp and moveDown decides the direction of movement of the player when the buttons are pressed in the controller

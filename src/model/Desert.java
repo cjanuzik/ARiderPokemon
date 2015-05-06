@@ -1,9 +1,5 @@
 package model;
 
-/**
- * This class designs the desert map for the game
- * 
- */
 import java.util.Random;
 
 import model.Tiles.DesertGrass;
@@ -18,6 +14,10 @@ import model.Tiles.HillTopLeft;
 import model.Tiles.HillTopRight;
 import model.Tiles.Sand;
 
+/**
+ * This class designs the desert map for the game
+ * 
+ */
 public class Desert {
 	private Tile[][] desert;
 	
