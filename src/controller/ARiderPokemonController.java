@@ -30,7 +30,7 @@ import model.Map;
 /**
  * This class is the main controller class for the program and executes all the code
  * 
- * @author Aakash and Chris
+ * @author Chris, Aakash, Sean, Yash
  *
  */
 public class ARiderPokemonController extends JFrame{
@@ -233,7 +233,7 @@ public class ARiderPokemonController extends JFrame{
     //Listener for about file item to give the player info about the project
 	/**
 	 * Listener for about file item to give the player info about the project
-	 * @author Aakash
+	 * @author Chris
 	 *
 	 */
 	private class AboutActionListener implements ActionListener{
@@ -251,7 +251,7 @@ public class ARiderPokemonController extends JFrame{
 	}
 	/**
 	 * Listener for exit file item to exit the projects
-	 * @author Aakash
+	 * @author Chris
 	 *
 	 */
 	private class ExitActionListener implements ActionListener
@@ -272,7 +272,7 @@ public class ARiderPokemonController extends JFrame{
 	//Listener for Controls file item to show player the controls
 	/**
 	 * Listener for Controls file item to show player the controls
-	 * @author Aakash
+	 * @author Chris
 	 *
 	 */
 	private class ControlsActionListener implements ActionListener{
@@ -292,7 +292,7 @@ public class ARiderPokemonController extends JFrame{
 	/**
 	 * Listner for HM file item, shows the player what HM they have unlocked
 	 * 
-	 * @author Aakash
+	 * @author Chris
 	 *
 	 */
 	private class hmActionListener implements ActionListener{
@@ -317,7 +317,7 @@ public class ARiderPokemonController extends JFrame{
 	//Listener for info file item, shows the player's steps and ball count
 /**
  * Listener for info file item, shows the player's steps and ball count
- * @author Aakash
+ * @author Chris
  *
  */
 	private class infoActionListener implements ActionListener{
