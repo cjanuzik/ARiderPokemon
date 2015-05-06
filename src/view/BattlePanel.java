@@ -1,7 +1,4 @@
 package view;
-
-
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -23,12 +20,20 @@ import model.Battle;
 import model.Inventory;
 import model.Map;
 import model.NotEnoughBallsException;
-import controller.GameView;
+import controller.ARiderPokemonController;
 
+/**
+ * Designs the battle panel of the code
+ * @author Aakash
+ * 
+ */
 public class BattlePanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	// Current instance of a battle
+	/**
+	 * Current instance of a battle
+	 */
 	private Battle battle;
 	private Timer timer = null;
 	private Timer runPause = null;
@@ -42,6 +47,10 @@ public class BattlePanel extends JPanel{
 	private JLabel trainerPic, pokemonPic, ballPic, pokemonBar, ballFeed, encounterFeed, brokeFeed, baitFeed, rockFeed, runFeed;
 	
 	//Initializes a new battle and calls layoutGUI
+	/**
+	 * Initializes a new battle and calls layoutGUI
+	 * @param map
+	 */
 	public BattlePanel(Map map) {
 		battle = new Battle(map);
 		ran = false;
@@ -52,12 +61,18 @@ public class BattlePanel extends JPanel{
 	}
     
 	//Layouts the GUI
+	/**
+	 * Layouts the GUI
+	 */
 	private void layoutGUI(){
 		makeAndLayoutViews();
 		setLayoutAndAddComponentsToFrame();
 	}
 	
 	//Adds main components to the BattlePanel
+	/**
+	 * Adds main components to the BattlePanel
+	 */
 	private void setLayoutAndAddComponentsToFrame() {
 		this.setPreferredSize(new Dimension(352, 352));
 		this.setVisible(true);
@@ -67,7 +82,11 @@ public class BattlePanel extends JPanel{
 		this.add(buttonPanel, BorderLayout.SOUTH);
 	}
     
-	//Creates components and adds them to eachother
+	//Creates components and adds them to each other
+	/**
+	 * Creates components and adds them to each other
+	 * @throws IOException
+	 */
 	private void makeAndLayoutViews() {
 		
 		//Create main panels and buttons
@@ -141,6 +160,9 @@ public class BattlePanel extends JPanel{
 	}
 	
 	//Registers listeners to buttons
+	/**
+	 * Registers listeners to buttons
+	 */
 	private void registerListeners() {
 		
 		//Timer to swap out JPanels when trying to catch and calcuates if caught
@@ -150,9 +172,10 @@ public class BattlePanel extends JPanel{
             	isWaiting = false;
             	if(caught){
         			Inventory.addPokemon(battle.getPokemon());
-        			if(battle.getPokemon().getName() == "Mewtwo")
-        				GameView.addSummaryPanel();
-        			GameView.addMapPanel();
+
+        			if(battle.getPokemon().getName().equals("Mewtwo"))
+        				ARiderPokemonController.addSummaryPanel();
+        			ARiderPokemonController.addMapPanel();
         		}
             	graphic.setViewportView(pokemonPic); //Changes view to Pokemon after 3 sec.
             	textGraphic.setViewportView(brokeFeed);
@@ -174,7 +197,7 @@ public class BattlePanel extends JPanel{
                         repaint();                  // updates
                     timer.start();              // starts the timer
             	    } catch(NotEnoughBallsException nebe){
-            	    	GameView.addSummaryPanel();
+            	    	ARiderPokemonController.addSummaryPanel();
             	    }
             	}
             }
@@ -190,7 +213,7 @@ public class BattlePanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
             	runPause.stop();
             	
-            	GameView.addMapPanel();
+            	ARiderPokemonController.addMapPanel();
             	
                 repaint(); //updates
             }
@@ -218,6 +241,11 @@ public class BattlePanel extends JPanel{
 	
 	
 	//Checks which button was pressed then performs the correct actions.
+	/**
+	 * Checks which button was pressed then performs the correct actions.
+	 * @author Aakash
+	 *
+	 */
 	private class BattleListener implements ActionListener{
 
 		@Override
@@ -234,7 +262,7 @@ public class BattlePanel extends JPanel{
 				battle.getPokemon().adjustCatchRate(1);
 			}
 			if (e.getSource() == run && !ran)
-				GameView.addMapPanel();
+				ARiderPokemonController.addMapPanel();
 		}
 	}
 

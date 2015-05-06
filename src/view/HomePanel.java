@@ -9,8 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.GameView;
-
+import controller.ARiderPokemonController;
+/**
+ * designs th home panel of the controller. This asks to select the play style and displays the rules
+ * @author Aakash
+ *
+ */
 public class HomePanel extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
@@ -22,17 +26,26 @@ public class HomePanel extends JPanel{
 	JPanel rulesPanel, choicePanel;
 	JButton mewtwoWin, tenWin, noWin;
 	JLabel choose, rules0, rules1, rules2, lucky, normal, roam;
+	/**
+	 * calls LayoutGUI() and makeAndLayoutViews() also initializes the winChosen(winCondition chosen by the player) variable with zero
+	 */
 	public HomePanel(){
 		winChosen = 0;
 		layoutGUI();
 		registerListeners();
 	}
-	
+	/**
+	 * sets the layout of the GUI for this panel
+	 */
 	private void layoutGUI(){
 		makeAndLayoutViews();
 		setLayoutAndAddComponentsToPanel();
 	}
-
+	
+	/**
+	 * adds functionality to the panel. 
+	 * initializes all the swing components like JPanel, JButton etc
+	 */
 	private void makeAndLayoutViews(){
 		mewtwoWin = new JButton("Lucky");
 		tenWin = new JButton("Normal");
@@ -69,7 +82,10 @@ public class HomePanel extends JPanel{
 		choicePanel.add(panel2);
 		choicePanel.add(panel3);
 	}
-	
+	/**
+	 * Adds main components to the HomePanel.
+	 * initializes the things needed for building the panel Layout
+	 */
 	private void setLayoutAndAddComponentsToPanel() {
 		this.setPreferredSize(new Dimension(352, 352));
 		this.setVisible(true);
@@ -79,17 +95,27 @@ public class HomePanel extends JPanel{
 		
 	}
 	
+	/**
+	 * registers the listeners. Calls the required classes and functions to add actionListeners to the components
+	 */
 	private void registerListeners(){
 		ChoiceListener listen = new ChoiceListener();
 		mewtwoWin.addActionListener(listen);
 		tenWin.addActionListener(listen);
 		noWin.addActionListener(listen);
 	}
-    
+    /**
+     * returns the win condition
+     * @return winChosen
+     */
 	public static int getWinCondition(){
 		return winChosen;
 	}
-	
+	/**
+	 * action Listener class to add action to the win condition chosen by the player
+	 * @author Aakash
+	 *
+	 */
 	private class ChoiceListener implements ActionListener{
 
 		@Override
@@ -103,7 +129,7 @@ public class HomePanel extends JPanel{
 			if(e.getSource() == noWin)
 				winChosen = NO_WIN;
 			
-			GameView.addMapPanel();
+			ARiderPokemonController.addMapPanel();
 		}
 		
 	}

@@ -27,15 +27,37 @@ import view.SummaryPanel;
 import model.Inventory;
 import model.Map;
 
-public class GameView extends JFrame{
+/**
+ * This class is the main controller class for the program and executes all the code
+ * 
+ * @author Aakash and Chris
+ *
+ */
+public class ARiderPokemonController extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	
 	//Components needed for JScrollPane
+	
+	/**
+	 * master panel for the controller. Display the main game panel
+	 */
 	private static JPanel master;
+	/**
+	 * Battle Panel
+	 */
 	private static BattlePanel battlePanel;
+	/**
+	 * panel for the map. It displays the map
+	 */
 	private static GraphicPanel mapPanel;
+	/**
+	 * displays the home screen of the game
+	 */
 	private HomePanel homePanel;
+	/**
+	 * Displays the summary of the battle.
+	 */
 	private static SummaryPanel summaryPanel;
 	private static JScrollPane graphic; // graphic view
 	
@@ -47,10 +69,17 @@ public class GameView extends JFrame{
 	private JPanel mainPanel;
 	
 	//Current instance of a Map
+	/**
+	 * map instance to create the map in the controller
+	 */
 	private static Map map;
 	
 	//Creates new instance of map and layouts the GUI
-	public GameView() {
+	/**
+	 * constructor: calls loadImage() and layoutGUI(). and initializes the variables
+	 */
+
+	public ARiderPokemonController() {
 		
 		map = new Map();
 		loadImages();
@@ -58,6 +87,11 @@ public class GameView extends JFrame{
 	}
     
 	//Initializes image variables
+	/**
+	 * loads all the images for the JLabels (GBC)
+	 * @throws IOException
+	 * 
+	 */
 	public void loadImages(){
 		try {
 		    BufferedImage GBCComponent = ImageIO.read(new File("Images/GBC/GBCTop.png"));
@@ -74,6 +108,10 @@ public class GameView extends JFrame{
 	}
 	
 	//Layouts the GUI
+	/**
+	 * sets the basic layout. Calls makeAndLayoutViews(), buildMenuBar() and setLayoutAndAddComponentsToFrame();
+	 * 
+	 */
 	public void layoutGUI() {
 		makeAndLayoutViews();
 		buildMenuBar();
@@ -81,6 +119,11 @@ public class GameView extends JFrame{
 	}
     
 	//Makes all the components of the GUI
+	/**
+	 * initializes all the swing components like JPanels JButtons etc.
+	 * Adds functionality to them.
+	 * Sets the layout of panels
+	 */
 	private void makeAndLayoutViews() {
 		master = new JPanel();
 		mapPanel = new GraphicPanel(map);
@@ -111,6 +154,10 @@ public class GameView extends JFrame{
 	}
 	
 	//Builds a menu bar and adds it to the Frame
+	/**
+	 * builds the menu bar by initializing all the components, adding JMenu Items to it.
+	 * 
+	 */
     private void buildMenuBar(){
     	//Add JMenuBar to Frame
 		JMenuBar theMenuBar = new JMenuBar();
@@ -145,6 +192,9 @@ public class GameView extends JFrame{
     }
     
     //Adds all main components to the frame
+    /**
+     * this function builds the JFrame by adding the required things
+     */
 	private void setLayoutAndAddComponentsToFrame() {
 		setTitle("Pokemon - Safari Zone");
 		this.setLayout(new BorderLayout());
@@ -156,23 +206,36 @@ public class GameView extends JFrame{
 	}
     
 	//Swaps to battle panel when a battle is triggered
+	/**
+	 * switches the battle panel when a battle is triggered
+	 */
 	public static void addBattlePanel(){
 		battlePanel = new BattlePanel(map);
 		graphic.setViewportView(battlePanel);
 	}
 	
 	//Swaps to map panel when a battle is over / homePanel is done
+	/**
+	 * Swaps to map panel when a battle is over / homePanel is done
+	 */
 	public static void addMapPanel(){
 		graphic.setViewportView(mapPanel);
 		mapPanel.comeBack();
 	}
-	
+	/**
+	 * swaps to summary panel when the battle is over
+	 */
 	public static void addSummaryPanel(){
 		summaryPanel = new SummaryPanel();
 		graphic.setViewportView(summaryPanel);
 	}
 	
     //Listener for about file item to give the player info about the project
+	/**
+	 * Listener for about file item to give the player info about the project
+	 * @author Aakash
+	 *
+	 */
 	private class AboutActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
             JPanel panel = new JPanel(new BorderLayout());
@@ -186,6 +249,11 @@ public class GameView extends JFrame{
 
 		}
 	}
+	/**
+	 * Listener for exit file item to exit the projects
+	 * @author Aakash
+	 *
+	 */
 	private class ExitActionListener implements ActionListener
 	{
 
@@ -202,6 +270,11 @@ public class GameView extends JFrame{
 	}
 	
 	//Listener for Controls file item to show player the controls
+	/**
+	 * Listener for Controls file item to show player the controls
+	 * @author Aakash
+	 *
+	 */
 	private class ControlsActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			JPanel panel = new JPanel(new BorderLayout());
@@ -216,6 +289,12 @@ public class GameView extends JFrame{
 	}
 	
 	//Listner for HM file item, shows the player what HM they have unlocked
+	/**
+	 * Listner for HM file item, shows the player what HM they have unlocked
+	 * 
+	 * @author Aakash
+	 *
+	 */
 	private class hmActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			JPanel panel = new JPanel(new BorderLayout());
@@ -236,6 +315,11 @@ public class GameView extends JFrame{
 	}
 	
 	//Listener for info file item, shows the player's steps and ball count
+/**
+ * Listener for info file item, shows the player's steps and ball count
+ * @author Aakash
+ *
+ */
 	private class infoActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			JPanel panel = new JPanel(new BorderLayout());
@@ -261,8 +345,12 @@ public class GameView extends JFrame{
 		}
 	}
 	//Calls GameView to start the game
+	/**
+	 * Calls GameView to start the game
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		new GameView();
+		new ARiderPokemonController();
 	}
 	
 }

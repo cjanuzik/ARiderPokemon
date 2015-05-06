@@ -4,8 +4,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import view.HomePanel;
-import controller.GameView;
+import controller.ARiderPokemonController;
 
 public class Inventory {
 	private static int numOfBalls = 30;
@@ -19,7 +18,7 @@ public class Inventory {
 		pokemon.add(toAdd);
 		
 		//if(toAdd.getName().equals("Mewtwo") && HomePanel.getWinCondition() == HomePanel.MEWTWO_WIN){
-			GameView.addSummaryPanel();
+			ARiderPokemonController.addSummaryPanel();
 		//}
 		
 	}

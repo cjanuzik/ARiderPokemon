@@ -17,13 +17,26 @@ import model.Dir;
 import model.Map;
 import model.Tile;
 
+/**
+ * Creates the graph Panel for the controller which has the map and the gameplay
+ * @author Aakash
+ *
+ */
 public class GraphicPanel extends JPanel implements Observer, KeyListener{
 
 	private static final long serialVersionUID = 321562980917862556L;
+	/**
+	 * instance of the map created. This is then displayed in the panel
+	 */
 	private Map map;
 	
 	//images of the character, ground, items and rocks
 	private BufferedImage ground, character, hm, rock;
+	
+	/**
+	 * sets the GraphicPanel. calls the function to buid the panel and initializes the required variables
+	 * @param map
+	 */
 
 	public GraphicPanel(Map map) {
 		this.map = map;
@@ -104,11 +117,17 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 			g.drawImage(rock, x, y, null);
 
 	}
-	
+	/**
+	 * returns the map
+	 * @return map
+	 */
 	public Map getMap(){
 		return map;
 	}
 	
+	/**
+	 * adds KeyListener
+	 */
     private void registerListeners() {
 		
 		this.addKeyListener(this);
