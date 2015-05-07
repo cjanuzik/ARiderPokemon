@@ -88,28 +88,36 @@ public class Map extends Observable{
 		hasMoved = false;
 		switch (d) {
 		case DOWN:
-			if(r < 30)
-			    moveDown();
-			g.loadImages("Down");
+			g.loadImages(d, "Down");
 			direction = 'd';
+			if(r < 30 && !g.getMoving())
+			    moveDown();
+			if(r < 30 && g.getMoving())
+				stepDown();
 			break;
 		case LEFT:
-			if(c > 0)
-			    moveLeft();
-			g.loadImages("Left");
+			g.loadImages(d, "Left");
 			direction = 'l';
+			if(c > 0 && !g.getMoving())
+			    moveLeft();
+			if(c > 0 && g.getMoving())
+				stepLeft();
 			break;
 		case RIGHT:
-			if(c < 62)
-			    moveRight();
-			g.loadImages("Right");
+			g.loadImages(d, "Right");
 			direction = 'r';
+			if(c < 62 && !g.getMoving())
+			    moveRight();
+			if(c < 62 && g.getMoving())
+				stepRight();
 			break;
 		case UP:
-			if(r > 0)
-			    moveUp();
-			g.loadImages("Up");
+			g.loadImages(d, "Up");
 			direction = 'u';
+			if(r > 0 && !g.getMoving())
+			    moveUp();
+			if(r > 0 && g.getMoving())
+				stepUp();
 			break;
 		default:
 			break;
@@ -118,7 +126,12 @@ public class Map extends Observable{
 		
 		//Redraws the map
 		makeMap();
-		
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//Deducts a step from the trainer's step count
 		if(hasMoved){
 			try{
@@ -199,44 +212,90 @@ public class Map extends Observable{
 	
 	//Moves character up if tile above is not solid
 	private void moveUp() {
-		if(!tileAtMeadow(r - 1, c).getSolid()){
-    		world.getWorld()[r][c].setHasCharacter(false);
-	    	r--;
+		//stepUp();
+		//makeMap();
+		//if(!tileAtMeadow(r - 1,c).getSolid()){
+			world.clearWorld();
+    		//world.getWorld()[r][c].setHasCharacter(false);
+	    	//r--;
 		    world.getWorld()[r][c].setHasCharacter(true);
 		    hasMoved = true;
-		}
+		//}
 	}
 	
+	//Makes he character step up
+	public void stepUp(){
+		if(!tileAtMeadow(r - 1,c).getSolid()){
+			world.getWorld()[r][c].setHasCharacter(true);
+			r--;
+			world.getWorld()[r][c].setHasCharacter(true);
+		}
+	}
 	//Moves character down if tile below is not solid
 	public void moveDown() {
-		if(!tileAtMeadow(r + 1, c).getSolid()){
-		    world.getWorld()[r][c].setHasCharacter(false);
-		    r++;
+		//stepDown();
+		//makeMap();
+		//if(!tileAtMeadow(r + 1,c).getSolid()){
+		    //world.getWorld()[r][c].setHasCharacter(false);
+			world.clearWorld();
+		    //r++;
 		    world.getWorld()[r][c].setHasCharacter(true);
 		    hasMoved = true;
-		}
+		//}
 	}
 	
+	//Makes the character step down
+	public void stepDown(){
+		if(!tileAtMeadow(r + 1, c).getSolid()){
+			world.getWorld()[r][c].setHasCharacter(true);
+			r++;
+			world.getWorld()[r][c].setHasCharacter(true);
+		}
+	}
 	//Moves character right if tile to the right is not solid
 	private void moveRight() {
-		if(!tileAtMeadow(r,c + 1).getSolid()){
-		    world.getWorld()[r][c].setHasCharacter(false);
-		    c++;
+		//stepRight();
+		//makeMap();
+		//if(!tileAtMeadow(r,c + 1).getSolid()){
+		    //world.getWorld()[r][c].setHasCharacter(false);
+			world.clearWorld();
+		    //c++;
 		    world.getWorld()[r][c].setHasCharacter(true);
 		    hasMoved = true;
+		//}
+	}
+	
+	//Makes the character step right
+	private void stepRight(){
+		if(!tileAtMeadow(r, c + 1).getSolid()){
+			world.getWorld()[r][c].setHasCharacter(true);
+			c++;
+			world.getWorld()[r][c].setHasCharacter(true);
+			hasMoved = true;
 		}
 	}
 	
 	//Moves character left if tile to the left is not solid
 	private void moveLeft() {
-		if(!tileAtMeadow(r,c - 1).getSolid()){
-		    world.getWorld()[r][c].setHasCharacter(false);
-		    c--;
+		//stepLeft();
+		//makeMap();
+		//if(!tileAtMeadow(r,c - 1).getSolid()){
+		    //world.getWorld()[r][c].setHasCharacter(false);
+			world.clearWorld();
+			//c--;
 		    world.getWorld()[r][c].setHasCharacter(true);
 		    hasMoved = true;
+		//}
+	}
+    
+	private void stepLeft(){
+		if(!tileAtMeadow(r,c - 1).getSolid()){
+			world.getWorld()[r][c].setHasCharacter(true);
+			c--;
+			world.getWorld()[r][c].setHasCharacter(true);
+			hasMoved = true;
 		}
 	}
-
 	//Returns the tile at viewing area (x,y)
 	/**
 	 * Returns the tile at viewing area (x,y)

@@ -133,6 +133,11 @@ public class Battle extends Observable{
 		
 		return false;
 	}
+	
+	/**
+	 * Determines if the wild Pokemon ran
+	 * @return true/false
+	 */
 	public boolean didRun(){
 		Random randomGenerator = new Random();
 		int ran = randomGenerator.nextInt(100);
@@ -146,6 +151,10 @@ public class Battle extends Observable{
 		return false;
 	}
 	
+	/**
+	 * Returns whether or not the player is standing on water
+	 * @return
+	 */
 	private boolean isWater(){
 		if(map.tileAtMeadow(map.getR(), map.getC()) instanceof Water)
 			return true;

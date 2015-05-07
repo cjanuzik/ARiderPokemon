@@ -66,4 +66,12 @@ public class World {
     		}
     	}
     }
+    
+    public void clearWorld(){
+    	for(int i = 0; i < 32; i++){
+    		for(int j = 0; j < 64; j++){
+    			world[i][j].setHasCharacter(false);
+    		}
+    	}
+    }
 }

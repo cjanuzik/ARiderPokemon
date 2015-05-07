@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -9,10 +11,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.Timer;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import controller.ARiderPokemonController;
 import model.Dir;
 import model.Map;
 import model.Tile;
@@ -28,9 +32,14 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 	 * instance of the map created. This is then displayed in the panel
 	 */
 	private Map map;
+	private Dir direction;
+	private boolean takingStep;
+	private boolean loadedFirst;
+	private boolean moving;
+	private int count;
 	
 	//images of the character, ground, items and rocks
-	private BufferedImage ground, character, hm, rock;
+	private BufferedImage ground, character, hm, rock, moveOne, moveTwo;
 	
 	/**
 	 * sets the GraphicPanel. calls the function to buid the panel and initializes the required variables
@@ -39,8 +48,10 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 
 	public GraphicPanel(Map map) {
 		this.map = map;
+		count = 0;
+		moving = false;
 		this.setPreferredSize(new Dimension(352, 352));
-		loadImages("Down");
+		loadImages(Dir.DOWN, "Down");
 		registerListeners();
 		map.addObserver(this);
 		this.setFocusable(true);
@@ -50,10 +61,12 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 	/**
 	 * This method loads the images for later use.
 	 */
-	public void loadImages(String dir) {
+	public void loadImages(Dir d, String dir) {
 		try {
-			String direction = dir;
-			character = ImageIO.read(new File("Images/Trainer/Trainer" + direction + ".png"));
+		    direction = d;
+			moveOne = ImageIO.read(new File("Images/Trainer/" + dir + "One.png"));
+			moveTwo = ImageIO.read(new File("Images/Trainer/" + dir + "Two.png"));
+			character = ImageIO.read(new File("Images/Trainer/Trainer" + dir + ".png"));
 			ground = ImageIO.read(new File("Images/Tiles/TallGrass.png"));
 			hm = ImageIO.read(new File("Images/Tiles/HMTile.png"));
 			rock = ImageIO.read(new File("Images/Tiles/Rock.png"));
@@ -82,6 +95,7 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 	 * @see java.awt.Graphics#drawImage(java.awt.Image, int, int, java.awt.image.ImageObserver)
 	 */
 	public void drawMap(Graphics g, Map map) {
+		count = 0;
 		for (int i = 0; i < map.getHeight(); i++) {
 			for (int j = 0; j < map.getWidth(); j++) {
 				drawTile(g, map.tileAt(i, j), j * 32, i * 32);
@@ -90,6 +104,9 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 
 	}
 	
+	public boolean getMoving(){
+		return moving;
+	}
 	/**
 	 * This method draws the tile on the Graphics passed.
 	 * 
@@ -108,14 +125,32 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 		}
 		
 		g.drawImage(ground, x, y, null);
-		if(tile.hasCharacter())
-			g.drawImage(character, x, y, null);
+		
+		if(tile.hasCharacter()){
+			if(moving){
+			    if(count == 1){
+				    g.drawImage(moveTwo, x, y, null);
+			    }
+			
+			    if(count == 0){
+			    	g.drawImage(moveOne, x, y, null);
+				    count++;
+				    takingStep = false;
+			    }
+			}
+			if(!moving){
+				
+				g.drawImage(character, x, y, null);
+				takingStep = true;
+			}
+	    }
 		if(tile.getHasRockSmash() || tile.getHasSurf() && !tile.getHasRock())
 			g.drawImage(hm, x, y, null);
 		if(tile.getHasRock())
 			g.drawImage(rock, x, y, null);
 
 	}
+	
 	/**
 	 * returns the map
 	 * @return map
@@ -141,7 +176,7 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		//if(graphic instanceof GraphicPanel){
+		moving = !moving;
 		    if(e.getKeyCode() == KeyEvent.VK_UP)
 			    map.move(Dir.UP,  this);
 		    if(e.getKeyCode() == KeyEvent.VK_LEFT)
@@ -153,7 +188,6 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 		    if(e.getKeyCode() == KeyEvent.VK_ENTER){
 		    	map.interact();
 		    }
-		//}
 	}
 
 	@Override
