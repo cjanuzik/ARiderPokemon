@@ -176,18 +176,19 @@ public class GraphicPanel extends JPanel implements Observer, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		moving = !moving;
-		    if(e.getKeyCode() == KeyEvent.VK_UP)
-			    map.move(Dir.UP,  this);
-		    if(e.getKeyCode() == KeyEvent.VK_LEFT)
-			    map.move(Dir.LEFT,  this);
-		    if(e.getKeyCode() == KeyEvent.VK_DOWN)
-		        map.move(Dir.DOWN, this);
-		    if(e.getKeyCode() == KeyEvent.VK_RIGHT)
-			    map.move(Dir.RIGHT,  this);
-		    if(e.getKeyCode() == KeyEvent.VK_ENTER){
-		    	map.interact();
-		    }
+		if(e.getKeyCode() != KeyEvent.VK_ENTER)
+		    moving = !moving;
+		if(e.getKeyCode() == KeyEvent.VK_UP)
+			map.move(Dir.UP,  this);
+		if(e.getKeyCode() == KeyEvent.VK_LEFT)
+		    map.move(Dir.LEFT,  this);
+	    if(e.getKeyCode() == KeyEvent.VK_DOWN)
+	        map.move(Dir.DOWN, this);
+	    if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+		    map.move(Dir.RIGHT,  this);
+	    if(e.getKeyCode() == KeyEvent.VK_ENTER){
+	    	map.interact();
+	    }
 	}
 
 	@Override

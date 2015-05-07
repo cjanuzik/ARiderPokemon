@@ -163,7 +163,6 @@ public class ARiderPokemonController extends JFrame{
 		JMenuBar theMenuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu("File"); 
 		JMenu inventoryMenu = new JMenu("Inventory");
-		JMenu pokedexMenu = new JMenu("Pokedex");
 		JMenuItem aboutItem = new JMenuItem("About");
 		aboutItem.addActionListener(new AboutActionListener());
 		JMenuItem exitItem = new JMenuItem("Exit");
@@ -176,7 +175,6 @@ public class ARiderPokemonController extends JFrame{
 		pokemonItem.addActionListener(new pokemonActionListener());
 		JMenuItem infoItem = new JMenuItem("Info");
 		infoItem.addActionListener(new infoActionListener());
-		JMenuItem seenItem = new JMenuItem("Seen");
 		
 		fileMenu.add(aboutItem);
 		fileMenu.add(controlsItem);
@@ -184,10 +182,8 @@ public class ARiderPokemonController extends JFrame{
 		inventoryMenu.add(hmItem);
 		inventoryMenu.add(pokemonItem);
 		inventoryMenu.add(infoItem);
-		pokedexMenu.add(seenItem);
 		theMenuBar.add(fileMenu);
 		theMenuBar.add(inventoryMenu);
-		theMenuBar.add(pokedexMenu);
 		this.setJMenuBar(theMenuBar);
     }
     
